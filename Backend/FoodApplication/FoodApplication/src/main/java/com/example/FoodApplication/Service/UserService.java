@@ -5,6 +5,7 @@ import com.example.FoodApplication.Dto.Response.UserResponseDto;
 import com.example.FoodApplication.Entity.User;
 import com.example.FoodApplication.Repository.UserRepo;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -14,9 +15,11 @@ import java.util.List;
 public class UserService {
 
     private final UserRepo userRepo;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepo userRepo) {
+    public UserService(UserRepo userRepo, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public UserResponseDto createUser(UserRequestDto request) {
@@ -57,7 +60,10 @@ public class UserService {
         user.setCity(request.getCity());
         user.setState(request.getState());
         user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
+        // Only update password when provided; store as BCrypt hash
+        if (request.getPassword() != null && !request.getPassword().isBlank()) {
+            user.setPassword(passwordEncoder.encode(request.getPassword()));
+        }
         user.setRole(request.getRole());
     }
 
