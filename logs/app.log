@@ -1,0 +1,802 @@
+2026-04-29 00:00:56 - Restarting due to 36 class path changes (4 additions, 1 deletion, 31 modifications)
+2026-04-29 00:00:56 - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-29 00:00:56 - Graceful shutdown complete
+2026-04-29 00:00:56 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 00:00:56 - HikariPool-1 - Shutdown initiated...
+2026-04-29 00:00:56 - HikariPool-1 - Shutdown completed.
+2026-04-29 00:01:02 - Starting FoodApplication using Java 26 with PID 7752 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
+2026-04-29 00:01:02 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 00:01:02 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-29 00:01:02 - Finished Spring Data repository scanning in 31 ms. Found 5 JPA repository interfaces.
+2026-04-29 00:01:02 - Tomcat initialized with port 8083 (http)
+2026-04-29 00:01:02 - Starting service [Tomcat]
+2026-04-29 00:01:02 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-04-29 00:01:02 - Root WebApplicationContext: initialization completed in 787 ms
+2026-04-29 00:01:02 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-29 00:01:02 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-29 00:01:02 - HikariPool-3 - Starting...
+2026-04-29 00:01:03 - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@2d639068
+2026-04-29 00:01:03 - HikariPool-3 - Start completed.
+2026-04-29 00:01:03 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: FoodApp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-29 00:01:03 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-29 00:01:03 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 00:01:03 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-29 00:01:03 - Exposing 1 endpoint beneath base path '/actuator'
+2026-04-29 00:01:03 - Tomcat started on port 8083 (http) with context path '/'
+2026-04-29 00:01:03 - Started FoodApplication in 1.932 seconds (process running for 21720.897)
+2026-04-29 00:01:03 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-29 00:01:03 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-29 00:01:03 - Condition evaluation unchanged
+2026-04-29 00:03:13 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-29 00:03:13 - Initializing Servlet 'dispatcherServlet'
+2026-04-29 00:03:13 - Completed initialization in 1 ms
+2026-04-29 00:04:54 - Restarting due to 30 class path changes (0 additions, 30 deletions, 0 modifications)
+2026-04-29 00:04:54 - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-29 00:04:54 - Graceful shutdown complete
+2026-04-29 00:04:54 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 00:04:54 - HikariPool-3 - Shutdown initiated...
+2026-04-29 00:04:54 - HikariPool-3 - Shutdown completed.
+2026-04-29 00:04:54 - Starting FoodApplication using Java 26 with PID 7752 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
+2026-04-29 00:04:54 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 00:04:55 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-29 00:04:55 - Finished Spring Data repository scanning in 5 ms. Found 0 JPA repository interfaces.
+2026-04-29 00:04:55 - Tomcat initialized with port 8083 (http)
+2026-04-29 00:04:55 - Starting service [Tomcat]
+2026-04-29 00:04:55 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-04-29 00:04:55 - Root WebApplicationContext: initialization completed in 811 ms
+2026-04-29 00:04:55 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-29 00:04:55 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-29 00:04:55 - HikariPool-4 - Starting...
+2026-04-29 00:04:56 - HikariPool-4 - Added connection org.postgresql.jdbc.PgConnection@7dd70c37
+2026-04-29 00:04:56 - HikariPool-4 - Start completed.
+2026-04-29 00:04:56 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: FoodApp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-29 00:04:56 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-29 00:04:56 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 00:04:56 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'orderController' defined in file [C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes\com\example\FoodApplication\Controller\OrderController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'orderService': Lookup method resolution failed
+2026-04-29 00:04:56 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 00:04:56 - HikariPool-4 - Shutdown initiated...
+2026-04-29 00:04:56 - HikariPool-4 - Shutdown completed.
+2026-04-29 00:04:56 - Stopping service [Tomcat]
+2026-04-29 00:04:56 - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-04-29 00:04:56 - Application run failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'orderController' defined in file [C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes\com\example\FoodApplication\Controller\OrderController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'orderService': Lookup method resolution failed
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1382) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1221) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1218) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1184) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.6.jar:4.0.6]
+	at com.example.FoodApplication.FoodApplication.main(FoodApplication.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52) ~[spring-boot-devtools-4.0.6.jar:4.0.6]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'orderService': Lookup method resolution failed
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.checkLookupMethods(AutowiredAnnotationBeanPostProcessor.java:482) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:352) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineConstructorsFromBeanPostProcessors(AbstractAutowireCapableBeanFactory.java:1321) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1218) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:1225) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1704) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.7.jar:7.0.7]
+	... 24 common frames omitted
+Caused by: java.lang.IllegalStateException: Failed to introspect Class [com.example.FoodApplication.Service.OrderService] from ClassLoader [org.springframework.boot.devtools.restart.classloader.RestartClassLoader@2f3e86e8]
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:483) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.util.ReflectionUtils.doWithLocalMethods(ReflectionUtils.java:320) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.checkLookupMethods(AutowiredAnnotationBeanPostProcessor.java:460) ~[spring-beans-7.0.7.jar:7.0.7]
+	... 38 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: com/example/FoodApplication/Entity/Order
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3011) ~[na:na]
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2330) ~[na:na]
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:465) ~[spring-core-7.0.7.jar:7.0.7]
+	... 40 common frames omitted
+Caused by: java.lang.ClassNotFoundException: com.example.FoodApplication.Entity.Order
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:580) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:502) ~[na:na]
+	at java.base/java.lang.Class.forName0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.forName(Class.java:560) ~[na:na]
+	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.loadClass(RestartClassLoader.java:123) ~[spring-boot-devtools-4.0.6.jar:4.0.6]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:502) ~[na:na]
+	... 44 common frames omitted
+2026-04-29 00:04:59 - Starting FoodApplication using Java 26 with PID 7752 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
+2026-04-29 00:04:59 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 00:05:00 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-29 00:05:00 - Finished Spring Data repository scanning in 36 ms. Found 5 JPA repository interfaces.
+2026-04-29 00:05:01 - Tomcat initialized with port 8083 (http)
+2026-04-29 00:05:01 - Starting service [Tomcat]
+2026-04-29 00:05:01 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-04-29 00:05:01 - Root WebApplicationContext: initialization completed in 1499 ms
+2026-04-29 00:05:01 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-29 00:05:01 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-29 00:05:01 - HikariPool-5 - Starting...
+2026-04-29 00:05:01 - HikariPool-5 - Added connection org.postgresql.jdbc.PgConnection@795d0ad8
+2026-04-29 00:05:01 - HikariPool-5 - Start completed.
+2026-04-29 00:05:01 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: FoodApp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-29 00:05:01 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-29 00:05:01 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 00:05:02 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-29 00:05:02 - Exposing 1 endpoint beneath base path '/actuator'
+2026-04-29 00:05:02 - Tomcat started on port 8083 (http) with context path '/'
+2026-04-29 00:05:02 - Started FoodApplication in 2.735 seconds (process running for 21959.434)
+2026-04-29 00:05:02 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-29 00:05:02 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-29 00:05:02 - Condition evaluation unchanged
+2026-04-29 00:19:33 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-29 00:19:33 - Initializing Servlet 'dispatcherServlet'
+2026-04-29 00:19:33 - Completed initialization in 3 ms
+2026-04-29 00:46:05 - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-29 00:46:05 - Graceful shutdown complete
+2026-04-29 00:46:05 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 00:46:05 - HikariPool-5 - Shutdown initiated...
+2026-04-29 00:46:05 - HikariPool-5 - Shutdown completed.
+2026-04-29 00:50:57 - Starting FoodApplication using Java 26 with PID 26904 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
+2026-04-29 00:50:57 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 00:50:57 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-29 00:50:57 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-29 00:50:59 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-29 00:51:00 - Finished Spring Data repository scanning in 105 ms. Found 5 JPA repository interfaces.
+2026-04-29 00:51:01 - Tomcat initialized with port 8083 (http)
+2026-04-29 00:51:01 - Starting service [Tomcat]
+2026-04-29 00:51:01 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-04-29 00:51:01 - Root WebApplicationContext: initialization completed in 3684 ms
+2026-04-29 00:51:01 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-29 00:51:01 - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-04-29 00:51:02 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-29 00:51:02 - HikariPool-1 - Starting...
+2026-04-29 00:51:02 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@781f2c70
+2026-04-29 00:51:02 - HikariPool-1 - Start completed.
+2026-04-29 00:51:02 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: FoodApp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-29 00:51:04 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-29 00:51:04 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 00:51:04 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-29 00:51:05 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-29 00:51:05 - Exposing 1 endpoint beneath base path '/actuator'
+2026-04-29 00:51:05 - Tomcat started on port 8083 (http) with context path '/'
+2026-04-29 00:51:05 - Started FoodApplication in 9.391 seconds (process running for 11.759)
+2026-04-29 00:51:06 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-29 00:51:06 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-29 00:51:59 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-29 00:51:59 - Initializing Servlet 'dispatcherServlet'
+2026-04-29 00:51:59 - Completed initialization in 3 ms
+2026-04-29 01:10:00 - Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)
+2026-04-29 01:10:00 - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-29 01:10:00 - Graceful shutdown complete
+2026-04-29 01:10:00 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 01:10:00 - HikariPool-1 - Shutdown initiated...
+2026-04-29 01:10:00 - HikariPool-1 - Shutdown completed.
+2026-04-29 01:10:00 - Starting FoodApplication using Java 26 with PID 26904 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
+2026-04-29 01:10:00 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 01:10:01 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-29 01:10:01 - Finished Spring Data repository scanning in 38 ms. Found 5 JPA repository interfaces.
+2026-04-29 01:10:01 - Tomcat initialized with port 8083 (http)
+2026-04-29 01:10:01 - Starting service [Tomcat]
+2026-04-29 01:10:01 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-04-29 01:10:02 - Root WebApplicationContext: initialization completed in 1025 ms
+2026-04-29 01:10:02 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-29 01:10:02 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-29 01:10:02 - HikariPool-2 - Starting...
+2026-04-29 01:10:02 - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@7d1bf60e
+2026-04-29 01:10:02 - HikariPool-2 - Start completed.
+2026-04-29 01:10:02 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: FoodApp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-29 01:10:02 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-29 01:10:02 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 01:10:02 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-29 01:10:02 - Exposing 1 endpoint beneath base path '/actuator'
+2026-04-29 01:10:02 - Tomcat started on port 8083 (http) with context path '/'
+2026-04-29 01:10:02 - Started FoodApplication in 2.026 seconds (process running for 1148.721)
+2026-04-29 01:10:02 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-29 01:10:02 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-29 01:10:02 - Condition evaluation unchanged
+2026-04-29 01:10:10 - Restarting due to 3 class path changes (0 additions, 0 deletions, 3 modifications)
+2026-04-29 01:10:10 - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-29 01:10:10 - Graceful shutdown complete
+2026-04-29 01:10:10 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 01:10:10 - HikariPool-2 - Shutdown initiated...
+2026-04-29 01:10:10 - HikariPool-2 - Shutdown completed.
+2026-04-29 01:10:10 - Starting FoodApplication using Java 26 with PID 26904 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
+2026-04-29 01:10:10 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 01:10:11 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-29 01:10:11 - Finished Spring Data repository scanning in 102 ms. Found 5 JPA repository interfaces.
+2026-04-29 01:10:11 - Tomcat initialized with port 8083 (http)
+2026-04-29 01:10:11 - Starting service [Tomcat]
+2026-04-29 01:10:11 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-04-29 01:10:11 - Root WebApplicationContext: initialization completed in 1182 ms
+2026-04-29 01:10:12 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-29 01:10:12 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-29 01:10:12 - HikariPool-3 - Starting...
+2026-04-29 01:10:12 - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@a46b0b8
+2026-04-29 01:10:12 - HikariPool-3 - Start completed.
+2026-04-29 01:10:12 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: FoodApp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-29 01:10:12 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-29 01:10:12 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 01:10:13 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-29 01:10:13 - Exposing 1 endpoint beneath base path '/actuator'
+2026-04-29 01:10:13 - Tomcat started on port 8083 (http) with context path '/'
+2026-04-29 01:10:13 - Started FoodApplication in 2.737 seconds (process running for 1159.052)
+2026-04-29 01:10:13 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-29 01:10:13 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-29 01:10:13 - Condition evaluation unchanged
+2026-04-29 01:10:14 - Restarting due to 3 class path changes (0 additions, 0 deletions, 3 modifications)
+2026-04-29 01:10:14 - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-29 01:10:14 - Graceful shutdown complete
+2026-04-29 01:10:14 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 01:10:14 - HikariPool-3 - Shutdown initiated...
+2026-04-29 01:10:14 - HikariPool-3 - Shutdown completed.
+2026-04-29 01:10:14 - Starting FoodApplication using Java 26 with PID 26904 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
+2026-04-29 01:10:14 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 01:10:15 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-29 01:10:15 - Finished Spring Data repository scanning in 28 ms. Found 5 JPA repository interfaces.
+2026-04-29 01:10:15 - Tomcat initialized with port 8083 (http)
+2026-04-29 01:10:15 - Starting service [Tomcat]
+2026-04-29 01:10:15 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-04-29 01:10:15 - Root WebApplicationContext: initialization completed in 530 ms
+2026-04-29 01:10:15 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-29 01:10:15 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-29 01:10:15 - HikariPool-4 - Starting...
+2026-04-29 01:10:15 - HikariPool-4 - Added connection org.postgresql.jdbc.PgConnection@2ea61a52
+2026-04-29 01:10:15 - HikariPool-4 - Start completed.
+2026-04-29 01:10:15 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: FoodApp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-29 01:10:15 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-29 01:10:15 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 01:10:15 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-29 01:10:16 - Exposing 1 endpoint beneath base path '/actuator'
+2026-04-29 01:10:16 - Tomcat started on port 8083 (http) with context path '/'
+2026-04-29 01:10:16 - Started FoodApplication in 1.842 seconds (process running for 1162.398)
+2026-04-29 01:10:16 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-29 01:10:16 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-29 01:10:16 - Condition evaluation unchanged
+2026-04-29 01:10:18 - Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+2026-04-29 01:10:18 - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-29 01:10:18 - Graceful shutdown complete
+2026-04-29 01:10:18 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 01:10:18 - HikariPool-4 - Shutdown initiated...
+2026-04-29 01:10:18 - HikariPool-4 - Shutdown completed.
+2026-04-29 01:10:18 - Starting FoodApplication using Java 26 with PID 26904 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
+2026-04-29 01:10:18 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 01:10:18 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-29 01:10:18 - Finished Spring Data repository scanning in 30 ms. Found 5 JPA repository interfaces.
+2026-04-29 01:10:18 - Tomcat initialized with port 8083 (http)
+2026-04-29 01:10:18 - Starting service [Tomcat]
+2026-04-29 01:10:18 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-04-29 01:10:18 - Root WebApplicationContext: initialization completed in 504 ms
+2026-04-29 01:10:18 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-29 01:10:18 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-29 01:10:18 - HikariPool-5 - Starting...
+2026-04-29 01:10:18 - HikariPool-5 - Added connection org.postgresql.jdbc.PgConnection@664e9bbe
+2026-04-29 01:10:18 - HikariPool-5 - Start completed.
+2026-04-29 01:10:18 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: FoodApp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-29 01:10:19 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-29 01:10:19 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 01:10:19 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-29 01:10:19 - Exposing 1 endpoint beneath base path '/actuator'
+2026-04-29 01:10:19 - Tomcat started on port 8083 (http) with context path '/'
+2026-04-29 01:10:19 - Started FoodApplication in 1.244 seconds (process running for 1165.172)
+2026-04-29 01:10:19 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-29 01:10:19 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-29 01:10:19 - Condition evaluation unchanged
+2026-04-29 01:12:53 - Restarting due to 37 class path changes (0 additions, 37 deletions, 0 modifications)
+2026-04-29 01:12:53 - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-29 01:12:53 - Graceful shutdown complete
+2026-04-29 01:12:53 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 01:12:53 - HikariPool-5 - Shutdown initiated...
+2026-04-29 01:12:53 - HikariPool-5 - Shutdown completed.
+2026-04-29 01:13:01 - Starting FoodApplication using Java 26 with PID 26904 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
+2026-04-29 01:13:01 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 01:13:02 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-29 01:13:02 - Finished Spring Data repository scanning in 38 ms. Found 5 JPA repository interfaces.
+2026-04-29 01:13:02 - Tomcat initialized with port 8083 (http)
+2026-04-29 01:13:02 - Starting service [Tomcat]
+2026-04-29 01:13:02 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-04-29 01:13:02 - Root WebApplicationContext: initialization completed in 1689 ms
+2026-04-29 01:13:02 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-29 01:13:03 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-29 01:13:03 - HikariPool-7 - Starting...
+2026-04-29 01:13:03 - HikariPool-7 - Added connection org.postgresql.jdbc.PgConnection@7d474ff8
+2026-04-29 01:13:03 - HikariPool-7 - Start completed.
+2026-04-29 01:13:03 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: FoodApp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-29 01:13:03 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-29 01:13:03 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 01:13:04 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-29 01:13:04 - Exposing 1 endpoint beneath base path '/actuator'
+2026-04-29 01:13:04 - Tomcat started on port 8083 (http) with context path '/'
+2026-04-29 01:13:04 - Started FoodApplication in 3.703 seconds (process running for 1330.554)
+2026-04-29 01:13:04 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-29 01:13:04 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-29 01:13:04 - Condition evaluation unchanged
+2026-04-29 01:15:08 - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-29 01:15:08 - Graceful shutdown complete
+2026-04-29 01:15:08 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 01:15:08 - HikariPool-7 - Shutdown initiated...
+2026-04-29 01:15:08 - HikariPool-7 - Shutdown completed.
+2026-04-29 01:15:17 - Starting FoodApplication using Java 26 with PID 20756 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
+2026-04-29 01:15:17 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 01:15:17 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-29 01:15:17 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-29 01:15:19 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-29 01:15:19 - Finished Spring Data repository scanning in 92 ms. Found 5 JPA repository interfaces.
+2026-04-29 01:15:20 - Tomcat initialized with port 8083 (http)
+2026-04-29 01:15:20 - Starting service [Tomcat]
+2026-04-29 01:15:20 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-04-29 01:15:20 - Root WebApplicationContext: initialization completed in 3619 ms
+2026-04-29 01:15:21 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-29 01:15:21 - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-04-29 01:15:22 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-29 01:15:22 - HikariPool-1 - Starting...
+2026-04-29 01:15:22 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@647aaa58
+2026-04-29 01:15:22 - HikariPool-1 - Start completed.
+2026-04-29 01:15:22 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: FoodApp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-29 01:15:24 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-29 01:15:24 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 01:15:24 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-29 01:15:25 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-29 01:15:26 - Exposing 1 endpoint beneath base path '/actuator'
+2026-04-29 01:15:26 - Tomcat started on port 8083 (http) with context path '/'
+2026-04-29 01:15:26 - Started FoodApplication in 10.972 seconds (process running for 11.836)
+2026-04-29 01:15:27 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-29 01:15:27 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-29 01:20:41 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-29 01:20:41 - Initializing Servlet 'dispatcherServlet'
+2026-04-29 01:20:41 - Completed initialization in 1 ms
+2026-04-29 01:57:51 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m58s781ms585µs200ns).
+2026-04-29 09:26:48 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7h29m4s902ms51µs500ns).
+2026-04-29 11:37:55 - Restarting due to 37 class path changes (0 additions, 0 deletions, 37 modifications)
+2026-04-29 11:37:55 - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-29 11:37:55 - Graceful shutdown complete
+2026-04-29 11:37:55 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 11:37:55 - HikariPool-1 - Shutdown initiated...
+2026-04-29 11:37:55 - HikariPool-1 - Shutdown completed.
+2026-04-29 11:37:55 - Starting FoodApplication using Java 26 with PID 20756 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
+2026-04-29 11:37:55 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 11:37:56 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-29 11:37:56 - Finished Spring Data repository scanning in 33 ms. Found 5 JPA repository interfaces.
+2026-04-29 11:37:56 - Tomcat initialized with port 8083 (http)
+2026-04-29 11:37:56 - Starting service [Tomcat]
+2026-04-29 11:37:56 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-04-29 11:37:56 - Root WebApplicationContext: initialization completed in 1602 ms
+2026-04-29 11:37:57 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-29 11:37:57 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-29 11:37:57 - HikariPool-2 - Starting...
+2026-04-29 11:37:57 - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@9a5e513
+2026-04-29 11:37:57 - HikariPool-2 - Start completed.
+2026-04-29 11:37:57 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: FoodApp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-29 11:37:57 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-29 11:37:57 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 11:37:57 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-29 11:37:58 - Exposing 1 endpoint beneath base path '/actuator'
+2026-04-29 11:37:58 - Tomcat started on port 8083 (http) with context path '/'
+2026-04-29 11:37:58 - Started FoodApplication in 3.062 seconds (process running for 37370.334)
+2026-04-29 11:37:58 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-29 11:37:58 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-29 11:37:58 - Condition evaluation unchanged
+2026-04-29 11:42:17 - Restarting due to 37 class path changes (0 additions, 0 deletions, 37 modifications)
+2026-04-29 11:42:17 - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-29 11:42:17 - Graceful shutdown complete
+2026-04-29 11:42:17 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 11:42:17 - HikariPool-2 - Shutdown initiated...
+2026-04-29 11:42:17 - HikariPool-2 - Shutdown completed.
+2026-04-29 11:42:17 - Starting FoodApplication using Java 26 with PID 20756 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
+2026-04-29 11:42:17 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 11:42:18 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-29 11:42:18 - Finished Spring Data repository scanning in 28 ms. Found 5 JPA repository interfaces.
+2026-04-29 11:42:18 - Tomcat initialized with port 8083 (http)
+2026-04-29 11:42:18 - Starting service [Tomcat]
+2026-04-29 11:42:18 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-04-29 11:42:18 - Root WebApplicationContext: initialization completed in 758 ms
+2026-04-29 11:42:18 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-29 11:42:18 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-29 11:42:18 - HikariPool-3 - Starting...
+2026-04-29 11:42:18 - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@d6c2ee8
+2026-04-29 11:42:18 - HikariPool-3 - Start completed.
+2026-04-29 11:42:18 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: FoodApp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-29 11:42:19 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-29 11:42:19 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 11:42:19 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-29 11:42:19 - Exposing 1 endpoint beneath base path '/actuator'
+2026-04-29 11:42:19 - Tomcat started on port 8083 (http) with context path '/'
+2026-04-29 11:42:19 - Started FoodApplication in 1.635 seconds (process running for 37631.387)
+2026-04-29 11:42:19 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-29 11:42:19 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-29 11:42:19 - Condition evaluation unchanged
+2026-04-29 11:42:25 - Restarting due to 4 class path changes (4 additions, 0 deletions, 0 modifications)
+2026-04-29 11:42:25 - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-29 11:42:25 - Graceful shutdown complete
+2026-04-29 11:42:25 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 11:42:25 - HikariPool-3 - Shutdown initiated...
+2026-04-29 11:42:25 - HikariPool-3 - Shutdown completed.
+2026-04-29 11:42:25 - Starting FoodApplication using Java 26 with PID 20756 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
+2026-04-29 11:42:25 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 11:42:26 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-29 11:42:26 - Finished Spring Data repository scanning in 14 ms. Found 5 JPA repository interfaces.
+2026-04-29 11:42:26 - Tomcat initialized with port 8083 (http)
+2026-04-29 11:42:26 - Starting service [Tomcat]
+2026-04-29 11:42:26 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-04-29 11:42:26 - Root WebApplicationContext: initialization completed in 424 ms
+2026-04-29 11:42:26 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-29 11:42:26 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-29 11:42:26 - HikariPool-4 - Starting...
+2026-04-29 11:42:26 - HikariPool-4 - Added connection org.postgresql.jdbc.PgConnection@5532ec31
+2026-04-29 11:42:26 - HikariPool-4 - Start completed.
+2026-04-29 11:42:26 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: FoodApp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-29 11:42:26 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-29 11:42:26 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 11:42:26 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-29 11:42:26 - Exposing 1 endpoint beneath base path '/actuator'
+2026-04-29 11:42:26 - Tomcat started on port 8083 (http) with context path '/'
+2026-04-29 11:42:26 - Started FoodApplication in 1.091 seconds (process running for 37639.007)
+2026-04-29 11:42:26 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-29 11:42:26 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-29 11:42:26 - Condition evaluation unchanged
+2026-04-29 11:43:21 - Restarting due to 4 class path changes (4 additions, 0 deletions, 0 modifications)
+2026-04-29 11:43:21 - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-29 11:43:21 - Graceful shutdown complete
+2026-04-29 11:43:21 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 11:43:21 - HikariPool-4 - Shutdown initiated...
+2026-04-29 11:43:21 - HikariPool-4 - Shutdown completed.
+2026-04-29 11:43:21 - Starting FoodApplication using Java 26 with PID 20756 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
+2026-04-29 11:43:21 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 11:43:21 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: I/O failure while processing configuration class [com.example.FoodApplication.Security.AppUserDetailsService]
+2026-04-29 11:43:22 - Application run failed
+org.springframework.beans.factory.BeanDefinitionStoreException: I/O failure while processing configuration class [com.example.FoodApplication.Security.AppUserDetailsService]
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:288) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:220) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:355) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:283) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:206) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:174) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:452) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:316) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:349) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:118) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:795) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:603) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.6.jar:4.0.6]
+	at com.example.FoodApplication.FoodApplication.main(FoodApplication.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52) ~[spring-boot-devtools-4.0.6.jar:4.0.6]
+Caused by: java.io.FileNotFoundException: class path resource [org/springframework/security/core/userdetails/UserDetailsService.class] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:212) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.core.type.classreading.ClassFileMetadataReader.parseClassModel(ClassFileMetadataReader.java:49) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.core.type.classreading.ClassFileMetadataReader.<init>(ClassFileMetadataReader.java:45) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.core.type.classreading.ClassFileMetadataReaderFactory.getMetadataReader(ClassFileMetadataReaderFactory.java:62) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.core.type.classreading.CachingMetadataReaderFactory.getMetadataReader(CachingMetadataReaderFactory.java:127) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.core.type.classreading.AbstractMetadataReaderFactory.getMetadataReader(AbstractMetadataReaderFactory.java:62) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.core.type.classreading.CachingMetadataReaderFactory.getMetadataReader(CachingMetadataReaderFactory.java:40) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.asSourceClass(ConfigurationClassParser.java:728) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser$SourceClass.getInterfaces(ConfigurationClassParser.java:1074) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.collectImports(ConfigurationClassParser.java:566) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.getImports(ConfigurationClassParser.java:541) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:362) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:283) ~[spring-context-7.0.7.jar:7.0.7]
+	... 21 common frames omitted
+2026-04-29 11:43:44 - Starting FoodApplication using Java 26 with PID 20756 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
+2026-04-29 11:43:44 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 11:43:44 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: I/O failure while processing configuration class [com.example.FoodApplication.Security.AppUserDetailsService]
+2026-04-29 11:43:44 - Application run failed
+org.springframework.beans.factory.BeanDefinitionStoreException: I/O failure while processing configuration class [com.example.FoodApplication.Security.AppUserDetailsService]
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:288) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:220) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:355) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:283) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:206) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:174) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:452) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:316) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:349) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:118) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:795) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:603) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.6.jar:4.0.6]
+	at com.example.FoodApplication.FoodApplication.main(FoodApplication.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52) ~[spring-boot-devtools-4.0.6.jar:4.0.6]
+Caused by: java.io.FileNotFoundException: class path resource [org/springframework/security/core/userdetails/UserDetailsService.class] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:212) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.core.type.classreading.ClassFileMetadataReader.parseClassModel(ClassFileMetadataReader.java:49) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.core.type.classreading.ClassFileMetadataReader.<init>(ClassFileMetadataReader.java:45) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.core.type.classreading.ClassFileMetadataReaderFactory.getMetadataReader(ClassFileMetadataReaderFactory.java:62) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.core.type.classreading.CachingMetadataReaderFactory.getMetadataReader(CachingMetadataReaderFactory.java:127) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.core.type.classreading.AbstractMetadataReaderFactory.getMetadataReader(AbstractMetadataReaderFactory.java:62) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.core.type.classreading.CachingMetadataReaderFactory.getMetadataReader(CachingMetadataReaderFactory.java:40) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.asSourceClass(ConfigurationClassParser.java:728) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser$SourceClass.getInterfaces(ConfigurationClassParser.java:1074) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.collectImports(ConfigurationClassParser.java:566) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.getImports(ConfigurationClassParser.java:541) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:362) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:283) ~[spring-context-7.0.7.jar:7.0.7]
+	... 21 common frames omitted
+2026-04-29 11:43:55 - Starting FoodApplication using Java 26 with PID 20756 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
+2026-04-29 11:43:55 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 11:43:55 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: I/O failure while processing configuration class [com.example.FoodApplication.Security.AppUserDetailsService]
+2026-04-29 11:43:55 - Application run failed
+org.springframework.beans.factory.BeanDefinitionStoreException: I/O failure while processing configuration class [com.example.FoodApplication.Security.AppUserDetailsService]
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:288) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:220) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:355) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:283) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:206) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:174) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:452) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:316) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:349) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:118) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:795) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:603) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.6.jar:4.0.6]
+	at com.example.FoodApplication.FoodApplication.main(FoodApplication.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52) ~[spring-boot-devtools-4.0.6.jar:4.0.6]
+Caused by: java.io.FileNotFoundException: class path resource [org/springframework/security/core/userdetails/UserDetailsService.class] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:212) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.core.type.classreading.ClassFileMetadataReader.parseClassModel(ClassFileMetadataReader.java:49) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.core.type.classreading.ClassFileMetadataReader.<init>(ClassFileMetadataReader.java:45) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.core.type.classreading.ClassFileMetadataReaderFactory.getMetadataReader(ClassFileMetadataReaderFactory.java:62) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.core.type.classreading.CachingMetadataReaderFactory.getMetadataReader(CachingMetadataReaderFactory.java:127) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.core.type.classreading.AbstractMetadataReaderFactory.getMetadataReader(AbstractMetadataReaderFactory.java:62) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.core.type.classreading.CachingMetadataReaderFactory.getMetadataReader(CachingMetadataReaderFactory.java:40) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.asSourceClass(ConfigurationClassParser.java:728) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser$SourceClass.getInterfaces(ConfigurationClassParser.java:1074) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.collectImports(ConfigurationClassParser.java:566) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.getImports(ConfigurationClassParser.java:541) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:362) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:283) ~[spring-context-7.0.7.jar:7.0.7]
+	... 21 common frames omitted
+2026-04-29 11:46:25 - Starting FoodApplication using Java 26 with PID 20756 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
+2026-04-29 11:46:25 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 11:46:26 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-29 11:46:26 - Finished Spring Data repository scanning in 45 ms. Found 5 JPA repository interfaces.
+2026-04-29 11:46:26 - Tomcat initialized with port 8083 (http)
+2026-04-29 11:46:26 - Starting service [Tomcat]
+2026-04-29 11:46:26 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-04-29 11:46:26 - Root WebApplicationContext: initialization completed in 794 ms
+2026-04-29 11:46:26 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-29 11:46:26 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-29 11:46:26 - HikariPool-5 - Starting...
+2026-04-29 11:46:26 - HikariPool-5 - Added connection org.postgresql.jdbc.PgConnection@6e10c8a6
+2026-04-29 11:46:26 - HikariPool-5 - Start completed.
+2026-04-29 11:46:26 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: FoodApp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-29 11:46:27 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-29 11:46:27 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 11:46:27 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-29 11:46:27 - Exposing 1 endpoint beneath base path '/actuator'
+2026-04-29 11:46:27 - Tomcat started on port 8083 (http) with context path '/'
+2026-04-29 11:46:27 - Started FoodApplication in 1.983 seconds (process running for 37879.593)
+2026-04-29 11:46:27 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-29 11:46:27 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-29 11:46:27 - Condition evaluation unchanged
+2026-04-29 11:46:30 - Restarting due to 37 class path changes (0 additions, 0 deletions, 37 modifications)
+2026-04-29 11:46:30 - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-29 11:46:30 - Graceful shutdown complete
+2026-04-29 11:46:30 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 11:46:30 - HikariPool-5 - Shutdown initiated...
+2026-04-29 11:46:30 - HikariPool-5 - Shutdown completed.
+2026-04-29 11:46:31 - Starting FoodApplication using Java 26 with PID 20756 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
+2026-04-29 11:46:31 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 11:46:31 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-29 11:46:31 - Finished Spring Data repository scanning in 38 ms. Found 5 JPA repository interfaces.
+2026-04-29 11:46:31 - Tomcat initialized with port 8083 (http)
+2026-04-29 11:46:31 - Starting service [Tomcat]
+2026-04-29 11:46:31 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-04-29 11:46:31 - Root WebApplicationContext: initialization completed in 815 ms
+2026-04-29 11:46:31 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-29 11:46:32 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-29 11:46:32 - HikariPool-6 - Starting...
+2026-04-29 11:46:32 - HikariPool-6 - Added connection org.postgresql.jdbc.PgConnection@6fb43bc4
+2026-04-29 11:46:32 - HikariPool-6 - Start completed.
+2026-04-29 11:46:32 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: FoodApp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-29 11:46:32 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-29 11:46:32 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 11:46:32 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-29 11:46:32 - Exposing 1 endpoint beneath base path '/actuator'
+2026-04-29 11:46:32 - Tomcat started on port 8083 (http) with context path '/'
+2026-04-29 11:46:32 - Started FoodApplication in 1.708 seconds (process running for 37884.778)
+2026-04-29 11:46:32 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-29 11:46:32 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-29 11:46:32 - Condition evaluation unchanged

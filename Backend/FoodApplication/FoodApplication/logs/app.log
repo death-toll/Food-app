@@ -1,0 +1,66 @@
+2026-04-29 00:05:04 - Starting FoodApplicationTests using Java 21.0.10 with PID 29460 (started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication)
+2026-04-29 00:05:04 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 00:05:06 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-29 00:05:06 - Finished Spring Data repository scanning in 104 ms. Found 5 JPA repository interfaces.
+2026-04-29 00:05:07 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-29 00:05:07 - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-04-29 00:05:08 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-29 00:05:08 - HikariPool-1 - Starting...
+2026-04-29 00:05:08 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6296e4bf
+2026-04-29 00:05:08 - HikariPool-1 - Start completed.
+2026-04-29 00:05:08 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: FoodApp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-29 00:05:10 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-29 00:05:10 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 00:05:10 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-29 00:05:11 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-29 00:05:12 - Exposing 1 endpoint beneath base path '/actuator'
+2026-04-29 00:05:12 - Started FoodApplicationTests in 9.139 seconds (process running for 11.451)
+2026-04-29 00:05:13 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-29 00:05:13 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-29 00:05:13 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 00:05:13 - HikariPool-1 - Shutdown initiated...
+2026-04-29 00:05:13 - HikariPool-1 - Shutdown completed.
+2026-04-29 01:13:07 - Starting FoodApplicationTests using Java 21.0.10 with PID 20908 (started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication)
+2026-04-29 01:13:07 - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 01:13:10 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-29 01:13:10 - Finished Spring Data repository scanning in 111 ms. Found 5 JPA repository interfaces.
+2026-04-29 01:13:11 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-29 01:13:12 - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-04-29 01:13:13 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-29 01:13:13 - HikariPool-1 - Starting...
+2026-04-29 01:13:13 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@22846a1d
+2026-04-29 01:13:13 - HikariPool-1 - Start completed.
+2026-04-29 01:13:13 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: FoodApp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-29 01:13:17 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-29 01:13:17 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 01:13:17 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-29 01:13:18 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-29 01:13:19 - Exposing 1 endpoint beneath base path '/actuator'
+2026-04-29 01:13:19 - Started FoodApplicationTests in 12.566 seconds (process running for 15.693)
+2026-04-29 01:13:19 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-29 01:13:19 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-29 01:13:20 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 01:13:20 - HikariPool-1 - Shutdown initiated...
+2026-04-29 01:13:20 - HikariPool-1 - Shutdown completed.
