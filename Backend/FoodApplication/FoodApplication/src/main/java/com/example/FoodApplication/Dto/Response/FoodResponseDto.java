@@ -10,9 +10,8 @@ public class FoodResponseDto {
     private Integer food_id;
     private Double price;
     private String name;
+    private String description;
     private Foodtype type;
     private Cuisines cuisine;
     private Integer like_count;
-
 }
-

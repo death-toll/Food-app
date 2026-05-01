@@ -4,7 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c3bc7ad6-d1d2-476d-890b-836ce7941d72" name="Changes" comment="" />
+    <list default="true" id="c3bc7ad6-d1d2-476d-890b-836ce7941d72" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/logs/app.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Controller/RestaurantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Controller/RestaurantController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Dto/Request/FoodRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Dto/Request/FoodRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Dto/Request/RestaurantRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Dto/Request/RestaurantRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Dto/Response/FoodResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Dto/Response/FoodResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Entity/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Entity/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Repository/RestaurantRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Repository/RestaurantRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Security/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Security/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Service/FoodService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Service/FoodService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Service/RestaurantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Service/RestaurantService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/food/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/food/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/food/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/food/src/api/restaurant.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/api/restaurant.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/food/src/assets/premium_photo-1683619761468-b06992704398.avif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/food/src/components/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/components/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/food/src/components/Orderlist.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/components/Orderlist.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/food/src/components/foodcard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/components/foodcard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/food/src/components/navbar_restaurant.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/components/navbar_restaurant.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/food/src/components/restaaurant_form.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/components/restaaurant_form.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/food/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/food/src/pages/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/pages/Home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/food/src/pages/Orderlist.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/food/src/pages/Restaurantlist.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/pages/Restaurantlist.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/food/src/pages/UserProfile.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/food/src/services/axiosInstance.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/services/axiosInstance.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/app.log" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,6 +75,9 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="3CvWBW0XonrxBY0ZPKDQaatOzM1" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -51,6 +88,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/sanchitgarg/OneDrive - Nagarro/Desktop/Food Mono/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication",

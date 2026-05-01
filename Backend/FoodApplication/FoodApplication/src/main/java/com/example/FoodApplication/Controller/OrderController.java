@@ -25,6 +25,22 @@ public class OrderController {
         return orderService.createOrder(request);
     }
 
+    /**
+     * GET /orders/user/{userId} — list orders for a given user id
+     */
+    @GetMapping("/user/{userId}")
+    public List<OrderResponseDto> getByUserId(@PathVariable Integer userId) {
+        return orderService.getOrdersByUserId(userId);
+    }
+
+    /**
+     * GET /orders/restaurant/{restaurantId} — list orders for a given restaurant id
+     */
+    @GetMapping("/restaurant/{restaurantId}")
+    public List<OrderResponseDto> getByRestaurantId(@PathVariable Integer restaurantId) {
+        return orderService.getOrdersByRestaurantId(restaurantId);
+    }
+
     @GetMapping("/{orderId}")
     public OrderResponseDto getById(@PathVariable Integer orderId) {
         return orderService.getOrderById(orderId);
@@ -46,4 +62,3 @@ public class OrderController {
         orderService.deleteOrder(orderId);
     }
 }
-

@@ -23,6 +23,7 @@ public class FoodService {
     public FoodResponseDto createFood(FoodRequestDto request) {
         Food food = new Food();
         food.setName(request.getName());
+        food.setDescription(request.getDescription());
         food.setType(request.getType());
         food.setCuisine(request.getCuisine());
         food.setPrice(request.getPrice());
@@ -47,6 +48,7 @@ public class FoodService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Food not found: " + foodId));
 
         food.setName(request.getName());
+        food.setDescription(request.getDescription());
         food.setType(request.getType());
         food.setCuisine(request.getCuisine());
         food.setPrice(request.getPrice());
@@ -73,6 +75,7 @@ public class FoodService {
         FoodResponseDto dto = new FoodResponseDto();
         dto.setFood_id(food.getFood_id());
         dto.setName(food.getName());
+        dto.setDescription(food.getDescription());
         dto.setType(food.getType());
         dto.setCuisine(food.getCuisine());
         dto.setPrice(food.getPrice());

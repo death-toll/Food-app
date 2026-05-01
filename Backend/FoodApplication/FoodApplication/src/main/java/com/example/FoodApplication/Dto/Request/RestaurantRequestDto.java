@@ -13,8 +13,6 @@ public class RestaurantRequestDto {
     @NotBlank
     private String name;
 
-    private Integer rating;
-
     @NotNull
     private Foodtype foodtype;
 

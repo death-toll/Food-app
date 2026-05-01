@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,6 +34,10 @@ public class Food {
     @NotBlank
     @Column(nullable = false)
     private String name;
+
+    @Size(max = 1000)
+    @Column(name = "description", length = 1000)
+    private String description;
 
     @NotNull
     @Column(nullable = false)

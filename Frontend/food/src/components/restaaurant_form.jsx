@@ -1,17 +1,18 @@
 ﻿import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { createRestaurant, updateRestaurant } from '../api/restaurant';
 
-const OWNER_ID = 1;
 const FOODTYPES = ['VEG', 'NON_VEG', 'BOTH'];
 
-const empty = () => ({
-    name: '', rating: '', foodtype: 'VEG',
+const empty = (ownerId) => ({
+    name: '', foodtype: 'VEG',
     street: '', city: '', state: '',
-    ownerId: OWNER_ID, date: new Date().toISOString().split('T')[0],
+    ownerId, date: new Date().toISOString().split('T')[0],
 });
 
-const RestaurantForm = ({ existing = null, onSuccess }) => {
-    const [form, setForm] = useState(existing ?? empty());
+const RestaurantForm = ({ existing = null, onSuccess, onCancel }) => {
+    const ownerId = useSelector((state) => state.auth.userId);
+    const [form, setForm] = useState(existing ?? empty(ownerId));
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
@@ -24,8 +25,7 @@ const RestaurantForm = ({ existing = null, onSuccess }) => {
         try {
             const payload = {
                 ...form,
-                rating: form.rating !== '' ? Number(form.rating) : undefined,
-                ownerId: OWNER_ID,
+                ownerId,
             };
             if (existing?.restaurant_id) {
                 await updateRestaurant(existing.restaurant_id, payload);
@@ -33,7 +33,7 @@ const RestaurantForm = ({ existing = null, onSuccess }) => {
             } else {
                 await createRestaurant(payload);
                 setSuccess('Restaurant created successfully!');
-                setForm(empty());
+                setForm(empty(ownerId));
             }
             if (typeof onSuccess === 'function') onSuccess();
         } catch (err) {
@@ -44,9 +44,14 @@ const RestaurantForm = ({ existing = null, onSuccess }) => {
     };
 
     return (
-        <section style={{ backgroundColor: '#eee', minHeight: 'calc(100vh - 56px)' }}>
+        <section style={{ backgroundColor: 'var(--app-bg)', minHeight: 'calc(100vh - 56px)' }}>
             <div className="container py-4" style={{ maxWidth: 640 }}>
-                <h4 className="fw-semibold mb-4">{existing ? 'Edit Restaurant' : 'Add Restaurant'}</h4>
+                <h4 className="fw-semibold mb-4 text-warning">{existing ? 'Edit Restaurant' : 'Add Restaurant'}</h4>
+                {onCancel && (
+                    <button type="button" className="btn btn-link p-0 mb-3 text-decoration-none" onClick={onCancel}>
+                        ← Back to my restaurants
+                    </button>
+                )}
                 {error && <div className="alert alert-danger">{error}</div>}
                 {success && <div className="alert alert-success">{success}</div>}
                 <div className="card shadow-sm">
@@ -57,15 +62,11 @@ const RestaurantForm = ({ existing = null, onSuccess }) => {
                                 <input type="text" className="form-control" value={form.name} onChange={(e) => set('name', e.target.value)} required />
                             </div>
                             <div className="row g-3 mb-3">
-                                <div className="col-md-6">
+                                <div className="col-md-12">
                                     <label className="form-label fw-medium">Food Type *</label>
                                     <select className="form-select" value={form.foodtype} onChange={(e) => set('foodtype', e.target.value)} required>
                                         {FOODTYPES.map((t) => <option key={t} value={t}>{t}</option>)}
                                     </select>
-                                </div>
-                                <div className="col-md-6">
-                                    <label className="form-label fw-medium">Rating</label>
-                                    <input type="number" className="form-control" min={0} max={5} value={form.rating} onChange={(e) => set('rating', e.target.value)} />
                                 </div>
                             </div>
                             <div className="mb-3">

@@ -1,33 +1,117 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
+  /* Custom app variables — light defaults */
+  --app-bg: #f8f9fa;
+  --app-surface: #ffffff;
+  --app-surface-2: #f1f3f5;
+  --app-border: #dee2e6;
+  --app-text: #212529;
+  --app-text-muted: #6c757d;
+  --app-card-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --app-overlay: rgba(0,0,0,0.45);
+
   color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+/* Bootstrap 5.3 dark mode — triggered by data-bs-theme="dark" on <html> */
+[data-bs-theme="dark"] {
+  --app-bg: #121318;
+  --app-surface: #1e2028;
+  --app-surface-2: #2a2d38;
+  --app-border: #3a3d4a;
+  --app-text: #e2e4ea;
+  --app-text-muted: #9ca3af;
+  --app-card-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  --app-overlay: rgba(0,0,0,0.65);
+}
+
+/* Always apply theme-aware background — vars switch with data-bs-theme */
+body {
+  background-color: var(--app-bg);
+  color: var(--app-text);
+}
+
+/* Cart side-panel */
+[data-bs-theme="dark"] .cart-panel {
+  background: var(--app-surface) !important;
+  color: var(--app-text) !important;
+  border-left: 1px solid var(--app-border) !important;
+}
+[data-bs-theme="dark"] .cart-panel .cart-item-row {
+  border-bottom-color: var(--app-border) !important;
+}
+
+/* Restaurant / food cards */
+[data-bs-theme="dark"] .card {
+  background-color: var(--app-surface) !important;
+  border-color: var(--app-border) !important;
+}
+
+/* List group items (food menu rows) */
+[data-bs-theme="dark"] .list-group-item {
+  background-color: var(--app-surface) !important;
+  border-color: var(--app-border) !important;
+  color: var(--app-text) !important;
+}
+
+/* Inputs / forms */
+[data-bs-theme="dark"] input,
+[data-bs-theme="dark"] select,
+[data-bs-theme="dark"] textarea {
+  background-color: var(--app-surface-2) !important;
+  color: var(--app-text) !important;
+  border-color: var(--app-border) !important;
+}
+[data-bs-theme="dark"] input::placeholder,
+[data-bs-theme="dark"] textarea::placeholder {
+  color: var(--app-text-muted) !important;
+}
+
+/* Tables */
+[data-bs-theme="dark"] table {
+  color: var(--app-text) !important;
+}
+[data-bs-theme="dark"] th,
+[data-bs-theme="dark"] td {
+  border-color: var(--app-border) !important;
+}
+
+/* Sidebar/filter panels */
+[data-bs-theme="dark"] .bg-white {
+  background-color: var(--app-surface) !important;
+}
+[data-bs-theme="dark"] .bg-light {
+  background-color: var(--app-surface-2) !important;
+}
+[data-bs-theme="dark"] .text-dark {
+  color: var(--app-text) !important;
+}
+[data-bs-theme="dark"] .text-muted {
+  color: var(--app-text-muted) !important;
+}
+[data-bs-theme="dark"] .border,
+[data-bs-theme="dark"] .border-top,
+[data-bs-theme="dark"] .border-bottom {
+  border-color: var(--app-border) !important;
+}
+
+/* Dropdown menus */
+[data-bs-theme="dark"] .dropdown-menu {
+  background-color: var(--app-surface) !important;
+  border-color: var(--app-border) !important;
+}
+[data-bs-theme="dark"] .dropdown-item {
+  color: var(--app-text) !important;
+}
+[data-bs-theme="dark"] .dropdown-item:hover {
+  background-color: var(--app-surface-2) !important;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -55,11 +139,12 @@ body {
 }
 
 #root {
-  width: 1126px;
+  width: 100%;
   max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  border: none;
   min-height: 100svh;
   display: flex;
   flex-direction: column;

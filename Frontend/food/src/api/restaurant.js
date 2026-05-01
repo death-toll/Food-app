@@ -11,6 +11,10 @@ export const getRestaurants = (params) =>
 export const getRestaurantById = (id) =>
     axiosInstance.get(`${BASE}/${id}`).then(unwrap);
 
+/** GET /restaurants/owner/{ownerId} — returns only the owner's restaurants */
+export const getRestaurantsByOwner = (ownerId) =>
+    axiosInstance.get(`${BASE}/owner/${ownerId}`).then(unwrap);
+
 export const createRestaurant = (payload) =>
     axiosInstance.post(BASE, payload).then(unwrap);
 
@@ -26,6 +30,7 @@ export const addFoodToRestaurant = (restaurantId, foodId) =>
 const restaurantApi = {
     getRestaurants,
     getRestaurantById,
+    getRestaurantsByOwner,
     createRestaurant,
     updateRestaurant,
     deleteRestaurant,

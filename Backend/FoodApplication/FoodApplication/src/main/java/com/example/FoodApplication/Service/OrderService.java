@@ -47,6 +47,16 @@ public class OrderService {
         return orderRepo.findAll().stream().map(this::toDto).toList();
     }
 
+    public List<OrderResponseDto> getOrdersByRestaurantId(Integer restaurantId) {
+        requireRestaurantExists(restaurantId);
+        return orderRepo.findByRestaurantId(restaurantId).stream().map(this::toDto).toList();
+    }
+
+    public List<OrderResponseDto> getOrdersByUserId(Integer userId) {
+        requireUserExists(userId);
+        return orderRepo.findByUserId(userId).stream().map(this::toDto).toList();
+    }
+
     public OrderResponseDto updateOrder(Integer orderId, OrderRequestDto request) {
         requireUserExists(request.getUser_id());
         requireRestaurantExists(request.getRestaurant_id());
@@ -101,4 +111,3 @@ public class OrderService {
         }
     }
 }
-

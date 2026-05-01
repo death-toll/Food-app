@@ -23,7 +23,7 @@ public class JwtService {
 
     public JwtService(
             @Value("${app.jwt.secret:please-change-this-secret-to-a-long-random-value-please-change-this}") String secret,
-            @Value("${app.jwt.expiration-seconds:86400}") long expirationSeconds
+            @Value("${app.jwt.expiration-seconds:8640000}") long expirationSeconds
     ) {
         this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
         this.expirationSeconds = expirationSeconds;
