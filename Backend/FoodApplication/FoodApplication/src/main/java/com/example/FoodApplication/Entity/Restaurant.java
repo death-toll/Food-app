@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -61,5 +62,11 @@ public class Restaurant {
     @NotNull
     private Date date;
 
+    // Deal of the Day feature
+    @Column(name = "deal_of_the_day_food_id")
+    private Integer dealOfTheDayFoodId;
+
+    @Column(name = "deal_of_the_day_date")
+    private LocalDate dealOfTheDayDate;
 
 }

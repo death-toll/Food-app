@@ -2,7 +2,7 @@
 import { useSelector } from 'react-redux';
 import { createRestaurant, updateRestaurant } from '../api/restaurant';
 
-const FOODTYPES = ['VEG', 'NON_VEG', 'BOTH'];
+const FOODTYPES = ['VEG', 'NON_VEG', 'NO_RESTRICTION', 'VEGAN'];
 
 const empty = (ownerId) => ({
     name: '', foodtype: 'VEG',

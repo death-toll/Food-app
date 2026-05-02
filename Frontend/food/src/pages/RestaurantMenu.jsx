@@ -3,10 +3,11 @@ import { getFoodById, likeFood } from '../api/food';
 import { getAverageRating, getRatingsForRestaurant, rateRestaurant } from '../api/rating';
 import { addToCart } from '../api/cart';
 import { getOrdersByRestaurant } from '../api/order';
+import { getDealOfTheDay } from '../api/restaurant';
 import { setCartCount } from '../store/cartSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
-const FOODTYPE_COLOR = { VEG: '#28a745', NON_VEG: '#dc3545', BOTH: '#fd7e14' };
+const FOODTYPE_COLOR = { VEG: '#28a745', NON_VEG: '#dc3545', NO_RESTRICTION: '#fd7e14', VEGAN: '#6f42c1' };
 const fallbackImg = (id) => `https://picsum.photos/seed/restaurant${id ?? 0}/1200/400`;
 const UNSPLASH_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
 
@@ -37,7 +38,7 @@ export const FoodImage = ({ name, size = 72 }) => {
 };
 
 // ── Food List Row ─────────────────────────────────────────────────────────────
-const FoodListRow = ({ food, restaurantId, onAddedToCart, isTopOrdered }) => {
+const FoodListRow = ({ food, restaurantId, onAddedToCart, isTopOrdered, isDealOfTheDay, discountedPrice }) => {
     const [likes, setLikes] = useState(food.like_count ?? 0);
     const [liking, setLiking] = useState(false);
     const [adding, setAdding] = useState(false);
@@ -73,9 +74,33 @@ const FoodListRow = ({ food, restaurantId, onAddedToCart, isTopOrdered }) => {
     return (
         <li
             className="list-group-item px-3 py-2"
-            style={isTopOrdered ? { borderLeft: '3px solid #f59e0b', backgroundColor: '#fffdf5' } : {}}
+            style={
+                isDealOfTheDay
+                    ? { borderLeft: '3px solid #22c55e', backgroundColor: '#f0fdf4' }
+                    : isTopOrdered
+                        ? { borderLeft: '3px solid #f59e0b', backgroundColor: '#fffdf5' }
+                        : {}
+            }
         >
-            {isTopOrdered && (
+            {isDealOfTheDay && (
+                <div
+                    className="d-flex align-items-center gap-1 mb-2"
+                    style={{
+                        background: 'linear-gradient(90deg, #22c55e 0%, #16a34a 100%)',
+                        color: '#fff',
+                        fontSize: '0.7rem',
+                        fontWeight: 700,
+                        letterSpacing: '0.04em',
+                        padding: '2px 10px',
+                        borderRadius: 20,
+                        width: 'fit-content',
+                    }}
+                >
+                    <span>⭐</span>
+                    <span>DEAL OF THE DAY — 10% OFF!</span>
+                </div>
+            )}
+            {isTopOrdered && !isDealOfTheDay && (
                 <div
                     className="d-flex align-items-center gap-1 mb-2"
                     style={{
@@ -113,9 +138,19 @@ const FoodListRow = ({ food, restaurantId, onAddedToCart, isTopOrdered }) => {
                     {food.description && (
                         <p className="text-muted mb-1" style={{ fontSize: '0.8rem', lineHeight: 1.4 }}>{food.description}</p>
                     )}
-                    <span className="fw-bold text-success">
-                        {food.price != null ? `₹${Number(food.price).toFixed(2)}` : '—'}
-                    </span>
+                    {isDealOfTheDay && discountedPrice != null ? (
+                        <div className="d-flex align-items-center gap-2">
+                            <span className="fw-bold text-success">₹{Number(discountedPrice).toFixed(2)}</span>
+                            <span className="text-muted text-decoration-line-through" style={{ fontSize: '0.85rem' }}>
+                                ₹{Number(food.price).toFixed(2)}
+                            </span>
+                            <span className="badge text-bg-success" style={{ fontSize: '0.65rem' }}>10% OFF</span>
+                        </div>
+                    ) : (
+                        <span className="fw-bold text-success">
+                            {food.price != null ? `₹${Number(food.price).toFixed(2)}` : '—'}
+                        </span>
+                    )}
                 </div>
                 <div className="d-flex flex-column align-items-end gap-1 flex-shrink-0">
                     {restaurantId && (
@@ -188,6 +223,9 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
     // Most ordered food id
     const [topFoodId, setTopFoodId] = useState(null);
 
+    // Deal of the Day
+    const [dealOfTheDay, setDealOfTheDay] = useState(null);
+
     // Filter
     const [typeFilter, setTypeFilter] = useState('ALL');
 
@@ -224,6 +262,11 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
             const topId = Object.entries(freq).sort((a, b) => b[1] - a[1])[0]?.[0];
             if (topId != null) setTopFoodId(Number(topId));
         }).catch(() => {});
+
+        // Fetch Deal of the Day
+        getDealOfTheDay(restaurant_id)
+            .then((deal) => setDealOfTheDay(deal))
+            .catch(() => setDealOfTheDay(null));
     }, [restaurant_id, food_available_id]);
 
     const handleSubmitRating = async (e) => {
@@ -339,6 +382,8 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
                                         food={food}
                                         restaurantId={isCustomer ? restaurant_id : null}
                                         isTopOrdered={food.food_id === topFoodId}
+                                        isDealOfTheDay={dealOfTheDay?.foodId === food.food_id}
+                                        discountedPrice={dealOfTheDay?.foodId === food.food_id ? dealOfTheDay.discountedPrice : null}
                                         onAddedToCart={() => {
                                             // refresh cart badge
                                             import('../api/cart').then(({ getCart }) =>

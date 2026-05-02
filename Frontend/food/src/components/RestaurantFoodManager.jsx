@@ -1,17 +1,38 @@
 import { useEffect, useState } from 'react';
 import { getFoodById, createFood, updateFood, deleteFood } from '../api/food';
-import { addFoodToRestaurant } from '../api/restaurant';
+import { addFoodToRestaurant, getDealOfTheDay, setDealOfTheDay, removeDealOfTheDay } from '../api/restaurant';
 import { FoodImage } from '../pages/RestaurantMenu';
 
-const FOODTYPE_COLOR = { VEG: '#28a745', NON_VEG: '#dc3545', BOTH: '#fd7e14' };
+const FOODTYPE_COLOR = { VEG: '#28a745', NON_VEG: '#dc3545', NO_RESTRICTION: '#fd7e14', VEGAN: '#6f42c1' };
 const CUISINES = ['INDIAN', 'CHINESE', 'ITALIAN', 'MEXICAN', 'THAI', 'JAPANESE', 'KOREAN', 'MEDITERRANEAN', 'AMERICAN'];
-const TYPES = ['VEG', 'NON_VEG', 'BOTH'];
+const TYPES = ['VEG', 'NON_VEG', 'NO_RESTRICTION', 'VEGAN'];
 
 const EMPTY_FORM = { name: '', price: '', type: 'VEG', cuisine: 'INDIAN', description: '' };
 
 // ── Food row with edit / delete actions ───────────────────────────────────────
-const FoodRow = ({ food, onEdit, onDelete }) => (
-    <li className="list-group-item px-3 py-2">
+const FoodRow = ({ food, onEdit, onDelete, isDeal, onSetDeal, onRemoveDeal, dealLoading }) => (
+    <li
+        className="list-group-item px-3 py-2"
+        style={isDeal ? { borderLeft: '3px solid #22c55e', backgroundColor: '#f0fdf4' } : {}}
+    >
+        {isDeal && (
+            <div
+                className="d-flex align-items-center gap-1 mb-2"
+                style={{
+                    background: 'linear-gradient(90deg, #22c55e 0%, #16a34a 100%)',
+                    color: '#fff',
+                    fontSize: '0.7rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.04em',
+                    padding: '2px 10px',
+                    borderRadius: 20,
+                    width: 'fit-content',
+                }}
+            >
+                <span>⭐</span>
+                <span>DEAL OF THE DAY — 10% OFF!</span>
+            </div>
+        )}
         <div className="d-flex align-items-center gap-3">
             <FoodImage name={food.name} size={64} />
             <div className="flex-grow-1 min-w-0">
@@ -28,27 +49,64 @@ const FoodRow = ({ food, onEdit, onDelete }) => (
                     {food.cuisine && (
                         <span className="badge text-bg-info" style={{ fontSize: '0.65rem' }}>{food.cuisine}</span>
                     )}
-                </div>                {food.description && (
+                </div>
+                {food.description && (
                     <p className="text-muted mb-1" style={{ fontSize: '0.78rem', lineHeight: 1.4 }}>{food.description}</p>
-                )}                <span className="fw-bold text-success small">
-                    {food.price != null ? `₹${Number(food.price).toFixed(2)}` : '—'}
-                </span>
+                )}
+                {isDeal ? (
+                    <div className="d-flex align-items-center gap-2">
+                        <span className="fw-bold text-success small">
+                            ₹{(food.price * 0.9).toFixed(2)}
+                        </span>
+                        <span className="text-muted text-decoration-line-through" style={{ fontSize: '0.75rem' }}>
+                            ₹{Number(food.price).toFixed(2)}
+                        </span>
+                        <span className="badge text-bg-success" style={{ fontSize: '0.6rem' }}>10% OFF</span>
+                    </div>
+                ) : (
+                    <span className="fw-bold text-success small">
+                        {food.price != null ? `₹${Number(food.price).toFixed(2)}` : '—'}
+                    </span>
+                )}
             </div>
-            <div className="d-flex gap-1 flex-shrink-0">
-                <button
-                    type="button"
-                    className="btn btn-outline-primary btn-sm"
-                    onClick={() => onEdit(food)}
-                >
-                    Edit
-                </button>
-                <button
-                    type="button"
-                    className="btn btn-outline-danger btn-sm"
-                    onClick={() => onDelete(food.food_id)}
-                >
-                    Delete
-                </button>
+            <div className="d-flex flex-column gap-1 flex-shrink-0">
+                <div className="d-flex gap-1">
+                    <button
+                        type="button"
+                        className="btn btn-outline-primary btn-sm"
+                        onClick={() => onEdit(food)}
+                    >
+                        Edit
+                    </button>
+                    <button
+                        type="button"
+                        className="btn btn-outline-danger btn-sm"
+                        onClick={() => onDelete(food.food_id)}
+                    >
+                        Delete
+                    </button>
+                </div>
+                {isDeal ? (
+                    <button
+                        type="button"
+                        className="btn btn-outline-warning btn-sm"
+                        onClick={onRemoveDeal}
+                        disabled={dealLoading}
+                        style={{ fontSize: '0.75rem' }}
+                    >
+                        {dealLoading ? '...' : '✕ Remove Deal'}
+                    </button>
+                ) : (
+                    <button
+                        type="button"
+                        className="btn btn-success btn-sm"
+                        onClick={() => onSetDeal(food.food_id)}
+                        disabled={dealLoading}
+                        style={{ fontSize: '0.75rem' }}
+                    >
+                        {dealLoading ? '...' : '⭐ Set as Deal'}
+                    </button>
+                )}
             </div>
         </div>
     </li>
@@ -71,6 +129,11 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
     const [deleteLoading, setDeleteLoading] = useState(false);
     const [deleteError, setDeleteError] = useState('');
 
+    // Deal of the Day
+    const [dealFoodId, setDealFoodId] = useState(null);
+    const [dealLoading, setDealLoading] = useState(false);
+    const [dealError, setDealError] = useState('');
+
     // Load foods
     const loadFoods = async () => {
         const ids = Array.isArray(food_available_id) ? food_available_id : [];
@@ -80,10 +143,48 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
         setLoading(false);
     };
 
+    // Load deal of the day
+    const loadDeal = async () => {
+        try {
+            const deal = await getDealOfTheDay(restaurant_id);
+            setDealFoodId(deal?.foodId ?? null);
+        } catch {
+            setDealFoodId(null);
+        }
+    };
+
     useEffect(() => {
         loadFoods();
+        loadDeal();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [restaurant_id]);
+
+    // ── Deal handlers ──────────────────────────────────────────────────────────
+    const handleSetDeal = async (foodId) => {
+        setDealLoading(true);
+        setDealError('');
+        try {
+            const deal = await setDealOfTheDay(restaurant_id, foodId);
+            setDealFoodId(deal?.foodId ?? foodId);
+        } catch (e) {
+            setDealError(e?.response?.data?.message || 'Failed to set deal');
+        } finally {
+            setDealLoading(false);
+        }
+    };
+
+    const handleRemoveDeal = async () => {
+        setDealLoading(true);
+        setDealError('');
+        try {
+            await removeDealOfTheDay(restaurant_id);
+            setDealFoodId(null);
+        } catch (e) {
+            setDealError(e?.response?.data?.message || 'Failed to remove deal');
+        } finally {
+            setDealLoading(false);
+        }
+    };
 
     // ── Form handlers ──────────────────────────────────────────────────────────
     const openAdd = () => { setForm({ ...EMPTY_FORM }); setFormError(''); };
@@ -158,6 +259,14 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
                     {/* ── Food list ── */}
                     <div className={form ? 'col-12 col-lg-7' : 'col-12'}>
 
+                        {/* Deal error message */}
+                        {dealError && (
+                            <div className="alert alert-danger py-2 small mb-3">
+                                {dealError}
+                                <button type="button" className="btn-close float-end" style={{ fontSize: '0.6rem' }} onClick={() => setDealError('')} />
+                            </div>
+                        )}
+
                         {/* Delete confirmation */}
                         {deletingId && (
                             <div className="alert alert-warning d-flex justify-content-between align-items-center mb-3">
@@ -206,6 +315,10 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
                                         food={food}
                                         onEdit={openEdit}
                                         onDelete={(id) => { setDeletingId(id); setDeleteError(''); }}
+                                        isDeal={dealFoodId === food.food_id}
+                                        onSetDeal={handleSetDeal}
+                                        onRemoveDeal={handleRemoveDeal}
+                                        dealLoading={dealLoading}
                                     />
                                 ))}
                             </ul>

@@ -1,6 +1,7 @@
 package com.example.FoodApplication.Controller;
 
 import com.example.FoodApplication.Dto.Request.RestaurantRequestDto;
+import com.example.FoodApplication.Dto.Response.DealOfTheDayResponseDto;
 import com.example.FoodApplication.Dto.Response.RestaurantResponseDto;
 import com.example.FoodApplication.Service.RestaurantService;
 import jakarta.validation.Valid;
@@ -69,5 +70,36 @@ public class RestaurantController {
 			@PathVariable Integer foodId
 	) {
 		return restaurantService.addFoodToRestaurant(restaurantId, foodId);
+	}
+
+	// ── Deal of the Day Endpoints ────────────────────────────────────────────────
+
+	/**
+	 * GET /restaurants/{restaurantId}/deal-of-the-day — Get today's deal (Public)
+	 */
+	@GetMapping("/{restaurantId}/deal-of-the-day")
+	public DealOfTheDayResponseDto getDealOfTheDay(@PathVariable Integer restaurantId) {
+		return restaurantService.getDealOfTheDay(restaurantId);
+	}
+
+	/**
+	 * PUT /restaurants/{restaurantId}/deal-of-the-day/{foodId} — Set deal of the day (Owner only)
+	 */
+	@PutMapping("/{restaurantId}/deal-of-the-day/{foodId}")
+	@PreAuthorize("hasRole('OWNER')")
+	public DealOfTheDayResponseDto setDealOfTheDay(
+			@PathVariable Integer restaurantId,
+			@PathVariable Integer foodId
+	) {
+		return restaurantService.setDealOfTheDay(restaurantId, foodId);
+	}
+
+	/**
+	 * DELETE /restaurants/{restaurantId}/deal-of-the-day — Remove deal of the day (Owner only)
+	 */
+	@DeleteMapping("/{restaurantId}/deal-of-the-day")
+	@PreAuthorize("hasRole('OWNER')")
+	public RestaurantResponseDto removeDealOfTheDay(@PathVariable Integer restaurantId) {
+		return restaurantService.removeDealOfTheDay(restaurantId);
 	}
 }

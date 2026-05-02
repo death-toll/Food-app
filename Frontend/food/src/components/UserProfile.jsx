@@ -3,35 +3,75 @@ import { useSelector } from 'react-redux';
 import axiosInstance from "../services/axiosInstance";
 import { getUserById } from "../api/customer";
 
-const UNSPLASH_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
+/** Default avatar fallback */
+const getDefaultAvatar = (userId) =>
+    `https://i.pravatar.cc/280?u=${encodeURIComponent(String(userId ?? 'guest'))}`;
 
-/** Fetch a portrait photo from Unsplash, deterministic per userId */
+/** Hook to manage profile photo stored in localStorage, mapped by userId */
 const useProfilePhoto = (userId) => {
-    const [src, setSrc] = useState(null);
+    const storageKey = `profile_photo_${userId}`;
+    const fallback = getDefaultAvatar(userId);
 
-    // Stable fallback — same avatar for same userId, no randomness
-    const fallback = `https://i.pravatar.cc/280?u=${encodeURIComponent(String(userId ?? 'guest'))}`;
+    const [src, setSrc] = useState(() => {
+        if (!userId) return fallback;
+        return localStorage.getItem(storageKey) || fallback;
+    });
+    const [uploading, setUploading] = useState(false);
+    const [uploadError, setUploadError] = useState('');
 
+    // Re-read from storage if userId changes
     useEffect(() => {
-        if (!userId || !UNSPLASH_KEY) return;
-        let cancelled = false;
-        // Use userId to pick a deterministic page (1–50); each page has 1 result → same image every time
-        const page = (Math.abs(Number(userId)) % 50) + 1;
-        fetch(
-            `https://api.unsplash.com/search/photos?query=portrait+person&per_page=1&page=${page}&orientation=squarish&client_id=${UNSPLASH_KEY}`
-        )
-            .then((r) => r.json())
-            .then((data) => {
-                if (!cancelled) {
-                    const url = data?.results?.[0]?.urls?.small;
-                    if (url) setSrc(url);
-                }
-            })
-            .catch(() => {});
-        return () => { cancelled = true; };
-    }, [userId]);
+        if (!userId) {
+            setSrc(fallback);
+            return;
+        }
+        const stored = localStorage.getItem(storageKey);
+        setSrc(stored || fallback);
+    }, [userId, storageKey, fallback]);
 
-    return { src: src || fallback, fallback };
+    const uploadPhoto = (file) => {
+        if (!file || !userId) return;
+        setUploadError('');
+
+        // Validate file type
+        if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+            setUploadError('Only JPEG, PNG, or WEBP images are allowed.');
+            return;
+        }
+
+        // Validate file size (max 2MB for localStorage safety)
+        if (file.size > 2 * 1024 * 1024) {
+            setUploadError('Image must be smaller than 2MB.');
+            return;
+        }
+
+        setUploading(true);
+        const reader = new FileReader();
+        reader.onload = () => {
+            try {
+                const base64 = reader.result;
+                localStorage.setItem(storageKey, base64);
+                setSrc(base64);
+            } catch (e) {
+                setUploadError('Failed to save image. Storage may be full.');
+            } finally {
+                setUploading(false);
+            }
+        };
+        reader.onerror = () => {
+            setUploadError('Failed to read file.');
+            setUploading(false);
+        };
+        reader.readAsDataURL(file);
+    };
+
+    const removePhoto = () => {
+        if (!userId) return;
+        localStorage.removeItem(storageKey);
+        setSrc(fallback);
+    };
+
+    return { src, fallback, uploadPhoto, removePhoto, uploading, uploadError };
 };
 
 const safeArray = (value) => (Array.isArray(value) ? value : []);
@@ -50,7 +90,13 @@ const UserProfile = () => {
         return [user.street, user.city, user.state].filter(Boolean).join(', ');
     }, [user]);
 
-    const { src: profilePhoto, fallback: profileFallbackPhoto } = useProfilePhoto(userId);
+    const { src: profilePhoto, fallback: profileFallbackPhoto, uploadPhoto, removePhoto, uploading, uploadError } = useProfilePhoto(userId);
+
+    const handleFileSelect = (e) => {
+        const file = e.target.files?.[0];
+        if (file) uploadPhoto(file);
+        e.target.value = ''; // Reset so same file can be re-selected
+    };
 
     useEffect(() => {
         let cancelled = false;
@@ -131,12 +177,39 @@ const UserProfile = () => {
                                     src={profilePhoto}
                                     alt="avatar"
                                     className="rounded-circle img-fluid"
-                                    style={{ width: 140 }}
+                                    style={{ width: 140, height: 140, objectFit: 'cover' }}
                                     onError={(e) => {
                                         e.currentTarget.onerror = null;
                                         e.currentTarget.src = profileFallbackPhoto;
                                     }}
                                 />
+
+                                {/* Upload photo controls */}
+                                <div className="mt-3">
+                                    <label className="btn btn-outline-secondary btn-sm mb-2" style={{ cursor: 'pointer' }}>
+                                        {uploading ? 'Uploading...' : 'Change Photo'}
+                                        <input
+                                            type="file"
+                                            accept="image/png,image/jpeg,image/webp"
+                                            className="d-none"
+                                            onChange={handleFileSelect}
+                                            disabled={uploading}
+                                        />
+                                    </label>
+                                    {profilePhoto !== profileFallbackPhoto && (
+                                        <button
+                                            type="button"
+                                            className="btn btn-outline-danger btn-sm ms-2"
+                                            onClick={removePhoto}
+                                            disabled={uploading}
+                                        >
+                                            Remove
+                                        </button>
+                                    )}
+                                    {uploadError && (
+                                        <div className="text-danger small mt-1">{uploadError}</div>
+                                    )}
+                                </div>
 
                                 <h5 className="mt-3 mb-1">{user?.name || `User #${userId}`}</h5>
 

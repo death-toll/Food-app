@@ -7,9 +7,10 @@ import RestaurantFoodManager from '../components/RestaurantFoodManager';
 const RATINGS = [1, 2, 3, 4, 5];
 
 const FOODTYPE_BADGE = {
-    VEG:     'text-bg-success',
-    NON_VEG: 'text-bg-danger',
-    BOTH:    'text-bg-warning',
+    VEG:            'text-bg-success',
+    NON_VEG:        'text-bg-danger',
+    NO_RESTRICTION: 'text-bg-warning',
+    VEGAN:          'text-bg-info',
 };
 
 const MyRestaurants = ({ onAddNew }) => {

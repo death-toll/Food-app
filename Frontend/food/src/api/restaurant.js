@@ -27,6 +27,20 @@ export const deleteRestaurant = (id) =>
 export const addFoodToRestaurant = (restaurantId, foodId) =>
     axiosInstance.post(`${BASE}/${restaurantId}/foods/${foodId}`).then(unwrap);
 
+// ── Deal of the Day ────────────────────────────────────────────────────────────
+
+/** GET /restaurants/{restaurantId}/deal-of-the-day — Get today's deal (Public) */
+export const getDealOfTheDay = (restaurantId) =>
+    axiosInstance.get(`${BASE}/${restaurantId}/deal-of-the-day`).then(unwrap);
+
+/** PUT /restaurants/{restaurantId}/deal-of-the-day/{foodId} — Set deal (Owner only) */
+export const setDealOfTheDay = (restaurantId, foodId) =>
+    axiosInstance.put(`${BASE}/${restaurantId}/deal-of-the-day/${foodId}`).then(unwrap);
+
+/** DELETE /restaurants/{restaurantId}/deal-of-the-day — Remove deal (Owner only) */
+export const removeDealOfTheDay = (restaurantId) =>
+    axiosInstance.delete(`${BASE}/${restaurantId}/deal-of-the-day`).then(unwrap);
+
 const restaurantApi = {
     getRestaurants,
     getRestaurantById,
@@ -35,6 +49,9 @@ const restaurantApi = {
     updateRestaurant,
     deleteRestaurant,
     addFoodToRestaurant,
+    getDealOfTheDay,
+    setDealOfTheDay,
+    removeDealOfTheDay,
 };
 
 export default restaurantApi;
