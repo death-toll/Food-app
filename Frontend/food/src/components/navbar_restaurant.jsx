@@ -1,10 +1,21 @@
 ﻿import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { logout } from '../store/authSlice';
 import { toggleTheme } from '../store/themeSlice';
 
-const NavbarRestaurant = ({ active = 'home', onNavigate, onLogout }) => {
+const NavbarRestaurant = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const themeMode = useSelector((state) => state.theme.mode);
-    const go = (page) => typeof onNavigate === 'function' && onNavigate(page);
+
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate('/login');
+    };
+
+    const linkClass = ({ isActive }) =>
+        `nav-link btn btn-link text-white px-3${isActive ? ' fw-semibold text-warning' : ''}`;
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
@@ -15,19 +26,19 @@ const NavbarRestaurant = ({ active = 'home', onNavigate, onLogout }) => {
                 <div className="collapse navbar-collapse" id="restaurantNav">
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
-                            <button type="button" className={`nav-link btn btn-link text-white px-3${active === 'home' ? ' fw-semibold text-warning' : ''}`} onClick={() => go('home')}>Home</button>
+                            <NavLink to="/owner" className={linkClass} end>Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <button type="button" className={`nav-link btn btn-link text-white px-3${active === 'my-restaurants' ? ' fw-semibold text-warning' : ''}`} onClick={() => go('my-restaurants')}>My Restaurants</button>
+                            <NavLink to="/owner/my-restaurants" className={linkClass}>My Restaurants</NavLink>
                         </li>
                         <li className="nav-item">
-                            <button type="button" className={`nav-link btn btn-link text-white px-3${active === 'orders' ? ' fw-semibold text-warning' : ''}`} onClick={() => go('orders')}>Orders</button>
+                            <NavLink to="/owner/orders" className={linkClass}>Orders</NavLink>
                         </li>
                         <li className="nav-item">
-                            <button type="button" className={`nav-link btn btn-link text-white px-3${active === 'add-restaurant' ? ' fw-semibold text-warning' : ''}`} onClick={() => go('add-restaurant')}>Add Restaurant</button>
+                            <NavLink to="/owner/add-restaurant" className={linkClass}>Add Restaurant</NavLink>
                         </li>
                         <li className="nav-item">
-                            <button type="button" className={`nav-link btn btn-link text-white px-3${active === 'profile' ? ' fw-semibold text-warning' : ''}`} onClick={() => go('profile')}>Profile</button>
+                            <NavLink to="/owner/profile" className={linkClass}>Profile</NavLink>
                         </li>
                         <li className="nav-item ms-2">
                             <button
@@ -41,7 +52,7 @@ const NavbarRestaurant = ({ active = 'home', onNavigate, onLogout }) => {
                             </button>
                         </li>
                         <li className="nav-item ms-2">
-                            <button type="button" className="btn btn-outline-light btn-sm" onClick={() => typeof onLogout === 'function' && onLogout()}>Logout</button>
+                            <button type="button" className="btn btn-outline-light btn-sm" onClick={handleLogout}>Logout</button>
                         </li>
                     </ul>
                 </div>

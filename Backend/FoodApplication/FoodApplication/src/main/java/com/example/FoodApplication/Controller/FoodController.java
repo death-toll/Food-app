@@ -2,10 +2,17 @@ package com.example.FoodApplication.Controller;
 
 import com.example.FoodApplication.Dto.Request.FoodRequestDto;
 import com.example.FoodApplication.Dto.Response.FoodResponseDto;
+import com.example.FoodApplication.Entity.User;
+import com.example.FoodApplication.Repository.UserRepo;
 import com.example.FoodApplication.Service.FoodService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -14,9 +21,11 @@ import java.util.List;
 public class FoodController {
 
 	private final FoodService foodService;
+	private final UserRepo userRepo;
 
-	public FoodController(FoodService foodService) {
+	public FoodController(FoodService foodService, UserRepo userRepo) {
 		this.foodService = foodService;
+		this.userRepo = userRepo;
 	}
 
 	@PostMapping
@@ -47,7 +56,21 @@ public class FoodController {
 	}
 
 	@PostMapping("/{foodId}/like")
+	@PreAuthorize("hasAnyRole('CUSTOMER','OWNER')")
 	public FoodResponseDto like(@PathVariable Integer foodId) {
-		return foodService.likeFood(foodId);
+		Integer userId = getCurrentUserId();
+		return foodService.likeFood(foodId, userId);
+	}
+
+	private Integer getCurrentUserId() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication == null || !(authentication.getPrincipal() instanceof UserDetails principal)) {
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Not authenticated");
+		}
+
+		User user = userRepo.findByEmail(principal.getUsername())
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found"));
+
+		return user.getUser_id();
 	}
 }

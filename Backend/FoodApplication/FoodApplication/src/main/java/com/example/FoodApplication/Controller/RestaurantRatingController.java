@@ -8,6 +8,7 @@ import com.example.FoodApplication.Repository.UserRepo;
 import com.example.FoodApplication.Service.RestaurantRatingService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,9 +34,20 @@ public class RestaurantRatingController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAnyRole('CUSTOMER','OWNER')")
     public RestaurantRatingResponseDto rate(@Valid @RequestBody RestaurantRatingRequestDto request) {
         Integer userId = getCurrentUserId();
         return restaurantRatingService.rateRestaurant(userId, request);
+    }
+
+    /**
+     * Get the current logged-in user's rating/review for a restaurant.
+     */
+    @GetMapping("/restaurant/{restaurantId}/me")
+    @PreAuthorize("hasAnyRole('CUSTOMER','OWNER')")
+    public RestaurantRatingResponseDto getMyRating(@PathVariable Integer restaurantId) {
+        Integer userId = getCurrentUserId();
+        return restaurantRatingService.getMyRatingForRestaurant(userId, restaurantId);
     }
 
     /**

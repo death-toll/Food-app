@@ -1,35 +1,39 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { logout, setCredentials } from './store/authSlice';
 import { getMe } from './api/auth';
 import './App.css';
-import NavbarRestaurant from './components/navbar_restaurant';
+
+// Layouts
+import CustomerLayout from './layouts/CustomerLayout';
+import OwnerLayout from './layouts/OwnerLayout';
+import RequireAuth from './components/RequireAuth';
+
+// Pages
+import Login from './pages/Login';
+import Home from './pages/Home';
+import Orderlist from './components/Orderlist';
+import UserProfile from './components/UserProfile';
+import OrderConfirmationPage from './pages/OrderConfirmationPage';
 import Restaurantlist from './pages/Restaurantlist';
 import MyRestaurants from './pages/MyRestaurants';
 import RestaurantForm from './components/restaaurant_form';
-import UserProfile from './components/UserProfile';
-import Login from './pages/Login';
-import CustomerUi from './pages/Customer_ui';
 import OwnerOrders from './pages/OwnerOrders';
+import NotFound from './pages/NotFound';
 
 function App() {
   const { isLoggedIn, role } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const [activePage, setActivePage] = useState(
-    () => localStorage.getItem('owner_page') || 'home'
-  );
-
-  const navigateTo = (page) => {
-    setActivePage(page);
-    localStorage.setItem('owner_page', page);
-  };
   const [validating, setValidating] = useState(() => !!localStorage.getItem('token'));
 
   // On mount: re-validate stored token with the server.
-  // If valid, refresh user info. If invalid/expired, force logout.
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (!token) return;
+    if (!token) {
+      setValidating(false);
+      return;
+    }
     getMe()
       .then((user) => {
         dispatch(setCredentials({
@@ -46,13 +50,7 @@ function App() {
       .finally(() => setValidating(false));
   }, [dispatch]);
 
-  const handleLogout = () => {
-    dispatch(logout());
-    localStorage.removeItem('owner_page');
-    setActivePage('home');
-  };
-
-  // Show nothing while we check the token — avoids flash of login page
+  // Show spinner while validating token
   if (validating) {
     return (
       <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
@@ -63,39 +61,46 @@ function App() {
     );
   }
 
-  if (!isLoggedIn) {
-    return <Login />;
-  }
-
-  // Customer role → customer UI
-  if (role === 'CUSTOMER') {
-    return <CustomerUi />;
-  }
-
-  // OWNER role → restaurant owner UI
-  const renderPage = () => {
-    switch (activePage) {
-      case 'home':
-        return <Restaurantlist />;
-      case 'my-restaurants':
-        return <MyRestaurants onAddNew={() => navigateTo('add-restaurant')} />;
-      case 'add-restaurant':
-        return <RestaurantForm onSuccess={() => navigateTo('my-restaurants')} onCancel={() => navigateTo('my-restaurants')} />;
-      case 'orders':
-        return <OwnerOrders />;
-      case 'profile':
-        return <UserProfile />;
-      default:
-        return <Restaurantlist />;
-    }
-  };
-
   return (
-    <>
-      <NavbarRestaurant active={activePage} onNavigate={navigateTo} onLogout={handleLogout} />
-      {renderPage()}
-    </>
+    <Routes>
+      {/* Public route */}
+      <Route path="/login" element={
+        isLoggedIn 
+          ? <Navigate to={role === 'OWNER' ? '/owner' : '/'} replace /> 
+          : <Login />
+      } />
+
+      {/* Customer routes */}
+      <Route element={
+        <RequireAuth allowedRole="CUSTOMER">
+          <CustomerLayout />
+        </RequireAuth>
+      }>
+        <Route path="/" element={<Home />} />
+        <Route path="/orders" element={<Orderlist />} />
+        <Route path="/profile" element={<UserProfile />} />
+        <Route path="/order-confirmation" element={<OrderConfirmationPage />} />
+      </Route>
+
+      {/* Owner routes */}
+      <Route path="/owner" element={
+        <RequireAuth allowedRole="OWNER">
+          <OwnerLayout />
+        </RequireAuth>
+      }>
+        <Route index element={<Restaurantlist />} />
+        <Route path="my-restaurants" element={<MyRestaurants />} />
+        <Route path="add-restaurant" element={<RestaurantForm />} />
+        <Route path="orders" element={<OwnerOrders />} />
+        <Route path="profile" element={<UserProfile />} />
+      </Route>
+
+      {/* 404 */}
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
 
 export default App;
+
+

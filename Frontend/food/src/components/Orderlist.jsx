@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getFoods } from '../api/food';
 import { getOrdersByUser } from '../api/order';
+import { getRestaurantById } from '../api/restaurant';
 
 // ── Status → step index mapping ───────────────────────────────────────────────
 // Backend statuses: PLACED, CONFIRMED, DELIVERED, CANCELLED
@@ -116,6 +117,7 @@ const Orderlist = () => {
     const userId = useSelector((state) => state.auth.userId);
     const [orders, setOrders] = useState([]);
     const [foodNameById, setFoodNameById] = useState({});
+    const [restaurantNameById, setRestaurantNameById] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
@@ -139,6 +141,29 @@ const Orderlist = () => {
                 const mine = (Array.isArray(orderResponse) ? orderResponse : [])
                     .sort((a, b) => Number(b.order_id) - Number(a.order_id));
 
+                // Build restaurant name lookup for orders
+                const uniqueRestaurantIds = Array.from(
+                    new Set(
+                        mine
+                            .map((o) => o?.restaurant_id)
+                            .filter((id) => id != null)
+                            .map((id) => String(id))
+                    )
+                );
+
+                const restaurantResults = await Promise.all(
+                    uniqueRestaurantIds.map((id) =>
+                        getRestaurantById(id)
+                            .then((r) => ({ id, name: r?.name }))
+                            .catch(() => ({ id, name: null }))
+                    )
+                );
+
+                const restaurantMap = {};
+                restaurantResults.forEach(({ id, name }) => {
+                    if (id) restaurantMap[String(id)] = name || 'Restaurant';
+                });
+
                 const map = {};
                 (Array.isArray(foods) ? foods : []).forEach((food) => {
                     if (food?.food_id != null) {
@@ -147,6 +172,7 @@ const Orderlist = () => {
                 });
 
                 setFoodNameById(map);
+                setRestaurantNameById(restaurantMap);
                 setOrders(mine);
             } catch (e) {
                 if (cancelled) return;
@@ -164,7 +190,7 @@ const Orderlist = () => {
     return (
         <section
             style={{
-                background: 'linear-gradient(180deg, #f8f9fa 0%, #eef1f4 100%)',
+                backgroundColor: 'var(--app-bg)',
                 minHeight: 'calc(100vh - 56px)',
             }}
         >
@@ -213,19 +239,32 @@ const Orderlist = () => {
                                         </div>
 
                                         <div className="text-muted small mb-2">
-                                            Restaurant <span className="fw-medium text-dark">#{order.restaurant_id}</span>
+                                            Restaurant{' '}
+                                            <span className="fw-medium text-dark">
+                                                {restaurantNameById[String(order.restaurant_id)] || 'Restaurant'}
+                                            </span>
                                         </div>
 
                                         <div className="d-flex flex-wrap gap-2 mb-3">
-                                            {(Array.isArray(order.food_id) ? order.food_id : []).map((id) => (
-                                                <span
-                                                    key={`${order.order_id}-${id}`}
-                                                    className="badge rounded-pill"
-                                                    style={{ backgroundColor: '#edf6f2', color: '#0f6d4b', fontWeight: 500 }}
-                                                >
-                                                    {foodNameById[String(id)] || `Food #${id}`}
-                                                </span>
-                                            ))}
+                                            {(() => {
+                                                const ids = Array.isArray(order.food_id) ? order.food_id : [];
+                                                const counts = new Map();
+
+                                                ids.forEach((id) => {
+                                                    const key = String(id);
+                                                    counts.set(key, (counts.get(key) ?? 0) + 1);
+                                                });
+
+                                                return Array.from(counts.entries()).map(([id, count]) => (
+                                                    <span
+                                                        key={`${order.order_id}-${id}`}
+                                                        className="badge rounded-pill"
+                                                        style={{ backgroundColor: '#edf6f2', color: '#0f6d4b', fontWeight: 500 }}
+                                                    >
+                                                        {(foodNameById[id] || `Food #${id}`) + (count > 1 ? ` × ${count}` : '')}
+                                                    </span>
+                                                ));
+                                            })()}
                                             {!Array.isArray(order.food_id) || order.food_id.length === 0 ? (
                                                 <span className="text-muted small">No items in this order.</span>
                                             ) : null}

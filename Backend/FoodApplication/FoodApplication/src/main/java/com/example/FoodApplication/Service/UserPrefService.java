@@ -5,6 +5,7 @@ import com.example.FoodApplication.Dto.Response.UserPrefResponseDto;
 import com.example.FoodApplication.Entity.Preference;
 import com.example.FoodApplication.Repository.UserPrefRepo;
 import com.example.FoodApplication.Repository.UserRepo;
+import com.example.FoodApplication.enums.Cuisines;
 import com.example.FoodApplication.enums.Foodtype;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,7 @@ public class UserPrefService {
 		pref.setUser_id(request.getUser_id());
 		pref.setRestaurant_id(request.getRestaurant_id());
 		pref.setFood_id(request.getFood_id());
+		pref.setCuisines(request.getCuisines());
 		pref.setFoodtype(request.getFoodtype());
 
 		Preference saved = userPrefRepo.save(pref);
@@ -90,6 +92,19 @@ public class UserPrefService {
 		return toDto(userPrefRepo.save(pref));
 	}
 
+	public UserPrefResponseDto addCuisine(Integer userId, Cuisines cuisine) {
+		requireUserExists(userId);
+		if (cuisine == null) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "cuisine is required");
+		}
+		Preference pref = userPrefRepo.findById(userId).orElseGet(() -> defaultPreference(userId));
+		List<Cuisines> cuisines = pref.getCuisines();
+		if (cuisines == null) cuisines = new ArrayList<>();
+		if (!cuisines.contains(cuisine)) cuisines.add(cuisine);
+		pref.setCuisines(cuisines);
+		return toDto(userPrefRepo.save(pref));
+	}
+
 	private void requireUserExists(Integer userId) {
 		if (userId == null) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "userId is required");
@@ -104,6 +119,7 @@ public class UserPrefService {
 		pref.setUser_id(userId);
 		pref.setRestaurant_id(new ArrayList<>());
 		pref.setFood_id(new ArrayList<>());
+		pref.setCuisines(new ArrayList<>());
 		// Preference.foodtype is @NotNull, so we need a default when auto-creating.
 		pref.setFoodtype(Foodtype.VEG);
 		return pref;
@@ -114,6 +130,7 @@ public class UserPrefService {
 		dto.setUser_id(pref.getUser_id());
 		dto.setRestaurant_id(pref.getRestaurant_id());
 		dto.setFood_id(pref.getFood_id());
+		dto.setCuisines(pref.getCuisines());
 		dto.setFoodtype(pref.getFoodtype());
 		return dto;
 	}

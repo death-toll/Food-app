@@ -1,5 +1,6 @@
 ﻿import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { createRestaurant, updateRestaurant } from '../api/restaurant';
 
 const FOODTYPES = ['VEG', 'NON_VEG', 'NO_RESTRICTION', 'VEGAN'];
@@ -11,6 +12,7 @@ const empty = (ownerId) => ({
 });
 
 const RestaurantForm = ({ existing = null, onSuccess, onCancel }) => {
+    const navigate = useNavigate();
     const ownerId = useSelector((state) => state.auth.userId);
     const [form, setForm] = useState(existing ?? empty(ownerId));
     const [saving, setSaving] = useState(false);
@@ -35,7 +37,11 @@ const RestaurantForm = ({ existing = null, onSuccess, onCancel }) => {
                 setSuccess('Restaurant created successfully!');
                 setForm(empty(ownerId));
             }
-            if (typeof onSuccess === 'function') onSuccess();
+            if (typeof onSuccess === 'function') {
+                onSuccess();
+            } else {
+                navigate('/owner/my-restaurants');
+            }
         } catch (err) {
             setError(err?.response?.data?.message || 'Save failed. Check all fields.');
         } finally {
@@ -47,8 +53,8 @@ const RestaurantForm = ({ existing = null, onSuccess, onCancel }) => {
         <section style={{ backgroundColor: 'var(--app-bg)', minHeight: 'calc(100vh - 56px)' }}>
             <div className="container py-4" style={{ maxWidth: 640 }}>
                 <h4 className="fw-semibold mb-4 text-warning">{existing ? 'Edit Restaurant' : 'Add Restaurant'}</h4>
-                {onCancel && (
-                    <button type="button" className="btn btn-link p-0 mb-3 text-decoration-none" onClick={onCancel}>
+                {(onCancel || !existing) && (
+                    <button type="button" className="btn btn-link p-0 mb-3 text-decoration-none" onClick={onCancel || (() => navigate('/owner/my-restaurants'))}>
                         ← Back to my restaurants
                     </button>
                 )}

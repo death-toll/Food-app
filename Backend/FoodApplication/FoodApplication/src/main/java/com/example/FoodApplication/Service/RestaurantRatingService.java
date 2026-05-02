@@ -37,6 +37,7 @@ public class RestaurantRatingService {
         Restaurant restaurant = restaurantRepo.findById(request.getRestaurantId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant not found: " + request.getRestaurantId()));
 
+        // One review per user per restaurant (unique constraint). If it exists, update it.
         RestaurantRating rating = restaurantRatingRepo.findByUserIdAndRestaurantId(userId, request.getRestaurantId())
                 .orElseGet(RestaurantRating::new);
 
@@ -61,6 +62,17 @@ public class RestaurantRatingService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant not found: " + restaurantId);
         }
         return restaurantRatingRepo.findByRestaurantId(restaurantId).stream().map(this::toDto).toList();
+    }
+
+    public RestaurantRatingResponseDto getMyRatingForRestaurant(Integer userId, Integer restaurantId) {
+        if (!restaurantRepo.existsById(restaurantId)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant not found: " + restaurantId);
+        }
+
+        RestaurantRating rr = restaurantRatingRepo.findByUserIdAndRestaurantId(userId, restaurantId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No review found"));
+
+        return toDto(rr);
     }
 
     public AverageRatingResponseDto getAverageRating(Integer restaurantId) {

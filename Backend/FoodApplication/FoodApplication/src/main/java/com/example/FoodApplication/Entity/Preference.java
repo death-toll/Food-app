@@ -1,5 +1,6 @@
 package com.example.FoodApplication.Entity;
 
+import com.example.FoodApplication.enums.Cuisines;
 import com.example.FoodApplication.enums.Foodtype;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -34,6 +35,11 @@ public class Preference{
     @CollectionTable(name = "preference_food_ids", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "food_id")
     private List<Integer> food_id;
+
+    @ElementCollection
+    @CollectionTable(name = "preference_cuisines", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "cuisine")
+    private List<Cuisines> cuisines;
 
     @NotNull
     private Foodtype foodtype;

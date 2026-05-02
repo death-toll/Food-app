@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { getRestaurantsByOwner, deleteRestaurant } from '../api/restaurant';
 import RestaurantForm from '../components/restaaurant_form';
 import RestaurantFoodManager from '../components/RestaurantFoodManager';
@@ -14,6 +15,8 @@ const FOODTYPE_BADGE = {
 };
 
 const MyRestaurants = ({ onAddNew }) => {
+    const navigate = useNavigate();
+    const handleAddNew = onAddNew || (() => navigate('/owner/add-restaurant'));
     const ownerId = useSelector((state) => state.auth.userId);
 
     const [restaurants, setRestaurants] = useState([]);
@@ -171,7 +174,7 @@ const MyRestaurants = ({ onAddNew }) => {
                                 <button
                                     type="button"
                                     className="btn btn-dark btn-sm"
-                                    onClick={typeof onAddNew === 'function' ? onAddNew : undefined}
+                                    onClick={handleAddNew}
                                 >
                                     + Add Restaurant
                                 </button>
@@ -228,7 +231,7 @@ const MyRestaurants = ({ onAddNew }) => {
                                             <button
                                                 type="button"
                                                 className="btn btn-link p-0"
-                                                onClick={typeof onAddNew === 'function' ? onAddNew : undefined}
+                                                onClick={handleAddNew}
                                             >
                                                 Add your first restaurant
                                             </button>

@@ -234,7 +234,7 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
     };
 
     return (
-        <section style={{ backgroundColor: '#f5f5f5', minHeight: 'calc(100vh - 56px)' }}>
+        <section style={{ backgroundColor: 'var(--app-bg)', minHeight: 'calc(100vh - 56px)' }}>
             <div className="container-fluid py-4">
                 {/* Header */}
                 <div className="d-flex align-items-center gap-3 mb-4">

@@ -31,10 +31,19 @@ export const getRatingsForRestaurant = (restaurantId) =>
 export const getAverageRating = (restaurantId) =>
     axiosInstance.get(`${BASE}/restaurant/${restaurantId}/average`).then(unwrap);
 
+/**
+ * GET /restaurant-ratings/restaurant/{restaurantId}/me
+ * Get the current logged-in user's rating/review for a restaurant.
+ * @returns {RestaurantRatingResponseDto}
+ */
+export const getMyRatingForRestaurant = (restaurantId) =>
+    axiosInstance.get(`${BASE}/restaurant/${restaurantId}/me`).then(unwrap);
+
 const ratingApi = {
     rateRestaurant,
     getRatingsForRestaurant,
     getAverageRating,
+    getMyRatingForRestaurant,
 };
 
 export default ratingApi;

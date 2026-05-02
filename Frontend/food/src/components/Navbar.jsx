@@ -1,13 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { logout } from '../store/authSlice';
 import { toggleTheme } from '../store/themeSlice';
 
-const Navbar = ({ active = 'home', onNavigate, onCartClick }) => {
+const Navbar = ({ onCartClick }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { name } = useSelector((state) => state.auth);
     const cartCount = useSelector((state) => state.cart.totalItems);
     const themeMode = useSelector((state) => state.theme.mode);
-    const go = (page) => typeof onNavigate === 'function' && onNavigate(page);
+
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate('/login');
+    };
+
+    const linkClass = ({ isActive }) =>
+        `nav-link btn btn-link px-2${isActive ? ' active fw-semibold' : ''}`;
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -19,36 +28,23 @@ const Navbar = ({ active = 'home', onNavigate, onCartClick }) => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <button
-                                type="button"
-                                className={`nav-link btn btn-link px-2${active === 'home' ? ' active fw-semibold' : ''}`}
-                                onClick={() => go('home')}
-                            >
+                            <NavLink to="/" className={linkClass} end>
                                 Home
-                            </button>
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <button
-                                type="button"
-                                className={`nav-link btn btn-link px-2${active === 'orders' ? ' active fw-semibold' : ''}`}
-                                onClick={() => go('orders')}
-                            >
+                            <NavLink to="/orders" className={linkClass}>
                                 Orders
-                            </button>
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <button
-                                type="button"
-                                className={`nav-link btn btn-link px-2${active === 'profile' ? ' active fw-semibold' : ''}`}
-                                onClick={() => go('profile')}
-                            >
+                            <NavLink to="/profile" className={linkClass}>
                                 Profile
-                            </button>
+                            </NavLink>
                         </li>
                     </ul>
                     <ul className="navbar-nav ms-auto align-items-center">
                         {name && <li className="nav-item me-2"><span className="navbar-text small text-muted">Hi, {name}</span></li>}
-                        {/* Cart icon */}
                         {/* Theme toggle */}
                         <li className="nav-item me-2">
                             <button
@@ -61,6 +57,7 @@ const Navbar = ({ active = 'home', onNavigate, onCartClick }) => {
                                 {themeMode === 'dark' ? '☀️' : '🌙'}
                             </button>
                         </li>
+                        {/* Cart icon */}
                         <li className="nav-item me-2">
                             <button
                                 type="button"
@@ -80,7 +77,7 @@ const Navbar = ({ active = 'home', onNavigate, onCartClick }) => {
                             </button>
                         </li>
                         <li className="nav-item">
-                            <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => dispatch(logout())}>Logout</button>
+                            <button type="button" className="btn btn-outline-secondary btn-sm" onClick={handleLogout}>Logout</button>
                         </li>
                     </ul>
                 </div>

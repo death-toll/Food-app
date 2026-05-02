@@ -272,15 +272,25 @@ const OwnerOrders = () => {
                                             </td>
                                             <td>
                                                 <div className="d-flex flex-wrap gap-1">
-                                                    {(Array.isArray(order.food_id) ? order.food_id : []).map((id, i) => (
-                                                        <span
-                                                            key={`${order.order_id}-${id}-${i}`}
-                                                            className="badge rounded-pill"
-                                                            style={{ backgroundColor: '#edf6f2', color: '#0f6d4b', fontWeight: 500, fontSize: '0.72rem' }}
-                                                        >
-                                                            {foodNameById[String(id)] || `Food #${id}`}
-                                                        </span>
-                                                    ))}
+                                                    {(() => {
+                                                        const ids = Array.isArray(order.food_id) ? order.food_id : [];
+                                                        const counts = new Map();
+
+                                                        ids.forEach((id) => {
+                                                            const key = String(id);
+                                                            counts.set(key, (counts.get(key) ?? 0) + 1);
+                                                        });
+
+                                                        return Array.from(counts.entries()).map(([id, count]) => (
+                                                            <span
+                                                                key={`${order.order_id}-${id}`}
+                                                                className="badge rounded-pill"
+                                                                style={{ backgroundColor: '#edf6f2', color: '#0f6d4b', fontWeight: 500, fontSize: '0.72rem' }}
+                                                            >
+                                                                {(foodNameById[id] || `Food #${id}`) + (count > 1 ? ` × ${count}` : '')}
+                                                            </span>
+                                                        ));
+                                                    })()}
                                                     {(!order.food_id || order.food_id.length === 0) && (
                                                         <span className="text-muted small">—</span>
                                                     )}

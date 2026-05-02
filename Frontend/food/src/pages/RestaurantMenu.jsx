@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { getFoodById, likeFood } from '../api/food';
-import { getAverageRating, getRatingsForRestaurant, rateRestaurant } from '../api/rating';
+import { getAverageRating, getMyRatingForRestaurant, getRatingsForRestaurant, rateRestaurant } from '../api/rating';
 import { addToCart } from '../api/cart';
 import { getOrdersByRestaurant } from '../api/order';
 import { getDealOfTheDay } from '../api/restaurant';
 import { setCartCount } from '../store/cartSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import Notification from '../components/Notification';
 
 const FOODTYPE_COLOR = { VEG: '#28a745', NON_VEG: '#dc3545', NO_RESTRICTION: '#fd7e14', VEGAN: '#6f42c1' };
 const fallbackImg = (id) => `https://picsum.photos/seed/restaurant${id ?? 0}/1200/400`;
@@ -38,7 +39,7 @@ export const FoodImage = ({ name, size = 72 }) => {
 };
 
 // ── Food List Row ─────────────────────────────────────────────────────────────
-const FoodListRow = ({ food, restaurantId, onAddedToCart, isTopOrdered, isDealOfTheDay, discountedPrice }) => {
+const FoodListRow = ({ food, restaurantId, onAddedToCart, onNotify, isTopOrdered, isDealOfTheDay, discountedPrice }) => {
     const [likes, setLikes] = useState(food.like_count ?? 0);
     const [liking, setLiking] = useState(false);
     const [adding, setAdding] = useState(false);
@@ -50,7 +51,7 @@ const FoodListRow = ({ food, restaurantId, onAddedToCart, isTopOrdered, isDealOf
             const updated = await likeFood(food.food_id);
             setLikes(updated.like_count ?? likes + 1);
         } catch {
-            setLikes((l) => l + 1);
+            // Backend enforces one-like-per-user; don't fake-increment on error.
         } finally {
             setLiking(false);
         }
@@ -62,9 +63,16 @@ const FoodListRow = ({ food, restaurantId, onAddedToCart, isTopOrdered, isDealOf
             await addToCart(food.food_id, restaurantId, 1);
             setAddMsg('Added!');
             if (typeof onAddedToCart === 'function') onAddedToCart();
+            if (typeof onNotify === 'function') {
+                onNotify({ message: `${food?.name || 'Item'} added to cart.`, variant: 'success' });
+            }
             setTimeout(() => setAddMsg(''), 1500);
         } catch (e) {
-            setAddMsg(e?.response?.data?.message || 'Failed');
+            const msg = e?.response?.data?.message || 'Failed to add to cart';
+            setAddMsg('Failed');
+            if (typeof onNotify === 'function') {
+                onNotify({ message: msg, variant: 'danger' });
+            }
             setTimeout(() => setAddMsg(''), 2000);
         } finally {
             setAdding(false);
@@ -205,6 +213,8 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
     const role = useSelector((s) => s.auth.role);
     const isCustomer = role === 'CUSTOMER';
 
+    const [cartNotice, setCartNotice] = useState(null); // { message, variant }
+
     // Menu items
     const [foods, setFoods] = useState([]);
     const [foodsLoading, setFoodsLoading] = useState(true);
@@ -217,6 +227,7 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
     // Submit rating
     const [myRating, setMyRating] = useState(0);
     const [myReview, setMyReview] = useState('');
+    const [hasExistingReview, setHasExistingReview] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [submitMsg, setSubmitMsg] = useState('');
 
@@ -249,6 +260,26 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
             setReviews(Array.isArray(ratingList) ? ratingList : []);
         }).finally(() => setReviewsLoading(false));
 
+        // Fetch my existing rating/review (for edit)
+        if (isLoggedIn) {
+            getMyRatingForRestaurant(restaurant_id)
+                .then((mine) => {
+                    if (!mine) return;
+                    setHasExistingReview(true);
+                    setMyRating(mine.rating ?? 0);
+                    setMyReview(mine.review ?? '');
+                })
+                .catch(() => {
+                    setHasExistingReview(false);
+                    setMyRating(0);
+                    setMyReview('');
+                });
+        } else {
+            setHasExistingReview(false);
+            setMyRating(0);
+            setMyReview('');
+        }
+
         // Fetch orders to determine most ordered item
         getOrdersByRestaurant(restaurant_id).then((orders) => {
             if (!Array.isArray(orders) || orders.length === 0) return;
@@ -267,7 +298,7 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
         getDealOfTheDay(restaurant_id)
             .then((deal) => setDealOfTheDay(deal))
             .catch(() => setDealOfTheDay(null));
-    }, [restaurant_id, food_available_id]);
+    }, [restaurant_id, food_available_id, isLoggedIn]);
 
     const handleSubmitRating = async (e) => {
         e.preventDefault();
@@ -275,8 +306,8 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
         setSubmitting(true); setSubmitMsg('');
         try {
             await rateRestaurant(restaurant_id, myRating, myReview);
-            setSubmitMsg('Rating submitted! Thank you.');
-            setMyRating(0); setMyReview('');
+            setHasExistingReview(true);
+            setSubmitMsg(hasExistingReview ? 'Review updated!' : 'Rating submitted! Thank you.');
             // Refresh ratings
             const [avg, ratingList] = await Promise.all([
                 getAverageRating(restaurant_id).catch(() => null),
@@ -296,6 +327,12 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
 
     return (
         <div style={{ backgroundColor: 'var(--app-bg)', minHeight: '100vh' }}>
+
+            <Notification
+                message={cartNotice?.message || ''}
+                variant={cartNotice?.variant || 'success'}
+                onClose={() => setCartNotice(null)}
+            />
 
             {/* ── Hero Banner ── */}
             <div style={{ position: 'relative', height: 280, overflow: 'hidden' }}>
@@ -384,6 +421,7 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
                                         isTopOrdered={food.food_id === topFoodId}
                                         isDealOfTheDay={dealOfTheDay?.foodId === food.food_id}
                                         discountedPrice={dealOfTheDay?.foodId === food.food_id ? dealOfTheDay.discountedPrice : null}
+                                        onNotify={setCartNotice}
                                         onAddedToCart={() => {
                                             // refresh cart badge
                                             import('../api/cart').then(({ getCart }) =>
@@ -419,7 +457,9 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
                         {/* Submit rating (logged-in users only) */}
                         {isLoggedIn && (
                             <div className="card shadow-sm mb-3 border-0">
-                                <div className="card-header bg-white fw-semibold border-0 pb-0">Rate this restaurant</div>
+                                <div className="card-header bg-white fw-semibold border-0 pb-0">
+                                    {hasExistingReview ? 'Edit your review' : 'Rate this restaurant'}
+                                </div>
                                 <div className="card-body">
                                     {submitMsg && (
                                         <div className={`alert py-2 small ${submitMsg.includes('Thank') ? 'alert-success' : 'alert-danger'}`}>
@@ -440,7 +480,7 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
                                             className="btn btn-dark btn-sm w-100 mt-2"
                                             disabled={!myRating || submitting}
                                         >
-                                            {submitting ? 'Submitting…' : 'Submit'}
+                                            {submitting ? 'Submitting…' : (hasExistingReview ? 'Update' : 'Submit')}
                                         </button>
                                     </form>
                                 </div>

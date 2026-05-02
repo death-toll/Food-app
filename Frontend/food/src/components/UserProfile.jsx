@@ -2,6 +2,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axiosInstance from "../services/axiosInstance";
 import { getUserById } from "../api/customer";
+import { getRestaurants } from '../api/restaurant';
+import { getFoods } from '../api/food';
+import Notification from './Notification';
 
 /** Default avatar fallback */
 const getDefaultAvatar = (userId) =>
@@ -76,12 +79,26 @@ const useProfilePhoto = (userId) => {
 
 const safeArray = (value) => (Array.isArray(value) ? value : []);
 
+const CUISINES = ['INDIAN', 'CHINESE', 'ITALIAN', 'MEXICAN', 'THAI', 'JAPANESE', 'KOREAN', 'MEDITERRANEAN', 'AMERICAN'];
+
+const FOODTYPE_OPTIONS = ['VEG', 'NON_VEG', 'NO_RESTRICTION', 'VEGAN'];
+
 const UserProfile = () => {
     const userId = useSelector((state) => state.auth.userId);
+    const role = useSelector((state) => state.auth.role);
+    const isCustomer = role === 'CUSTOMER';
     const [user, setUser] = useState(null);
     const [preferences, setPreferences] = useState(null);
     const [restaurantPrefs, setRestaurantPrefs] = useState([]);
     const [foodPrefs, setFoodPrefs] = useState([]);
+    const [allRestaurants, setAllRestaurants] = useState([]);
+    const [allFoods, setAllFoods] = useState([]);
+    const [prefFoodtype, setPrefFoodtype] = useState('VEG');
+    const [prefRestaurantIds, setPrefRestaurantIds] = useState([]);
+    const [prefFoodIds, setPrefFoodIds] = useState([]);
+    const [prefCuisines, setPrefCuisines] = useState([]);
+    const [prefSaving, setPrefSaving] = useState(false);
+    const [prefNotice, setPrefNotice] = useState(null); // { message, variant }
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
@@ -98,6 +115,23 @@ const UserProfile = () => {
         e.target.value = ''; // Reset so same file can be re-selected
     };
 
+    // Load selectable options for preferences (customer only)
+    useEffect(() => {
+        if (!isCustomer) {
+            setAllRestaurants([]);
+            setAllFoods([]);
+            return;
+        }
+
+        Promise.all([
+            getRestaurants().catch(() => []),
+            getFoods().catch(() => []),
+        ]).then(([restaurants, foods]) => {
+            setAllRestaurants(Array.isArray(restaurants) ? restaurants : []);
+            setAllFoods(Array.isArray(foods) ? foods : []);
+        });
+    }, [isCustomer]);
+
     useEffect(() => {
         let cancelled = false;
 
@@ -110,29 +144,48 @@ const UserProfile = () => {
                 if (cancelled) return;
                 setUser(userResponse);
 
+                // Preferences are customer-only
+                if (!isCustomer) {
+                    setPreferences(null);
+                    setRestaurantPrefs([]);
+                    setFoodPrefs([]);
+                    setPrefFoodtype('VEG');
+                    setPrefRestaurantIds([]);
+                    setPrefFoodIds([]);
+                    setPrefCuisines([]);
+                    return;
+                }
+
                 try {
                     const prefResponse = await axiosInstance.get(`/user-preferences/${userId}`);
                     if (cancelled) return;
-                    setPreferences(prefResponse.data);
 
-                    const restaurantIds = safeArray(prefResponse.data?.restaurant_id);
-                    const foodIds = safeArray(prefResponse.data?.food_id);
+                    const pref = prefResponse.data;
+                    setPreferences(pref);
+
+                    const restaurantIds = safeArray(pref?.restaurant_id).map((id) => String(id));
+                    const foodIds = safeArray(pref?.food_id).map((id) => String(id));
+                    const cuisines = safeArray(pref?.cuisines).map((c) => String(c));
+                    setPrefFoodtype(pref?.foodtype || 'VEG');
+                    setPrefRestaurantIds(restaurantIds);
+                    setPrefFoodIds(foodIds);
+                    setPrefCuisines(cuisines);
 
                     const [restaurants, foods] = await Promise.all([
                         Promise.all(
-                            restaurantIds.map((id) =>
+                            safeArray(pref?.restaurant_id).map((id) =>
                                 axiosInstance
                                     .get(`/restaurants/${id}`)
                                     .then((r) => r.data)
-                                    .catch(() => ({ restaurant_id: id, name: `Restaurant #${id}` })),
+                                            .catch(() => ({ restaurant_id: id, name: 'Restaurant' })),
                             ),
                         ),
                         Promise.all(
-                            foodIds.map((id) =>
+                            safeArray(pref?.food_id).map((id) =>
                                 axiosInstance
                                     .get(`/foods/${id}`)
                                     .then((r) => r.data)
-                                    .catch(() => ({ food_id: id, name: `Food #${id}` })),
+                                        .catch(() => ({ food_id: id, name: 'Food' })),
                             ),
                         ),
                     ]);
@@ -142,9 +195,14 @@ const UserProfile = () => {
                     setFoodPrefs(foods);
                 } catch {
                     if (cancelled) return;
+                    // No preferences yet — allow user to create
                     setPreferences(null);
                     setRestaurantPrefs([]);
                     setFoodPrefs([]);
+                    setPrefFoodtype('VEG');
+                    setPrefRestaurantIds([]);
+                    setPrefFoodIds([]);
+                    setPrefCuisines([]);
                 }
             } catch (e) {
                 if (cancelled) return;
@@ -166,8 +224,51 @@ const UserProfile = () => {
         };
     }, [userId]);
 
+    const handleSavePreferences = async () => {
+        if (!isCustomer || !userId) return;
+        setPrefSaving(true);
+        setPrefNotice(null);
+
+        try {
+            const payload = {
+                user_id: userId,
+                foodtype: prefFoodtype,
+                restaurant_id: prefRestaurantIds.map((id) => Number(id)).filter((n) => Number.isFinite(n)),
+                food_id: prefFoodIds.map((id) => Number(id)).filter((n) => Number.isFinite(n)),
+                cuisines: prefCuisines,
+            };
+
+            const res = await axiosInstance.put('/user-preferences', payload);
+            const saved = res.data;
+            setPreferences(saved);
+            setPrefNotice({ message: 'Preferences saved.', variant: 'success' });
+
+            // Refresh display lists using loaded options when possible
+            const savedRestaurantIds = new Set(safeArray(saved?.restaurant_id).map((id) => String(id)));
+            const savedFoodIds = new Set(safeArray(saved?.food_id).map((id) => String(id)));
+
+            if (allRestaurants.length) {
+                setRestaurantPrefs(allRestaurants.filter((r) => savedRestaurantIds.has(String(r.restaurant_id))));
+            }
+            if (allFoods.length) {
+                setFoodPrefs(allFoods.filter((f) => savedFoodIds.has(String(f.food_id))));
+            }
+        } catch (e) {
+            setPrefNotice({ message: e?.response?.data?.message || 'Failed to save preferences', variant: 'danger' });
+        } finally {
+            setPrefSaving(false);
+        }
+    };
+
+    const readSelectedValues = (e) => Array.from(e.target.selectedOptions).map((o) => o.value);
+
     return (
         <section style={{ backgroundColor: 'var(--app-bg)', minHeight: 'calc(100vh - 56px)' }}>
+            <Notification
+                message={prefNotice?.message || ''}
+                variant={prefNotice?.variant || 'success'}
+                onClose={() => setPrefNotice(null)}
+            />
             <div className="container py-4">
                 <div className="row">
                     <div className="col-lg-4 mb-4">
@@ -287,51 +388,162 @@ const UserProfile = () => {
                                 <div className="card mb-4">
                                     <div className="card-header bg-white d-flex justify-content-between align-items-center">
                                         <div className="fw-semibold">Preferences</div>
-                                        {preferences?.foodtype ? (
-                                            <span className="badge text-bg-success">{preferences.foodtype}</span>
+                                        {isCustomer && prefFoodtype ? (
+                                            <span className="badge text-bg-success">{prefFoodtype}</span>
                                         ) : null}
                                     </div>
 
                                     <div className="card-body">
-                                        <div className="row g-4">
-                                            <div className="col-md-6">
-                                                <div className="fw-medium mb-2">Restaurants</div>
-                                                {restaurantPrefs.length ? (
-                                                    <ul className="list-group">
-                                                        {restaurantPrefs.map((r) => (
-                                                            <li
-                                                                key={r.restaurant_id}
-                                                                className="list-group-item d-flex justify-content-between align-items-center"
-                                                            >
-                                                                <span>{r.name || `Restaurant #${r.restaurant_id}`}</span>
-                                                                <span className="badge text-bg-light">#{r.restaurant_id}</span>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                ) : (
-                                                    <div className="text-muted">No restaurant preferences</div>
-                                                )}
-                                            </div>
+                                        {!isCustomer ? (
+                                            <div className="text-muted">Preferences are available for customers only.</div>
+                                        ) : (
+                                            <>
+                                                <div className="row g-3 mb-3">
+                                                    <div className="col-md-6">
+                                                        <label className="form-label fw-medium">Food preference</label>
+                                                        <select
+                                                            className="form-select"
+                                                            value={prefFoodtype}
+                                                            onChange={(e) => setPrefFoodtype(e.target.value)}
+                                                            disabled={prefSaving}
+                                                        >
+                                                            {FOODTYPE_OPTIONS.map((t) => (
+                                                                <option key={t} value={t}>{t}</option>
+                                                            ))}
+                                                        </select>
+                                                    </div>
 
-                                            <div className="col-md-6">
-                                                <div className="fw-medium mb-2">Foods</div>
-                                                {foodPrefs.length ? (
-                                                    <ul className="list-group">
-                                                        {foodPrefs.map((f) => (
-                                                            <li
-                                                                key={f.food_id}
-                                                                className="list-group-item d-flex justify-content-between align-items-center"
-                                                            >
-                                                                <span>{f.name || `Food #${f.food_id}`}</span>
-                                                                <span className="badge text-bg-light">#{f.food_id}</span>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                ) : (
-                                                    <div className="text-muted">No food preferences</div>
-                                                )}
-                                            </div>
-                                        </div>
+                                                    <div className="col-md-6">
+                                                        <label className="form-label fw-medium">Preferred cuisines</label>
+                                                        <select
+                                                            className="form-select"
+                                                            multiple
+                                                            size={4}
+                                                            value={prefCuisines}
+                                                            onChange={(e) => setPrefCuisines(readSelectedValues(e))}
+                                                            disabled={prefSaving}
+                                                        >
+                                                            {CUISINES.map((c) => (
+                                                                <option key={c} value={c}>{c}</option>
+                                                            ))}
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div className="row g-4">
+                                                    <div className="col-md-6">
+                                                        <div className="fw-medium mb-2">Preferred Restaurants</div>
+                                                        <select
+                                                            className="form-select"
+                                                            multiple
+                                                            size={8}
+                                                            value={prefRestaurantIds}
+                                                            onChange={(e) => setPrefRestaurantIds(readSelectedValues(e))}
+                                                            disabled={prefSaving || allRestaurants.length === 0}
+                                                        >
+                                                            {allRestaurants.map((r) => (
+                                                                <option key={r.restaurant_id} value={String(r.restaurant_id)}>
+                                                                    {r.name || 'Restaurant'}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                        <div className="small text-muted mt-1">
+                                                            Selected: {prefRestaurantIds.length}. Tip: hold Ctrl (Windows) / Cmd (Mac) to select multiple.
+                                                        </div>
+                                                        {allRestaurants.length === 0 && (
+                                                            <div className="text-muted small mt-1">No restaurants available to choose from.</div>
+                                                        )}
+                                                    </div>
+
+                                                    <div className="col-md-6">
+                                                        <div className="fw-medium mb-2">Preferred Foods</div>
+                                                        <select
+                                                            className="form-select"
+                                                            multiple
+                                                            size={8}
+                                                            value={prefFoodIds}
+                                                            onChange={(e) => setPrefFoodIds(readSelectedValues(e))}
+                                                            disabled={prefSaving || allFoods.length === 0}
+                                                        >
+                                                            {allFoods.map((f) => (
+                                                                <option key={f.food_id} value={String(f.food_id)}>
+                                                                    {f.name || 'Food'}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                        <div className="small text-muted mt-1">
+                                                            Selected: {prefFoodIds.length}. Tip: hold Ctrl (Windows) / Cmd (Mac) to select multiple.
+                                                        </div>
+                                                        {allFoods.length === 0 && (
+                                                            <div className="text-muted small mt-1">No foods available to choose from.</div>
+                                                        )}
+                                                    </div>
+                                                </div>
+
+                                                <div className="d-flex flex-wrap gap-2 mt-3">
+                                                    <button
+                                                        type="button"
+                                                        className="btn btn-dark"
+                                                        onClick={handleSavePreferences}
+                                                        disabled={prefSaving}
+                                                    >
+                                                        {prefSaving ? 'Saving…' : (preferences ? 'Update Preferences' : 'Save Preferences')}
+                                                    </button>
+                                                </div>
+
+                                                {/* Read-only summary (optional) */}
+                                                <div className="row g-4 mt-4">
+                                                    <div className="col-md-6">
+                                                        <div className="fw-medium mb-2">Saved Restaurants</div>
+                                                        {restaurantPrefs.length ? (
+                                                            <ul className="list-group">
+                                                                {restaurantPrefs.map((r) => (
+                                                                    <li
+                                                                        key={r.restaurant_id}
+                                                                        className="list-group-item d-flex justify-content-between align-items-center"
+                                                                    >
+                                                                        <span>{r.name || 'Restaurant'}</span>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        ) : (
+                                                            <div className="text-muted">No restaurant preferences</div>
+                                                        )}
+                                                    </div>
+
+                                                    <div className="col-md-6">
+                                                        <div className="fw-medium mb-2">Saved Foods</div>
+                                                        {foodPrefs.length ? (
+                                                            <ul className="list-group">
+                                                                {foodPrefs.map((f) => (
+                                                                    <li
+                                                                        key={f.food_id}
+                                                                        className="list-group-item d-flex justify-content-between align-items-center"
+                                                                    >
+                                                                        <span>{f.name || 'Food'}</span>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        ) : (
+                                                            <div className="text-muted">No food preferences</div>
+                                                        )}
+                                                    </div>
+
+                                                    <div className="col-12">
+                                                        <div className="fw-medium mb-2">Saved Cuisines</div>
+                                                        {safeArray(preferences?.cuisines).length ? (
+                                                            <div className="d-flex flex-wrap gap-2">
+                                                                {safeArray(preferences?.cuisines).map((c) => (
+                                                                    <span key={c} className="badge text-bg-info">{c}</span>
+                                                                ))}
+                                                            </div>
+                                                        ) : (
+                                                            <div className="text-muted">No cuisine preferences</div>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </>
+                                        )}
                                     </div>
                                 </div>
                             </>
