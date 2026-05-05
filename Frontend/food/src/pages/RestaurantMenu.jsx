@@ -7,6 +7,7 @@ import { getDealOfTheDay } from '../api/restaurant';
 import { setCartCount } from '../store/cartSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import Notification from '../components/Notification';
+import axiosInstance from '../services/axiosInstance';
 
 const FOODTYPE_COLOR = { VEG: '#28a745', NON_VEG: '#dc3545', NO_RESTRICTION: '#fd7e14', VEGAN: '#6f42c1' };
 const fallbackImg = (id) => `https://picsum.photos/seed/restaurant${id ?? 0}/1200/400`;
@@ -210,6 +211,7 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
     const address = [street, city, state].filter(Boolean).join(', ');
     const dispatch = useDispatch();
     const isLoggedIn = useSelector((s) => s.auth.isLoggedIn);
+    const userId = useSelector((s) => s.auth.userId);
     const role = useSelector((s) => s.auth.role);
     const isCustomer = role === 'CUSTOMER';
 
@@ -239,6 +241,28 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
 
     // Filter
     const [typeFilter, setTypeFilter] = useState('ALL');
+
+    // Default filter based on user's saved preference
+    useEffect(() => {
+        if (!isCustomer || !isLoggedIn || !userId) return;
+        let cancelled = false;
+
+        axiosInstance.get(`/user-preferences/${userId}`)
+            .then((res) => {
+                if (cancelled) return;
+                const prefType = res?.data?.foodtype;
+                // Only default to VEG/NON_VEG; otherwise keep ALL
+                if (typeFilter === 'ALL' && (prefType === 'VEG' || prefType === 'NON_VEG')) {
+                    setTypeFilter(prefType);
+                }
+            })
+            .catch(() => {})
+            .finally(() => {});
+
+        return () => { cancelled = true; };
+        // Intentionally not depending on typeFilter to avoid overriding user selection
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isCustomer, isLoggedIn, userId]);
 
     useEffect(() => {
         if (!restaurant_id) return;
@@ -322,7 +346,7 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
         }
     };
 
-    const typeOptions = ['ALL', ...new Set(foods.map((f) => f.type).filter(Boolean))];
+    const typeOptions = ['ALL', 'VEG', 'NON_VEG'];
     const filteredFoods = typeFilter === 'ALL' ? foods : foods.filter((f) => f.type === typeFilter);
 
     return (

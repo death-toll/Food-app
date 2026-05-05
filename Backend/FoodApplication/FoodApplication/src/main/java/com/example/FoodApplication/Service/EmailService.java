@@ -10,16 +10,29 @@ public class EmailService {
 
     private final JavaMailSender mailSender;
 
-    @Value("${spring.mail.username}")
+    @Value("${spring.mail.username:}")
     private String fromEmail;
+
+    @Value("${app.mail.from:noreply@foodapp.com}")
+    private String fallbackFromEmail;
 
     public EmailService(JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }
 
+    /**
+     * Get a valid "from" email address. Uses configured username, or fallback if empty.
+     */
+    private String getFromEmail() {
+        if (fromEmail != null && !fromEmail.isBlank()) {
+            return fromEmail;
+        }
+        return fallbackFromEmail;
+    }
+
     public void sendRegistrationOtpEmail(String toEmail, String otp) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(fromEmail);
+        message.setFrom(getFromEmail());
         message.setTo(toEmail);
         message.setSubject("Verify Your Email - Food Application");
         message.setText(
@@ -37,7 +50,7 @@ public class EmailService {
 
     public void sendLoginOtpEmail(String toEmail, String otp) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(fromEmail);
+        message.setFrom(getFromEmail());
         message.setTo(toEmail);
         message.setSubject("Login OTP - Food Application");
         message.setText(
@@ -53,7 +66,7 @@ public class EmailService {
 
     public void sendPasswordResetOtpEmail(String toEmail, String otp) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(fromEmail);
+        message.setFrom(getFromEmail());
         message.setTo(toEmail);
         message.setSubject("Password Reset OTP - Food Application");
         message.setText(
@@ -70,7 +83,7 @@ public class EmailService {
 
     public void sendWelcomeEmail(String toEmail, String name) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(fromEmail);
+        message.setFrom(getFromEmail());
         message.setTo(toEmail);
         message.setSubject("Welcome to Food Application!");
         message.setText(
@@ -86,7 +99,7 @@ public class EmailService {
 
     public void sendPasswordChangedEmail(String toEmail) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(fromEmail);
+        message.setFrom(getFromEmail());
         message.setTo(toEmail);
         message.setSubject("Password Changed - Food Application");
         message.setText(

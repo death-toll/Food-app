@@ -5,31 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c3bc7ad6-d1d2-476d-890b-836ce7941d72" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/copilotDiffState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/logs/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Controller/FoodController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Controller/FoodController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Controller/RestaurantRatingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Controller/RestaurantRatingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Controller/UserPrefController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Controller/UserPrefController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Dto/Request/UserPrefRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Dto/Request/UserPrefRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Dto/Response/UserPrefResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Dto/Response/UserPrefResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Entity/Preference.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Entity/Preference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Security/SecurityHelper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Service/FoodService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Service/FoodService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Service/RestaurantRatingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Service/RestaurantRatingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Service/UserPrefService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Service/UserPrefService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/food/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/food/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/food/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/food/src/api/rating.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/api/rating.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/food/src/components/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/components/Navbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/food/src/components/Orderlist.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/components/Orderlist.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/food/src/components/RestaurantFoodManager.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/components/RestaurantFoodManager.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/food/src/components/UserProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/components/UserProfile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/food/src/components/navbar_restaurant.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/components/navbar_restaurant.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/food/src/components/restaaurant_form.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/components/restaaurant_form.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/food/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/food/src/pages/MyRestaurants.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/pages/MyRestaurants.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/food/src/pages/OwnerOrders.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/pages/OwnerOrders.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Config/CorsConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Service/EmailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/food/src/layouts/OwnerLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/layouts/OwnerLayout.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/food/src/pages/RestaurantMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/pages/RestaurantMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/food/src/services/axiosInstance.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/services/axiosInstance.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/app.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,8 +34,8 @@
   </component>
   <component name="CopilotUserSelectedModel">
     <selectedModels>
-      <entry key="chat-panel" value="GPT-5.2" />
-      <entry key="agent-panel" value="GPT-5.2" />
+      <entry key="chat-panel" value="Claude Opus 4.5" />
+      <entry key="agent-panel" value="Claude Opus 4.5" />
     </selectedModels>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -78,6 +64,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.FoodApplication.executor": "Run",
+    "JUnit.AllLayersTest.executor": "Run",
+    "JUnit.FoodApplication in FoodApplication.executor": "Run",
+    "JUnit.FoodApplicationTests.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -98,6 +87,44 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration name="AllLayersTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FoodApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.FoodApplication.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.FoodApplication" />
+      <option name="MAIN_CLASS_NAME" value="com.example.FoodApplication.AllLayersTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FoodApplication in FoodApplication" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FoodApplication" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/test/java/com/example/FoodApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FoodApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FoodApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.FoodApplication.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.FoodApplication" />
+      <option name="MAIN_CLASS_NAME" value="com.example.FoodApplication.FoodApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="Food Mono" />
       <method v="2">
@@ -109,6 +136,13 @@
       <option name="filePath" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.AllLayersTest" />
+        <item itemvalue="JUnit.FoodApplicationTests" />
+        <item itemvalue="JUnit.FoodApplication in FoodApplication" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

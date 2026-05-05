@@ -1,84 +1,21 @@
-2026-05-03 00:09:17 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-05-03 00:09:17 - Initializing Servlet 'dispatcherServlet'
-2026-05-03 00:09:17 - Completed initialization in 111 ms
-2026-05-03 00:55:51 - Resolved [org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND "No review found"]
-2026-05-03 00:55:51 - Resolved [org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND "No review found"]
-2026-05-03 00:57:02 - Resolved [org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND "Food not found: 13"]
-2026-05-03 00:57:02 - Resolved [org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND "Food not found: 13"]
-2026-05-03 00:57:11 - Resolved [org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND "Food not found: 13"]
-2026-05-03 00:57:11 - Resolved [org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND "Food not found: 13"]
-2026-05-03 01:28:50 - Resolved [org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND "Food not found: 13"]
-2026-05-03 01:28:50 - Resolved [org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND "Food not found: 13"]
-2026-05-03 01:31:17 - Restarting due to 77 class path changes (3 additions, 1 deletion, 73 modifications)
-2026-05-03 01:31:17 - Commencing graceful shutdown. Waiting for active requests to complete
-2026-05-03 01:31:17 - Graceful shutdown complete
-2026-05-03 01:31:17 - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-05-03 01:31:17 - HikariPool-71 - Shutdown initiated...
-2026-05-03 01:31:17 - HikariPool-71 - Shutdown completed.
-2026-05-03 02:03:25 - Starting FoodApplication using Java 26 with PID 31816 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
-2026-05-03 02:03:25 - Running with Spring Boot v4.0.6, Spring v7.0.7
-2026-05-03 02:03:25 - No active profile set, falling back to 1 default profile: "default"
-2026-05-03 02:03:26 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-05-03 02:03:26 - Exception encountered during context initialization - cancelling refresh attempt: java.lang.NoClassDefFoundError: com/example/FoodApplication/Entity/Food
-2026-05-03 02:03:26 - 
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2026-05-03 02:03:26 - Application run failed
-java.lang.NoClassDefFoundError: com/example/FoodApplication/Entity/Food
-	at java.base/java.lang.Class.getDeclaredMethods0(Native Method) ~[na:na]
-	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3011) ~[na:na]
-	at java.base/java.lang.Class.privateGetPublicMethods(Class.java:3032) ~[na:na]
-	at java.base/java.lang.Class.getMethods(Class.java:1997) ~[na:na]
-	at org.springframework.data.core.ReactiveWrappers.usesReactiveType(ReactiveWrappers.java:144) ~[spring-data-commons-4.0.5.jar:4.0.5]
-	at org.springframework.data.repository.core.support.AbstractRepositoryMetadata.isReactiveRepository(AbstractRepositoryMetadata.java:140) ~[spring-data-commons-4.0.5.jar:4.0.5]
-	at org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport.useRepositoryConfiguration(RepositoryConfigurationExtensionSupport.java:344) ~[spring-data-commons-4.0.5.jar:4.0.5]
-	at org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport.getRepositoryConfigurations(RepositoryConfigurationExtensionSupport.java:98) ~[spring-data-commons-4.0.5.jar:4.0.5]
-	at org.springframework.data.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:170) ~[spring-data-commons-4.0.5.jar:4.0.5]
-	at org.springframework.boot.autoconfigure.data.AbstractRepositoryConfigurationSourceSupport.registerBeanDefinitions(AbstractRepositoryConfigurationSourceSupport.java:67) ~[spring-boot-autoconfigure-4.0.6.jar:4.0.6]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.lambda$loadBeanDefinitionsFromImportBeanDefinitionRegistrars$0(ConfigurationClassBeanDefinitionReader.java:422) ~[spring-context-7.0.7.jar:7.0.7]
-	at java.base/java.util.LinkedHashMap.forEach(LinkedHashMap.java:987) ~[na:na]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsFromImportBeanDefinitionRegistrars(ConfigurationClassBeanDefinitionReader.java:421) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForConfigurationClass(ConfigurationClassBeanDefinitionReader.java:152) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitions(ConfigurationClassBeanDefinitionReader.java:124) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:464) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:316) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:349) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:118) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:795) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:603) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.6.jar:4.0.6]
-	at com.example.FoodApplication.FoodApplication.main(FoodApplication.java:10) ~[classes/:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52) ~[spring-boot-devtools-4.0.6.jar:4.0.6]
-Caused by: java.lang.ClassNotFoundException: com.example.FoodApplication.Entity.Food
-	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:580) ~[na:na]
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:502) ~[na:na]
-	at java.base/java.lang.Class.forName0(Native Method) ~[na:na]
-	at java.base/java.lang.Class.forName(Class.java:560) ~[na:na]
-	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.loadClass(RestartClassLoader.java:123) ~[spring-boot-devtools-4.0.6.jar:4.0.6]
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:502) ~[na:na]
-	... 31 common frames omitted
-2026-05-03 02:03:34 - Starting FoodApplication using Java 26 with PID 31816 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
-2026-05-03 02:03:34 - Running with Spring Boot v4.0.6, Spring v7.0.7
-2026-05-03 02:03:34 - No active profile set, falling back to 1 default profile: "default"
-2026-05-03 02:03:37 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-05-03 02:03:37 - Finished Spring Data repository scanning in 140 ms. Found 9 JPA repository interfaces.
-2026-05-03 02:03:38 - Tomcat initialized with port 8083 (http)
-2026-05-03 02:03:38 - Starting service [Tomcat]
-2026-05-03 02:03:38 - Starting Servlet engine: [Apache Tomcat/11.0.21]
-2026-05-03 02:03:38 - Root WebApplicationContext: initialization completed in 3551 ms
-2026-05-03 02:03:38 - HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-05-03 02:03:38 - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-05-03 02:03:38 - HikariPool-73 - Starting...
-2026-05-03 02:03:38 - HikariPool-73 - Added connection org.postgresql.jdbc.PgConnection@72014625
-2026-05-03 02:03:38 - HikariPool-73 - Start completed.
-2026-05-03 02:03:38 - HHH10001005: Database info:
+2026-05-05 10:20:21 - Starting FoodApplication using Java 26 with PID 24500 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
+2026-05-05 10:20:21 - Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-05-05 10:20:21 - No active profile set, falling back to 1 default profile: "default"
+2026-05-05 10:20:21 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-05-05 10:20:21 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-05-05 10:20:24 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-05 10:20:24 - Finished Spring Data repository scanning in 137 ms. Found 9 JPA repository interfaces.
+2026-05-05 10:20:25 - Tomcat initialized with port 8083 (http)
+2026-05-05 10:20:25 - Starting service [Tomcat]
+2026-05-05 10:20:25 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-05-05 10:20:25 - Root WebApplicationContext: initialization completed in 4394 ms
+2026-05-05 10:20:26 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-05 10:20:26 - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-05-05 10:20:27 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-05 10:20:27 - HikariPool-1 - Starting...
+2026-05-05 10:20:27 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3b908f5b
+2026-05-05 10:20:27 - HikariPool-1 - Start completed.
+2026-05-05 10:20:27 - HHH10001005: Database info:
 	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
@@ -90,105 +27,185 @@ Caused by: java.lang.ClassNotFoundException: com.example.FoodApplication.Entity.
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-05-03 02:03:39 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-05-03 02:03:39 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-05-03 02:03:39 - Filter 'jwtAuthenticationFilter' configured for use
-2026-05-03 02:03:39 - Global AuthenticationManager configured with UserDetailsService bean with name appUserDetailsService
-2026-05-03 02:03:41 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-05-03 02:03:42 - Exposing 1 endpoint beneath base path '/actuator'
-2026-05-03 02:03:42 - Tomcat started on port 8083 (http) with context path '/'
-2026-05-03 02:03:42 - Started FoodApplication in 8.187 seconds (process running for 202855.328)
-2026-05-03 02:03:42 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
-2026-05-03 02:03:42 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
-2026-05-03 02:03:42 - Condition evaluation unchanged
-2026-05-03 02:17:13 - Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)
-2026-05-03 02:17:13 - Commencing graceful shutdown. Waiting for active requests to complete
-2026-05-03 02:17:13 - Graceful shutdown complete
-2026-05-03 02:17:13 - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-05-03 02:17:13 - HikariPool-73 - Shutdown initiated...
-2026-05-03 02:17:13 - HikariPool-73 - Shutdown completed.
-2026-05-03 02:17:13 - Starting FoodApplication using Java 26 with PID 31816 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
-2026-05-03 02:17:13 - Running with Spring Boot v4.0.6, Spring v7.0.7
-2026-05-03 02:17:13 - No active profile set, falling back to 1 default profile: "default"
-2026-05-03 02:17:17 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-05-03 02:17:17 - Finished Spring Data repository scanning in 238 ms. Found 9 JPA repository interfaces.
-2026-05-03 02:17:18 - Tomcat initialized with port 8083 (http)
-2026-05-03 02:17:18 - Starting service [Tomcat]
-2026-05-03 02:17:18 - Starting Servlet engine: [Apache Tomcat/11.0.21]
-2026-05-03 02:17:18 - Root WebApplicationContext: initialization completed in 5400 ms
-2026-05-03 02:17:19 - HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-05-03 02:17:19 - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-05-03 02:17:19 - HikariPool-74 - Starting...
-2026-05-03 02:17:20 - HikariPool-74 - Added connection org.postgresql.jdbc.PgConnection@466ab6b3
-2026-05-03 02:17:20 - HikariPool-74 - Start completed.
-2026-05-03 02:17:20 - HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
-	Database driver: PostgreSQL JDBC Driver
-	Database dialect: PostgreSQLDialect
-	Database version: 18.1
-	Default catalog/schema: FoodApp/public
-	Autocommit mode: undefined/unknown
-	Isolation level: READ_COMMITTED [default READ_COMMITTED]
-	JDBC fetch size: none
-	Pool: DataSourceConnectionProvider
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-05-03 02:17:20 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-05-03 02:17:20 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-05-03 02:17:21 - Filter 'jwtAuthenticationFilter' configured for use
-2026-05-03 02:17:21 - Global AuthenticationManager configured with UserDetailsService bean with name appUserDetailsService
-2026-05-03 02:17:21 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-05-03 02:17:23 - Exposing 1 endpoint beneath base path '/actuator'
-2026-05-03 02:17:23 - Tomcat started on port 8083 (http) with context path '/'
-2026-05-03 02:17:23 - Started FoodApplication in 9.932 seconds (process running for 203675.805)
-2026-05-03 02:17:23 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
-2026-05-03 02:17:23 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
-2026-05-03 02:17:23 - Condition evaluation unchanged
-2026-05-03 02:18:41 - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
-2026-05-03 02:18:41 - Commencing graceful shutdown. Waiting for active requests to complete
-2026-05-03 02:18:41 - Graceful shutdown complete
-2026-05-03 02:18:41 - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-05-03 02:18:41 - HikariPool-74 - Shutdown initiated...
-2026-05-03 02:18:41 - HikariPool-74 - Shutdown completed.
-2026-05-03 02:18:41 - Starting FoodApplication using Java 26 with PID 31816 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono)
-2026-05-03 02:18:41 - Running with Spring Boot v4.0.6, Spring v7.0.7
-2026-05-03 02:18:41 - No active profile set, falling back to 1 default profile: "default"
-2026-05-03 02:18:41 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-05-03 02:18:41 - Finished Spring Data repository scanning in 38 ms. Found 9 JPA repository interfaces.
-2026-05-03 02:18:42 - Tomcat initialized with port 8083 (http)
-2026-05-03 02:18:42 - Starting service [Tomcat]
-2026-05-03 02:18:42 - Starting Servlet engine: [Apache Tomcat/11.0.21]
-2026-05-03 02:18:42 - Root WebApplicationContext: initialization completed in 960 ms
-2026-05-03 02:18:42 - HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-05-03 02:18:42 - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-05-03 02:18:42 - HikariPool-75 - Starting...
-2026-05-03 02:18:42 - HikariPool-75 - Added connection org.postgresql.jdbc.PgConnection@6f88b0a6
-2026-05-03 02:18:42 - HikariPool-75 - Start completed.
-2026-05-03 02:18:42 - HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
-	Database driver: PostgreSQL JDBC Driver
-	Database dialect: PostgreSQLDialect
-	Database version: 18.1
-	Default catalog/schema: FoodApp/public
-	Autocommit mode: undefined/unknown
-	Isolation level: READ_COMMITTED [default READ_COMMITTED]
-	JDBC fetch size: none
-	Pool: DataSourceConnectionProvider
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-05-03 02:18:42 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-05-03 02:18:42 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-05-03 02:18:43 - Filter 'jwtAuthenticationFilter' configured for use
-2026-05-03 02:18:43 - Global AuthenticationManager configured with UserDetailsService bean with name appUserDetailsService
-2026-05-03 02:18:43 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-05-03 02:18:44 - Exposing 1 endpoint beneath base path '/actuator'
-2026-05-03 02:18:44 - Tomcat started on port 8083 (http) with context path '/'
-2026-05-03 02:18:44 - Started FoodApplication in 3.329 seconds (process running for 203757.099)
-2026-05-03 02:18:44 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
-2026-05-03 02:18:44 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
-2026-05-03 02:18:44 - Condition evaluation unchanged
-2026-05-03 02:19:22 - Commencing graceful shutdown. Waiting for active requests to complete
-2026-05-03 02:19:22 - Graceful shutdown complete
-2026-05-03 02:19:22 - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-05-03 02:19:22 - HikariPool-75 - Shutdown initiated...
-2026-05-03 02:19:22 - HikariPool-75 - Shutdown completed.
+2026-05-05 10:20:29 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-05 10:20:29 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-05 10:20:30 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-05 10:20:30 - Filter 'jwtAuthenticationFilter' configured for use
+2026-05-05 10:20:30 - Global AuthenticationManager configured with UserDetailsService bean with name appUserDetailsService
+2026-05-05 10:20:32 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-05 10:20:34 - Exposing 1 endpoint beneath base path '/actuator'
+2026-05-05 10:20:34 - Tomcat started on port 8083 (http) with context path '/'
+2026-05-05 10:20:34 - Started FoodApplication in 13.629 seconds (process running for 15.916)
+2026-05-05 10:20:34 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-05-05 10:20:34 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-05-05 10:23:04 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-05 10:23:04 - Initializing Servlet 'dispatcherServlet'
+2026-05-05 10:23:04 - Completed initialization in 6 ms
+2026-05-05 10:23:05 - Method Called me
+2026-05-05 10:23:05 - Method  me is executed
+2026-05-05 10:23:05 - Method Called me
+2026-05-05 10:23:05 - Method  me is executed
+2026-05-05 10:23:05 - Method Called getAll
+2026-05-05 10:23:05 - Method Called getAllRestaurants
+2026-05-05 10:23:06 - Method  getAllRestaurants is executed
+2026-05-05 10:23:06 - Method  getAll is executed
+2026-05-05 10:23:06 - Method Called getAll
+2026-05-05 10:23:06 - Method Called getAllRestaurants
+2026-05-05 10:23:06 - Method  getAllRestaurants is executed
+2026-05-05 10:23:06 - Method  getAll is executed
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method Called getAverage
+2026-05-05 10:23:06 - Method Called getAverageRating
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:06 - Method  getAverageRating is executed
+2026-05-05 10:23:06 - Method  getAverage is executed
+2026-05-05 10:23:13 - Method Called getByOwnerId
+2026-05-05 10:23:13 - Method Called getRestaurantsByOwnerId
+2026-05-05 10:23:13 - Method  getRestaurantsByOwnerId is executed
+2026-05-05 10:23:13 - Method  getByOwnerId is executed
+2026-05-05 10:23:13 - Method Called getByOwnerId
+2026-05-05 10:23:13 - Method Called getRestaurantsByOwnerId
+2026-05-05 10:23:13 - Method  getRestaurantsByOwnerId is executed
+2026-05-05 10:23:13 - Method  getByOwnerId is executed
+2026-05-05 10:23:14 - Method Called getByOwnerId
+2026-05-05 10:23:14 - Method Called getRestaurantsByOwnerId
+2026-05-05 10:23:14 - Method Called getAll
+2026-05-05 10:23:14 - Method Called getAllFood
+2026-05-05 10:23:14 - Method  getRestaurantsByOwnerId is executed
+2026-05-05 10:23:14 - Method  getByOwnerId is executed
+2026-05-05 10:23:14 - Method  getAllFood is executed
+2026-05-05 10:23:14 - Method  getAll is executed
+2026-05-05 10:23:14 - Method Called getByOwnerId
+2026-05-05 10:23:14 - Method Called getRestaurantsByOwnerId
+2026-05-05 10:23:14 - Method Called getAll
+2026-05-05 10:23:14 - Method Called getAllFood
+2026-05-05 10:23:14 - Method  getRestaurantsByOwnerId is executed
+2026-05-05 10:23:14 - Method  getByOwnerId is executed
+2026-05-05 10:23:14 - Method Called getByRestaurantId
+2026-05-05 10:23:14 - Method Called getOrdersByRestaurantId
+2026-05-05 10:23:14 - Method Called getByRestaurantId
+2026-05-05 10:23:14 - Method Called getOrdersByRestaurantId
+2026-05-05 10:23:14 - Method  getAllFood is executed
+2026-05-05 10:23:14 - Method  getAll is executed
+2026-05-05 10:23:14 - Method  getOrdersByRestaurantId is executed
+2026-05-05 10:23:14 - Method  getOrdersByRestaurantId is executed
+2026-05-05 10:23:14 - Method  getByRestaurantId is executed
+2026-05-05 10:23:14 - Method  getByRestaurantId is executed
+2026-05-05 10:23:14 - Method Called getByRestaurantId
+2026-05-05 10:23:14 - Method Called getByRestaurantId
+2026-05-05 10:23:14 - Method Called getOrdersByRestaurantId
+2026-05-05 10:23:14 - Method Called getOrdersByRestaurantId
+2026-05-05 10:23:14 - Method  getOrdersByRestaurantId is executed
+2026-05-05 10:23:14 - Method  getByRestaurantId is executed
+2026-05-05 10:23:14 - Method  getOrdersByRestaurantId is executed
+2026-05-05 10:23:14 - Method  getByRestaurantId is executed
+2026-05-05 10:23:17 - Method Called getById
+2026-05-05 10:23:17 - Method Called getUserById
+2026-05-05 10:23:17 - Method  getUserById is executed
+2026-05-05 10:23:17 - Method  getById is executed
+2026-05-05 10:23:17 - Method Called getById
+2026-05-05 10:23:17 - Method Called getUserById
+2026-05-05 10:23:17 - Method  getUserById is executed
+2026-05-05 10:23:17 - Method  getById is executed
+2026-05-05 10:23:57 - Method Called me
+2026-05-05 10:23:57 - Method  me is executed
+2026-05-05 10:23:57 - Method Called me
+2026-05-05 10:23:57 - Method  me is executed
+2026-05-05 10:23:57 - Method Called getById
+2026-05-05 10:23:57 - Method Called getUserById
+2026-05-05 10:23:57 - Method  getUserById is executed
+2026-05-05 10:23:57 - Method  getById is executed
+2026-05-05 10:23:57 - Method Called getById
+2026-05-05 10:23:57 - Method Called getUserById
+2026-05-05 10:23:57 - Method  getUserById is executed
+2026-05-05 10:23:57 - Method  getById is executed
