@@ -21,6 +21,7 @@ const RequireAuth = ({ children, allowedRole }) => {
         return <Navigate to={redirectTo} replace />;
     }
 
+    // Authorized → render the protected route subtree.
     return children;
 };
 

@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getFoods } from '../api/food';
-import { getOrdersByUser } from '../api/order';
+import { getFoodById, getFoods } from '../api/food';
+import { cancelOrder, getOrdersByUser } from '../api/order';
 import { getRestaurantById } from '../api/restaurant';
 
 // ── Status → step index mapping ───────────────────────────────────────────────
 // Backend statuses: PLACED, CONFIRMED, DELIVERED, CANCELLED
-// UI steps: Pending (0), Preparing (1), Ready (2), Completed (3)
+// We map these to a 4-step visual progress: Pending(0), Preparing(1), Ready(2), Completed(3)
 const STEP_INDEX = { PLACED: 0, CONFIRMED: 1, DELIVERED: 3 };
 
 const STEPS = [
@@ -121,14 +121,30 @@ const Orderlist = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
+    const [cancelBusyId, setCancelBusyId] = useState(null);
+    const [cancelError, setCancelError] = useState('');
+
     const totalItems = useMemo(
         () => orders.reduce((count, order) => count + (Array.isArray(order.food_id) ? order.food_id.length : 0), 0),
         [orders]
     );
 
+    // When orders contain food IDs that aren't in our name map (e.g., foods list didn't load),
+    // fetch missing food names so the UI doesn't show IDs.
+    const missingFoodIds = useMemo(() => {
+        const allIds = new Set();
+        orders.forEach((o) => {
+            (Array.isArray(o?.food_id) ? o.food_id : []).forEach((id) => {
+                if (id != null) allIds.add(String(id));
+            });
+        });
+        return Array.from(allIds).filter((id) => !foodNameById[id]);
+    }, [orders, foodNameById]);
+
     useEffect(() => {
         let cancelled = false;
 
+        // Load user's orders + food/restaurant names in parallel.
         const load = async () => {
             setLoading(true);
             setError('');
@@ -138,6 +154,7 @@ const Orderlist = () => {
                     getFoods().catch(() => []),
                 ]);
                 if (cancelled) return;
+                // Sort newest first by order_id.
                 const mine = (Array.isArray(orderResponse) ? orderResponse : [])
                     .sort((a, b) => Number(b.order_id) - Number(a.order_id));
 
@@ -154,26 +171,38 @@ const Orderlist = () => {
                 const restaurantResults = await Promise.all(
                     uniqueRestaurantIds.map((id) =>
                         getRestaurantById(id)
-                            .then((r) => ({ id, name: r?.name }))
-                            .catch(() => ({ id, name: null }))
+                            .then((r) => ({ id, name: r?.name, missing: false }))
+                            .catch((err) => ({ id, name: null, missing: err?.response?.status === 404 }))
                     )
                 );
 
                 const restaurantMap = {};
-                restaurantResults.forEach(({ id, name }) => {
-                    if (id) restaurantMap[String(id)] = name || 'Restaurant';
+                const missingRestaurantIds = new Set();
+                restaurantResults.forEach(({ id, name, missing }) => {
+                    if (!id) return;
+                    if (missing) {
+                        missingRestaurantIds.add(String(id));
+                        return;
+                    }
+                    // If restaurant exists but name is missing, still show a safe label.
+                    restaurantMap[String(id)] = name || 'Restaurant';
                 });
 
                 const map = {};
                 (Array.isArray(foods) ? foods : []).forEach((food) => {
                     if (food?.food_id != null) {
-                        map[String(food.food_id)] = food.name || `Food #${food.food_id}`;
+                        map[String(food.food_id)] = food.name || 'Food';
                     }
                 });
 
+                // Filter out orders belonging to restaurants that were deleted (404).
+                const visibleOrders = missingRestaurantIds.size > 0
+                    ? mine.filter((o) => !missingRestaurantIds.has(String(o?.restaurant_id)))
+                    : mine;
+
                 setFoodNameById(map);
                 setRestaurantNameById(restaurantMap);
-                setOrders(mine);
+                setOrders(visibleOrders);
             } catch (e) {
                 if (cancelled) return;
                 setError(e?.response?.data?.message || 'Failed to load orders');
@@ -187,6 +216,30 @@ const Orderlist = () => {
         return () => { cancelled = true; };
     }, [userId]);
 
+    useEffect(() => {
+        if (missingFoodIds.length === 0) return;
+        let cancelled = false;
+
+        Promise.all(
+            missingFoodIds.map((id) =>
+                getFoodById(id)
+                    .then((food) => ({ id: String(food?.food_id ?? id), name: food?.name }))
+                    .catch(() => null)
+            )
+        ).then((results) => {
+            if (cancelled) return;
+            const additions = {};
+            (results.filter(Boolean) ?? []).forEach(({ id, name }) => {
+                if (id && name) additions[id] = name;
+            });
+            if (Object.keys(additions).length > 0) {
+                setFoodNameById((prev) => ({ ...prev, ...additions }));
+            }
+        });
+
+        return () => { cancelled = true; };
+    }, [missingFoodIds.join('|')]);
+
     return (
         <section
             style={{
@@ -195,6 +248,7 @@ const Orderlist = () => {
             }}
         >
             <div className="container py-4">
+                {/* ── Page header with title and summary badges ── */}
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <div>
                         <h4 className="mb-0 fw-semibold">My Orders</h4>
@@ -212,7 +266,9 @@ const Orderlist = () => {
                     )}
                 </div>
 
+                {/* ── Conditional rendering: loading / error / orders list / empty ── */}
                 {loading ? (
+                    // Loading spinner
                     <div className="card">
                         <div className="card-body d-flex align-items-center gap-2">
                             <div className="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
@@ -220,10 +276,20 @@ const Orderlist = () => {
                         </div>
                     </div>
                 ) : error ? (
+                    // Error alert
                     <div className="alert alert-danger" role="alert">{error}</div>
                 ) : orders.length ? (
-                    <ul className="list-unstyled d-grid gap-3">
+                    // Orders list
+                    <>
+                        {cancelError && (
+                            <div className="alert alert-danger py-2 small" role="alert">
+                                {cancelError}
+                            </div>
+                        )}
+                        <ul className="list-unstyled d-grid gap-3">
                         {orders.map((order) => (
+                            // A customer can cancel only if not delivered/cancelled.
+                            // Single order card
                             <li
                                 key={order.order_id}
                                 className="card border-0 shadow-sm"
@@ -231,13 +297,40 @@ const Orderlist = () => {
                             >
                                 <div className="card-body d-flex justify-content-between align-items-start gap-3">
                                     <div className="flex-grow-1">
+                                        {/* Order ID and status badge */}
                                         <div className="d-flex flex-wrap align-items-center gap-2 mb-2">
                                             <span className="fw-semibold fs-6">Order #{order.order_id}</span>
                                             <span className={`badge ${STATUS_BADGE[order.status] ?? 'text-bg-secondary'}`}>
                                                 {order.status}
                                             </span>
+
+                                            {/* Cancel action (customers only; for PLACED/CONFIRMED) */}
+                                            {(order.status === 'PLACED' || order.status === 'CONFIRMED') && (
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-outline-danger btn-sm ms-auto"
+                                                    disabled={cancelBusyId === order.order_id}
+                                                    onClick={async () => {
+                                                        setCancelError('');
+                                                        const ok = window.confirm('Cancel this order?');
+                                                        if (!ok) return;
+                                                        setCancelBusyId(order.order_id);
+                                                        try {
+                                                            const updated = await cancelOrder(order.order_id);
+                                                            setOrders((prev) => prev.map((o) => (o.order_id === order.order_id ? (updated ?? { ...o, status: 'CANCELLED' }) : o)));
+                                                        } catch (e) {
+                                                            setCancelError(e?.response?.data?.message || e?.response?.data || 'Failed to cancel order');
+                                                        } finally {
+                                                            setCancelBusyId(null);
+                                                        }
+                                                    }}
+                                                >
+                                                    {cancelBusyId === order.order_id ? 'Cancelling…' : 'Cancel'}
+                                                </button>
+                                            )}
                                         </div>
 
+                                        {/* Restaurant name display */}
                                         <div className="text-muted small mb-2">
                                             Restaurant{' '}
                                             <span className="fw-medium text-dark">
@@ -245,6 +338,7 @@ const Orderlist = () => {
                                             </span>
                                         </div>
 
+                                        {/* Food item badges with quantities */}
                                         <div className="d-flex flex-wrap gap-2 mb-3">
                                             {(() => {
                                                 const ids = Array.isArray(order.food_id) ? order.food_id : [];
@@ -261,7 +355,7 @@ const Orderlist = () => {
                                                         className="badge rounded-pill"
                                                         style={{ backgroundColor: '#edf6f2', color: '#0f6d4b', fontWeight: 500 }}
                                                     >
-                                                        {(foodNameById[id] || `Food #${id}`) + (count > 1 ? ` × ${count}` : '')}
+                                                        {(foodNameById[id] || 'Food') + (count > 1 ? ` × ${count}` : '')}
                                                     </span>
                                                 ));
                                             })()}
@@ -280,8 +374,10 @@ const Orderlist = () => {
                                 </div>
                             </li>
                         ))}
-                    </ul>
+                        </ul>
+                    </>
                 ) : (
+                    // Empty state
                     <div className="card">
                         <div className="card-body text-muted">No orders found yet. Add food to cart and place your first order.</div>
                     </div>

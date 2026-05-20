@@ -13,6 +13,7 @@ const authSlice = createSlice({
         // Called after login + /me fetch
         setCredentials: (state, action) => {
             const { token, userId, name, email, role } = action.payload;
+            // Redux Toolkit uses Immer, so "mutations" here are safe.
             state.isLoggedIn = true;
             state.token = token;
             state.userId = userId;
@@ -24,6 +25,7 @@ const authSlice = createSlice({
             localStorage.setItem('authUser', JSON.stringify({ userId, name, email, role }));
         },
         logout: (state) => {
+            // Clear both Redux and localStorage so next refresh stays logged out.
             localStorage.removeItem('token');
             localStorage.removeItem('authUser');
             state.isLoggedIn = false;

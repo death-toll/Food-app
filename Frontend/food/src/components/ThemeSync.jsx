@@ -9,6 +9,7 @@ export default function ThemeSync() {
     const mode = useSelector((state) => state.theme.mode);
 
     useEffect(() => {
+        // Bootstrap reads this attribute and adjusts component colors automatically.
         document.documentElement.setAttribute('data-bs-theme', mode);
     }, [mode]);
 

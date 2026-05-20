@@ -24,6 +24,7 @@ public class UserService {
 
     public UserResponseDto createUser(UserRequestDto request) {
         User user = new User();
+        // Request -> entity mapping is centralized here.
         apply(user, request);
         return toDto(userRepo.save(user));
     }
@@ -54,6 +55,7 @@ public class UserService {
     }
 
     private void apply(User user, UserRequestDto request) {
+        // Copy mutable fields.
         user.setAge(request.getAge());
         user.setName(request.getName());
         user.setStreet(request.getStreet());
@@ -62,6 +64,7 @@ public class UserService {
         user.setEmail(request.getEmail());
         // Only update password when provided; store as BCrypt hash
         if (request.getPassword() != null && !request.getPassword().isBlank()) {
+            // Never store raw passwords; always persist the encoder output.
             user.setPassword(passwordEncoder.encode(request.getPassword()));
         }
         user.setRole(request.getRole());
@@ -69,6 +72,7 @@ public class UserService {
 
     private UserResponseDto toDto(User user) {
         UserResponseDto dto = new UserResponseDto();
+        // Entity -> response DTO mapping (never include password).
         dto.setUser_id(user.getUser_id());
         dto.setAge(user.getAge());
         dto.setName(user.getName());

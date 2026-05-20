@@ -32,12 +32,14 @@ public class FoodService {
     }
 
     public FoodResponseDto createFood(FoodRequestDto request) {
+        // Map request DTO -> entity.
         Food food = new Food();
         food.setName(request.getName());
         food.setDescription(request.getDescription());
         food.setType(request.getType());
         food.setCuisine(request.getCuisine());
         food.setPrice(request.getPrice());
+        // Likes are derived data; initialize to 0 for new foods.
         food.setLike_count(0);
 
         Food saved = foodrepository.save(food);
@@ -75,6 +77,7 @@ public class FoodService {
 
         // Remove likes first to avoid FK violations
         foodLikeRepo.deleteByFoodId(foodId);
+        // After dependents are removed, delete the food row.
         foodrepository.deleteById(foodId);
     }
 
@@ -83,6 +86,7 @@ public class FoodService {
         Food food = foodrepository.findById(foodId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Food not found: " + foodId));
 
+        // Enforce "like once per user per food" at application level.
         if (foodLikeRepo.existsLike(userId, foodId)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "You can like a food only once");
         }
@@ -95,12 +99,14 @@ public class FoodService {
         like.setFood(food);
         foodLikeRepo.save(like);
 
+        // Increment derived like counter.
         food.setLike_count((food.getLike_count() == null ? 0 : food.getLike_count()) + 1);
         return toDto(foodrepository.save(food));
     }
 
     private FoodResponseDto toDto(Food food) {
         FoodResponseDto dto = new FoodResponseDto();
+        // Entity -> response DTO mapping.
         dto.setFood_id(food.getFood_id());
         dto.setName(food.getName());
         dto.setDescription(food.getDescription());

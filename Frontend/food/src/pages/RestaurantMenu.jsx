@@ -267,14 +267,14 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
     useEffect(() => {
         if (!restaurant_id) return;
 
-        // Fetch food items
+        // Fetch food items (parallel). Individual failures are ignored.
         const ids = Array.isArray(food_available_id) ? food_available_id : [];
         setFoodsLoading(true);
         Promise.all(ids.map((id) => getFoodById(id).catch(() => null)))
             .then((results) => setFoods(results.filter(Boolean)))
             .finally(() => setFoodsLoading(false));
 
-        // Fetch ratings
+        // Fetch ratings in parallel; average endpoint is short-cached in the API layer.
         setReviewsLoading(true);
         Promise.all([
             getAverageRating(restaurant_id).catch(() => null),
@@ -304,7 +304,7 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
             setMyReview('');
         }
 
-        // Fetch orders to determine most ordered item
+        // Fetch orders to determine most ordered item (used for highlighting).
         getOrdersByRestaurant(restaurant_id).then((orders) => {
             if (!Array.isArray(orders) || orders.length === 0) return;
             // Count frequency of each food_id across all orders
@@ -352,24 +352,28 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
     return (
         <div style={{ backgroundColor: 'var(--app-bg)', minHeight: '100vh' }}>
 
+            {/* Toast notification for cart actions */}
             <Notification
                 message={cartNotice?.message || ''}
                 variant={cartNotice?.variant || 'success'}
                 onClose={() => setCartNotice(null)}
             />
 
-            {/* ── Hero Banner ── */}
+            {/* ── Hero Banner with restaurant image and info overlay ── */}
             <div style={{ position: 'relative', height: 280, overflow: 'hidden' }}>
+                {/* Background restaurant image */}
                 <img
                     src={fallbackImg(restaurant_id)}
                     alt={name}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
+                {/* Gradient overlay with restaurant name, type, rating */}
                 <div style={{
                     position: 'absolute', inset: 0,
                     background: 'linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.75) 100%)',
                     display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.5rem 2rem',
                 }}>
+                    {/* Back navigation button */}
                     <button
                         type="button"
                         className="btn btn-light btn-sm mb-3"
@@ -378,6 +382,7 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
                     >
                         ← Back
                     </button>
+                    {/* Restaurant name with badges */}
                     <div className="d-flex flex-wrap align-items-center gap-2 mb-1">
                         <h2 className="text-white fw-bold mb-0">{name}</h2>
                         {foodtype && (
@@ -388,6 +393,7 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
                                 {foodtype}
                             </span>
                         )}
+                        {/* Average rating badge */}
                         {avgRating != null && (
                             <span className="badge text-bg-warning">
                                 ★ {Number(avgRating).toFixed(1)}
@@ -395,6 +401,7 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
                             </span>
                         )}
                     </div>
+                    {/* Address line */}
                     {address && <p className="text-white-50 mb-0 small">📍 {address}</p>}
                 </div>
             </div>
@@ -402,8 +409,9 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
             <div className="container-fluid py-4">
                 <div className="row g-4">
 
-                    {/* ── Menu ── */}
+                    {/* ── Menu section (left column) ── */}
                     <div className="col-12 col-lg-8">
+                        {/* Header with title and VEG/NON_VEG filter buttons */}
                         <div className="d-flex justify-content-between align-items-center mb-3">
                             <h5 className="fw-bold mb-0">Menu</h5>
                             {!foodsLoading && (
@@ -422,7 +430,9 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
                             )}
                         </div>
 
+                        {/* Conditional render: loading / empty / food list */}
                         {foodsLoading ? (
+                            // Loading state
                             <div className="card">
                                 <div className="card-body d-flex gap-2 align-items-center">
                                     <div className="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
@@ -430,12 +440,14 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
                                 </div>
                             </div>
                         ) : filteredFoods.length === 0 ? (
+                            // Empty state
                             <div className="card">
                                 <div className="card-body text-muted text-center py-5">
                                     {foods.length === 0 ? 'No items on the menu yet.' : 'No items match the selected filter.'}
                                 </div>
                             </div>
                         ) : (
+                            // Food items list with deal/top-ordered badges
                             <ul className="list-group shadow-sm">
                                 {filteredFoods.map((food) => (
                                     <FoodListRow
@@ -458,15 +470,17 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
                         )}
                     </div>
 
-                    {/* ── Ratings sidebar ── */}
+                    {/* ── Ratings sidebar (right column) ── */}
                     <div className="col-12 col-lg-4">
 
-                        {/* Average summary */}
+                        {/* Average rating summary card */}
                         <div className="card shadow-sm mb-3 border-0">
                             <div className="card-body text-center">
+                                {/* Large rating number */}
                                 <div style={{ fontSize: '3rem', fontWeight: 700, color: '#ffc107', lineHeight: 1 }}>
                                     {avgRating != null ? Number(avgRating).toFixed(1) : '—'}
                                 </div>
+                                {/* Star visualization */}
                                 <div className="text-warning mb-1" style={{ fontSize: '1.3rem' }}>
                                     {avgRating != null
                                         ? '★'.repeat(Math.round(avgRating)) + '☆'.repeat(5 - Math.round(avgRating))
@@ -478,7 +492,7 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
                             </div>
                         </div>
 
-                        {/* Submit rating (logged-in users only) */}
+                        {/* Submit rating form (logged-in users only) */}
                         {isLoggedIn && (
                             <div className="card shadow-sm mb-3 border-0">
                                 <div className="card-header bg-white fw-semibold border-0 pb-0">
@@ -491,7 +505,9 @@ const RestaurantMenu = ({ restaurant, onBack }) => {
                                         </div>
                                     )}
                                     <form onSubmit={handleSubmitRating}>
+                                        {/* Star picker component */}
                                         <StarPicker value={myRating} onChange={setMyRating} />
+                                        {/* Review text area */}
                                         <textarea
                                             className="form-control form-control-sm mt-2"
                                             rows={2}

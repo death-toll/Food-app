@@ -15,6 +15,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * JWT helper service.
+ *
+ * <p>Generates and validates JWT tokens used by the API. The token is signed using an HMAC secret
+ * configured via {@code app.jwt.secret} and expires after {@code app.jwt.expiration-seconds}.</p>
+ *
+ * <p>Tokens include (at minimum) the username/email as subject and may include a {@code role}
+ * claim (e.g. {@code ROLE_OWNER}).</p>
+ */
 @Service
 public class JwtService {
 
@@ -31,15 +40,19 @@ public class JwtService {
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        String role = userDetails.getAuthorities().stream()
+        // Take the first granted authority (if present) and store it as a simple "role" claim.
+        // This keeps the token small and matches our security model (single role per user).
+        userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
+                .filter(java.util.Objects::nonNull)
                 .findFirst()
-                .orElse(null);
-        if (role != null) {
-            claims.put("role", role);
-        }
+                .ifPresent(r -> claims.put("role", r));
 
         Instant now = Instant.now();
+        // Standard JWT fields:
+        // - subject: the username/email
+        // - issuedAt/expiration: for session validity
+        // - signWith: HMAC-SHA256 using app.jwt.secret
         return Jwts.builder()
                 .claims(claims)
                 .subject(userDetails.getUsername())
@@ -54,6 +67,9 @@ public class JwtService {
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
+        // Token is valid if:
+        // 1) subject matches current user
+        // 2) token is not expired
         String username = extractUsername(token);
         return username != null && username.equalsIgnoreCase(userDetails.getUsername()) && !isTokenExpired(token);
     }
@@ -64,6 +80,7 @@ public class JwtService {
     }
 
     private Claims extractAllClaims(String token) {
+        // Parse and verify the signature before extracting claims.
         return Jwts.parser()
                 .verifyWith(key)
                 .build()

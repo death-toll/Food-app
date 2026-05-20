@@ -26,6 +26,7 @@ public class RestaurantController {
 	@ResponseStatus(HttpStatus.CREATED)
 	@PreAuthorize("hasRole('OWNER')")
 	public RestaurantResponseDto create(@Valid @RequestBody RestaurantRequestDto request) {
+		// Owner-only: restaurantService also enforces that request.ownerId matches JWT user.
 		return restaurantService.createRestaurant(request);
 	}
 
@@ -79,6 +80,7 @@ public class RestaurantController {
 	 */
 	@GetMapping("/{restaurantId}/deal-of-the-day")
 	public DealOfTheDayResponseDto getDealOfTheDay(@PathVariable Integer restaurantId) {
+		// Public endpoint: returns today's deal if set and not expired.
 		return restaurantService.getDealOfTheDay(restaurantId);
 	}
 

@@ -113,6 +113,7 @@ const FoodRow = ({ food, onEdit, onDelete, isDeal, onSetDeal, onRemoveDeal, deal
 );
 
 // ── Main Component ────────────────────────────────────────────────────────────
+// Allows owners to manage foods for a single restaurant (CRUD + deal of the day).
 const RestaurantFoodManager = ({ restaurant, onBack }) => {
     const { restaurant_id, name, food_available_id } = restaurant || {};
 
@@ -134,7 +135,7 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
     const [dealLoading, setDealLoading] = useState(false);
     const [dealError, setDealError] = useState('');
 
-    // Load foods
+    // Load foods by ID array; failures are filtered out.
     const loadFoods = async () => {
         const ids = Array.isArray(food_available_id) ? food_available_id : [];
         setLoading(true);
@@ -143,7 +144,7 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
         setLoading(false);
     };
 
-    // Load deal of the day
+    // Load deal of the day for highlighting; errors silently reset to null.
     const loadDeal = async () => {
         try {
             const deal = await getDealOfTheDay(restaurant_id);
@@ -160,6 +161,7 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
     }, [restaurant_id]);
 
     // ── Deal handlers ──────────────────────────────────────────────────────────
+    // Deal of the day gives the food item a 10% discount badge on the menu.
     const handleSetDeal = async (foodId) => {
         setDealLoading(true);
         setDealError('');
@@ -236,15 +238,19 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
     return (
         <section style={{ backgroundColor: 'var(--app-bg)', minHeight: 'calc(100vh - 56px)' }}>
             <div className="container-fluid py-4">
-                {/* Header */}
+
+                {/* ── Page header with back button and add food action ── */}
                 <div className="d-flex align-items-center gap-3 mb-4">
+                    {/* Back navigation */}
                     <button type="button" className="btn btn-outline-secondary btn-sm" onClick={onBack}>
                         ← Back
                     </button>
+                    {/* Restaurant name and subtitle */}
                     <div>
                         <h5 className="mb-0 fw-bold">{name}</h5>
                         <span className="text-muted small">Manage menu items</span>
                     </div>
+                    {/* Add food button */}
                     <button
                         type="button"
                         className="btn btn-dark btn-sm ms-auto"
@@ -256,7 +262,7 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
                 </div>
 
                 <div className="row g-4">
-                    {/* ── Food list ── */}
+                    {/* ── Food list column (shrinks when form is open) ── */}
                     <div className={form ? 'col-12 col-lg-7' : 'col-12'}>
 
                         {/* Deal error message */}
@@ -267,7 +273,7 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
                             </div>
                         )}
 
-                        {/* Delete confirmation */}
+                        {/* Delete confirmation alert */}
                         {deletingId && (
                             <div className="alert alert-warning d-flex justify-content-between align-items-center mb-3">
                                 <span>
@@ -293,7 +299,9 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
                             </div>
                         )}
 
+                        {/* Conditional render: loading / empty / food table */}
                         {loading ? (
+                            // Loading spinner
                             <div className="card">
                                 <div className="card-body d-flex gap-2 align-items-center">
                                     <div className="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
@@ -301,6 +309,7 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
                                 </div>
                             </div>
                         ) : foods.length === 0 ? (
+                            // Empty state with prompt to add first item
                             <div className="card">
                                 <div className="card-body text-muted text-center py-5">
                                     No items yet.{' '}
@@ -308,6 +317,7 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
                                 </div>
                             </div>
                         ) : (
+                            // Food items list with edit/delete/deal actions
                             <ul className="list-group shadow-sm">
                                 {foods.map((food) => (
                                     <FoodRow
@@ -325,18 +335,21 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
                         )}
                     </div>
 
-                    {/* ── Add / Edit form ── */}
+                    {/* ── Add / Edit form (sticky sidebar) ── */}
                     {form && (
                         <div className="col-12 col-lg-5">
                             <div className="card shadow-sm border-0 sticky-top" style={{ top: 70 }}>
+                                {/* Form header */}
                                 <div className="card-header bg-dark text-white fw-semibold border-0">
                                     {form.food_id ? 'Edit Food Item' : 'Add Food Item'}
                                 </div>
                                 <div className="card-body">
+                                    {/* Form error message */}
                                     {formError && (
                                         <div className="alert alert-danger py-2 small">{formError}</div>
                                     )}
                                     <form onSubmit={handleSave}>
+                                        {/* Name input */}
                                         <div className="mb-3">
                                             <label className="form-label small fw-medium">Name *</label>
                                             <input
@@ -348,6 +361,7 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
                                                 required
                                             />
                                         </div>
+                                        {/* Price input */}
                                         <div className="mb-3">
                                             <label className="form-label small fw-medium">Price (₹) *</label>
                                             <input
@@ -361,6 +375,7 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
                                                 required
                                             />
                                         </div>
+                                        {/* Food type dropdown (VEG/NON_VEG) */}
                                         <div className="mb-3">
                                             <label className="form-label small fw-medium">Type *</label>
                                             <select
@@ -373,6 +388,7 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
                                                 ))}
                                             </select>
                                         </div>
+                                        {/* Cuisine dropdown */}
                                         <div className="mb-4">
                                             <label className="form-label small fw-medium">Cuisine *</label>
                                             <select
@@ -385,6 +401,7 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
                                                 ))}
                                             </select>
                                         </div>
+                                        {/* Optional description textarea */}
                                         <div className="mb-4">
                                             <label className="form-label small fw-medium">Description <span className="text-muted">(optional)</span></label>
                                             <textarea
@@ -397,6 +414,7 @@ const RestaurantFoodManager = ({ restaurant, onBack }) => {
                                             />
                                             <div className="text-end" style={{ fontSize: '0.7rem', color: '#999' }}>{form.description.length}/1000</div>
                                         </div>
+                                        {/* Action buttons */}
                                         <div className="d-flex gap-2">
                                             <button
                                                 type="submit"

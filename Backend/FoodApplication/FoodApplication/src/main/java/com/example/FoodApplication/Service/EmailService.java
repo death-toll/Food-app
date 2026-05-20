@@ -24,13 +24,16 @@ public class EmailService {
      * Get a valid "from" email address. Uses configured username, or fallback if empty.
      */
     private String getFromEmail() {
+        // Prefer configured SMTP username as the sender address.
         if (fromEmail != null && !fromEmail.isBlank()) {
             return fromEmail;
         }
+        // Fallback prevents NullPointerException and keeps local/test environments working.
         return fallbackFromEmail;
     }
 
     public void sendRegistrationOtpEmail(String toEmail, String otp) {
+        // Use SimpleMailMessage for plain-text emails.
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(getFromEmail());
         message.setTo(toEmail);
@@ -44,7 +47,7 @@ public class EmailService {
             "If you did not create an account, please ignore this email.\n\n" +
             "Regards,\nFood Application Team"
         );
-
+        // Delegate actual send to Spring's mail sender (SMTP).
         mailSender.send(message);
     }
 
@@ -60,7 +63,7 @@ public class EmailService {
             "If you did not request this, please secure your account immediately.\n\n" +
             "Regards,\nFood Application Team"
         );
-
+        // OTP emails are time-sensitive; failures are handled by calling service/controller.
         mailSender.send(message);
     }
 

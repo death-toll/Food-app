@@ -1,7 +1,6 @@
 package com.example.FoodApplication;
 
 import com.example.FoodApplication.Dto.Request.FoodRequestDto;
-import com.example.FoodApplication.Dto.Response.DealOfTheDayResponseDto;
 import com.example.FoodApplication.Dto.Response.FoodResponseDto;
 import com.example.FoodApplication.Entity.Food;
 import com.example.FoodApplication.Entity.FoodLike;
@@ -61,9 +60,9 @@ class AllLayersTest {
         @Mock private FoodRepo foodRepo;
         @Mock private FoodLikeRepo foodLikeRepo;
         @Mock private UserRepo userRepo;
-        
+
         private FoodService foodService;
-        
+
         @BeforeEach
         void setUpFoodService() {
             // FoodService uses @Autowired fields, so we inject mocks manually
@@ -73,7 +72,7 @@ class AllLayersTest {
                 var likeField = FoodService.class.getDeclaredField("foodLikeRepo");
                 likeField.setAccessible(true);
                 likeField.set(foodService, foodLikeRepo);
-                
+
                 var userField = FoodService.class.getDeclaredField("userRepo");
                 userField.setAccessible(true);
                 userField.set(foodService, userRepo);
@@ -353,5 +352,4 @@ class AllLayersTest {
         }
     }
 }
-
 

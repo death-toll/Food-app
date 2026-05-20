@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getRestaurantsByOwner } from '../api/restaurant';
 import { getOrdersByRestaurant, updateOrderStatus } from '../api/order';
-import { getFoods } from '../api/food';
+import { getFoodById, getFoods } from '../api/food';
 
 // ── Status config ─────────────────────────────────────────────────────────────
+// Backend order statuses; owners can advance or cancel orders.
 const STATUSES = ['PLACED', 'CONFIRMED', 'DELIVERED', 'CANCELLED'];
 
 const STATUS_META = {
@@ -76,11 +77,22 @@ const OwnerOrders = () => {
     const [restsLoading, setRestsLoading] = useState(true);
     const [error, setError] = useState('');
 
+    // Any food IDs present in orders that we haven't resolved to names yet.
+    const missingFoodIds = useMemo(() => {
+        const allIds = new Set();
+        orders.forEach((o) => {
+            (Array.isArray(o?.food_id) ? o.food_id : []).forEach((id) => {
+                if (id != null) allIds.add(String(id));
+            });
+        });
+        return Array.from(allIds).filter((id) => !foodNameById[id]);
+    }, [orders, foodNameById]);
+
     // Filter
     const [statusFilter, setStatusFilter] = useState('ALL');
     const [search, setSearch] = useState('');
 
-    // Load owner's restaurants
+    // Load owner's restaurants so we can fetch orders for each.
     useEffect(() => {
         if (!ownerId) return;
         setRestsLoading(true);
@@ -88,7 +100,7 @@ const OwnerOrders = () => {
             .then((data) => {
                 const list = Array.isArray(data) ? data : [];
                 setRestaurants(list);
-                // Build name lookup map
+                // Build name lookup map for display in order rows.
                 const nameMap = {};
                 list.forEach((r) => {
                     nameMap[String(r.restaurant_id)] = r.name || `Restaurant #${r.restaurant_id}`;
@@ -104,13 +116,38 @@ const OwnerOrders = () => {
         getFoods().then((foods) => {
             const map = {};
             (Array.isArray(foods) ? foods : []).forEach((f) => {
-                if (f?.food_id != null) map[String(f.food_id)] = f.name || `Food #${f.food_id}`;
+                if (f?.food_id != null) map[String(f.food_id)] = f.name || 'Food';
             });
             setFoodNameById(map);
         }).catch(() => {});
     }, []);
 
-    // Load orders for ALL owner's restaurants (combined)
+    useEffect(() => {
+        if (missingFoodIds.length === 0) return;
+        let cancelled = false;
+
+        Promise.all(
+            missingFoodIds.map((id) =>
+                getFoodById(id)
+                    .then((food) => ({ id: String(food?.food_id ?? id), name: food?.name }))
+                    .catch(() => null)
+            )
+        ).then((results) => {
+            if (cancelled) return;
+            const additions = {};
+            (results.filter(Boolean) ?? []).forEach(({ id, name }) => {
+                if (id && name) additions[id] = name;
+            });
+            if (Object.keys(additions).length > 0) {
+                setFoodNameById((prev) => ({ ...prev, ...additions }));
+            }
+        });
+
+        return () => { cancelled = true; };
+    }, [missingFoodIds.join('|')]);
+
+    // Load orders for ALL owner's restaurants (combined view).
+    // Orders are fetched in parallel then merged and sorted (newest first).
     useEffect(() => {
         if (restaurants.length === 0) return;
         setLoading(true); setError('');
@@ -119,6 +156,7 @@ const OwnerOrders = () => {
             restaurants.map((r) => getOrdersByRestaurant(r.restaurant_id).catch(() => []))
         )
             .then((results) => {
+                // Flatten and sort newest first by order_id.
                 const combined = results.flat().sort((a, b) => Number(b.order_id) - Number(a.order_id));
                 setOrders(combined);
             })
@@ -148,14 +186,14 @@ const OwnerOrders = () => {
         <section style={{ backgroundColor: 'var(--app-bg)', minHeight: 'calc(100vh - 56px)' }}>
             <div className="container-fluid py-4">
 
-                {/* Header */}
+                {/* ── Page header with title and restaurant dropdown ── */}
                 <div className="d-flex flex-wrap align-items-center gap-3 mb-4">
                     <div>
                         <h4 className="mb-0 fw-bold">Order Management</h4>
                         <span className="text-muted small">View and update order statuses across your restaurants</span>
                     </div>
 
-                    {/* Restaurant picker */}
+                    {/* Restaurant picker dropdown to filter by restaurant */}
                     {!restsLoading && restaurants.length > 0 && (
                         <select
                             className="form-select form-select-sm ms-auto"
@@ -171,9 +209,10 @@ const OwnerOrders = () => {
                     )}
                 </div>
 
-                {/* Status summary cards */}
+                {/* ── Status summary cards — clickable filters ── */}
                 {!loading && orders.length > 0 && (
                     <div className="row g-3 mb-4">
+                        {/* Each card shows count for a status; clicking filters the table */}
                         {[['ALL', { label: 'All Orders', color: '#6b7280', bg: '#f9fafb', border: '#e5e7eb' }], ...Object.entries(STATUS_META)].map(([key, meta]) => {
                             const count = key === 'ALL' ? orders.length : (counts[key] ?? 0);
                             const isActive = statusFilter === key;
@@ -202,9 +241,10 @@ const OwnerOrders = () => {
                     </div>
                 )}
 
-                {/* Search bar */}
+                {/* ── Search bar for quick order lookup ── */}
                 {!loading && orders.length > 0 && (
                     <div className="mb-3 d-flex gap-2 align-items-center">
+                        {/* Text search input */}
                         <input
                             type="text"
                             className="form-control form-control-sm"
@@ -222,8 +262,9 @@ const OwnerOrders = () => {
                     </div>
                 )}
 
-                {/* Orders table */}
+                {/* ── Orders table with status changer ── */}
                 {restsLoading || loading ? (
+                    // Loading state
                     <div className="card">
                         <div className="card-body d-flex gap-2 align-items-center">
                             <div className="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
@@ -231,22 +272,27 @@ const OwnerOrders = () => {
                         </div>
                     </div>
                 ) : error ? (
+                    // Error state
                     <div className="alert alert-danger">{error}</div>
                 ) : restaurants.length === 0 ? (
+                    // No restaurants yet
                     <div className="card">
                         <div className="card-body text-muted text-center py-5">
                             You have no restaurants yet.
                         </div>
                     </div>
                 ) : filtered.length === 0 ? (
+                    // No orders match filter
                     <div className="card">
                         <div className="card-body text-muted text-center py-5">
                             {orders.length === 0 ? 'No orders for this restaurant yet.' : 'No orders match the current filter.'}
                         </div>
                     </div>
                 ) : (
+                    // Orders data table
                     <div className="card shadow-sm border-0">
                         <div className="table-responsive">
+                            {/* Sortable table with status change dropdown */}
                             <table className="table table-hover align-middle mb-0">
                                 <thead className="table-dark">
                                     <tr>
@@ -259,6 +305,7 @@ const OwnerOrders = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {/* Each row is an order with inline status changer */}
                                     {filtered.map((order) => (
                                         <tr key={order.order_id}>
                                             <td className="fw-semibold">#{order.order_id}</td>
@@ -287,7 +334,7 @@ const OwnerOrders = () => {
                                                                 className="badge rounded-pill"
                                                                 style={{ backgroundColor: '#edf6f2', color: '#0f6d4b', fontWeight: 500, fontSize: '0.72rem' }}
                                                             >
-                                                                {(foodNameById[id] || `Food #${id}`) + (count > 1 ? ` × ${count}` : '')}
+                                                                {(foodNameById[id] || 'Food') + (count > 1 ? ` × ${count}` : '')}
                                                             </span>
                                                         ));
                                                     })()}

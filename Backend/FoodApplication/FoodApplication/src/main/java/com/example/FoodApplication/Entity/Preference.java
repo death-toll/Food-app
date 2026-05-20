@@ -6,6 +6,8 @@ import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import lombok.AllArgsConstructor;
@@ -39,9 +41,11 @@ public class Preference{
     @ElementCollection
     @CollectionTable(name = "preference_cuisines", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "cuisine")
+    @Enumerated(EnumType.STRING)
     private List<Cuisines> cuisines;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private Foodtype foodtype;
     
     

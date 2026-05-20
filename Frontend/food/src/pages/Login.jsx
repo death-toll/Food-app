@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+﻿import { useState ,useMemo} from 'react';
 import { useDispatch } from 'react-redux';
 import { login, getMe, register, verifyRegistrationOtp, resendRegistrationOtp, forgotPassword, verifyForgotPasswordOtp, resetPassword } from '../api/auth';
 import { setCredentials } from '../store/authSlice';
@@ -51,8 +51,10 @@ const LoginView = ({ onSuccess, goRegister, goForgot }) => {
         e.preventDefault();
         setLoading(true); setError('');
         try {
+            // 1) Authenticate to get token
             const data = await login(email, password);
             localStorage.setItem('token', data.token);
+            // 2) Fetch current user profile to populate Redux + role-based routing
             const me = await getMe();
             dispatch(setCredentials({ token: data.token, userId: me.userId, name: me.name, email: me.email, role: me.role }));
             onSuccess();
@@ -335,8 +337,18 @@ const ResetPasswordView = ({ email, otp, onSuccess, goLogin }) => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
+    const strongEnough = useMemo(
+        () => PWD_RULES.every((r) => r.test(newPassword)),
+        [newPassword]
+    );
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const failedRules = PWD_RULES.filter((r) => !r.test(newPassword));
+        if (failedRules.length > 0) {
+            setError(`Password must include: ${failedRules.map((r) => r.label.toLowerCase()).join(', ')}.`);
+            return;
+        }
         if (newPassword !== confirm) { setError('Passwords do not match'); return; }
         setLoading(true); setError('');
         try {
@@ -357,13 +369,20 @@ const ResetPasswordView = ({ email, otp, onSuccess, goLogin }) => {
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <label className="form-label fw-medium" htmlFor="rp-new">New password</label>
-                        <input id="rp-new" type="password" className="form-control" placeholder="Min 6 characters"
-                            value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required minLength={6} autoComplete="new-password" />
+                        <input id="rp-new" type="password" className="form-control" placeholder="Min 8 characters"
+                            value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required minLength={8} autoComplete="new-password" />
+                        {/* Reuse the same password strength UI as registration */}
+                        <PasswordStrength password={newPassword} />
+                        {!strongEnough && newPassword && (
+                            <div className="small text-muted mt-2">
+                                Tip: Use a mix of uppercase, lowercase, number, and special character.
+                            </div>
+                        )}
                     </div>
                     <div className="mb-4">
                         <label className="form-label fw-medium" htmlFor="rp-confirm">Confirm password</label>
                         <input id="rp-confirm" type="password" className="form-control" placeholder="Repeat password"
-                            value={confirm} onChange={(e) => setConfirm(e.target.value)} required minLength={6} autoComplete="new-password" />
+                            value={confirm} onChange={(e) => setConfirm(e.target.value)} required minLength={8} autoComplete="new-password" />
                     </div>
                     <button type="submit" className="btn btn-dark w-100" disabled={loading}>
                         {loading ? <><Spinner />Resetting...</> : 'Reset Password'}
@@ -495,12 +514,16 @@ const Login = () => {
     };
 
     return (
+        // Full-screen centered login/register container
         <div data-bs-theme="light" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f5f5f5' }}>
+            {/* Main card with form on left, image on right */}
             <div className="card border-0 shadow-lg" style={{ maxWidth: 900, width: '100%' }}>
                 <div className="row g-0">
+                    {/* Dynamic form panel (login/register/otp/reset) */}
                     <div className="col-lg-6 overflow-auto" style={{ maxHeight: '90vh' }}>
                         {renderLeft()}
                     </div>
+                    {/* Decorative right panel with background image */}
                     <RightPanel />
                 </div>
             </div>

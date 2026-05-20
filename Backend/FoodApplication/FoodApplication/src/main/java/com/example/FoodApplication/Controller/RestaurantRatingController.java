@@ -36,6 +36,7 @@ public class RestaurantRatingController {
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyRole('CUSTOMER','OWNER')")
     public RestaurantRatingResponseDto rate(@Valid @RequestBody RestaurantRatingRequestDto request) {
+        // Ratings are always stored against the currently authenticated user.
         Integer userId = getCurrentUserId();
         return restaurantRatingService.rateRestaurant(userId, request);
     }
@@ -67,11 +68,13 @@ public class RestaurantRatingController {
     }
 
     private Integer getCurrentUserId() {
+        // UserDetails principal comes from Spring Security after JWT validation.
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !(authentication.getPrincipal() instanceof UserDetails principal)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Not authenticated");
         }
 
+        // Convert email (username) to our internal user id.
         User user = userRepo.findByEmail(principal.getUsername())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found"));
 

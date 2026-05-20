@@ -3,12 +3,16 @@ package com.example.FoodApplication.Service;
 import com.example.FoodApplication.Dto.Request.OrderRequestDto;
 import com.example.FoodApplication.Dto.Response.OrderResponseDto;
 import com.example.FoodApplication.Entity.Order;
+import com.example.FoodApplication.Entity.User;
 import com.example.FoodApplication.Repository.OrderRepo;
 import com.example.FoodApplication.Repository.RestaurantRepo;
 import com.example.FoodApplication.Repository.UserRepo;
+import com.example.FoodApplication.enums.OrderStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +31,7 @@ public class OrderService {
     }
 
     public OrderResponseDto createOrder(OrderRequestDto request) {
+        // Ensure foreign keys point to valid records before persisting.
         requireUserExists(request.getUser_id());
         requireRestaurantExists(request.getRestaurant_id());
 
@@ -69,6 +74,34 @@ public class OrderService {
         return toDto(saved);
     }
 
+    /**
+     * Cancel an order as the currently authenticated customer.
+     * Only the order owner can cancel, and only if it is not already DELIVERED/CANCELLED.
+     */
+    public OrderResponseDto cancelOrderAsCustomer(Integer orderId) {
+        User current = getCurrentUser();
+
+        Order order = orderRepo.findById(orderId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found: " + orderId));
+
+        // Customers can only cancel their own orders.
+        if (order.getUser_id() == null || !order.getUser_id().equals(current.getUser_id())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You can only cancel your own orders");
+        }
+
+        OrderStatus status = order.getStatus();
+        if (status == OrderStatus.DELIVERED) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Delivered orders cannot be cancelled");
+        }
+        if (status == OrderStatus.CANCELLED) {
+            return toDto(order); // idempotent
+        }
+
+        order.setStatus(OrderStatus.CANCELLED);
+        Order saved = orderRepo.save(order);
+        return toDto(saved);
+    }
+
     public void deleteOrder(Integer orderId) {
         if (!orderRepo.existsById(orderId)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found: " + orderId);
@@ -77,9 +110,11 @@ public class OrderService {
     }
 
     private void apply(Order order, OrderRequestDto request) {
+        // Copy request fields into entity. Service owns mapping so controllers stay thin.
         order.setStatus(request.getStatus());
         order.setUser_id(request.getUser_id());
         order.setRestaurant_id(request.getRestaurant_id());
+        // Null-safe: represent "no foods" as an empty list instead of null.
         order.setFood_Id(request.getFood_id() == null ? new ArrayList<>() : request.getFood_id());
     }
 
@@ -95,9 +130,11 @@ public class OrderService {
 
     private void requireUserExists(Integer userId) {
         if (userId == null) {
+            // Fail fast with 400 on missing required request fields.
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "user_id is required");
         }
         if (!userRepo.existsById(userId)) {
+            // Prevent creating/updating orders that reference a non-existent user.
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found: " + userId);
         }
     }
@@ -107,8 +144,18 @@ public class OrderService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "restaurant_id is required");
         }
         if (!restaurantRepo.existsById(restaurantId)) {
+            // Prevent invalid restaurant references.
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant not found: " + restaurantId);
         }
+    }
+
+    private User getCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || auth.getName() == null || auth.getName().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
+        }
+        return userRepo.findByEmail(auth.getName())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found"));
     }
 }
 

@@ -1,4 +1,5 @@
 import axiosInstance from "../services/axiosInstance";
+import apiCache from "../services/apiCache";
 
 const BASE = "restaurant-ratings";
 
@@ -26,10 +27,17 @@ export const getRatingsForRestaurant = (restaurantId) =>
 /**
  * GET /restaurant-ratings/restaurant/{restaurantId}/average
  * Get average rating and total count for a restaurant.
+ * Cached for 2 seconds to prevent repeated calls
  * @returns {{ restaurantId, restaurantName, averageRating, totalRatings }}
  */
 export const getAverageRating = (restaurantId) =>
-    axiosInstance.get(`${BASE}/restaurant/${restaurantId}/average`).then(unwrap);
+    apiCache.withCache(
+        `rating/average/${restaurantId}`,
+        () => axiosInstance.get(`${BASE}/restaurant/${restaurantId}/average`).then(unwrap),
+        restaurantId,
+        // Short TTL because list pages can render many cards at once.
+        2000
+    );
 
 /**
  * GET /restaurant-ratings/restaurant/{restaurantId}/me

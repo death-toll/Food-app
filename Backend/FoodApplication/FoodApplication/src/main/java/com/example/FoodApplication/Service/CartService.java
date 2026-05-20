@@ -37,10 +37,12 @@ public class CartService {
      * Get cart for the current user. Creates one if it doesn't exist.
      */
     public CartResponseDto getCart(Integer userId) {
+        // Ensure the user exists before creating/returning a cart.
         User user = userRepo.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
         Cart cart = cartRepo.findByUser(user)
+                // Lazily create a cart so callers don't need a separate "create cart" step.
                 .orElseGet(() -> createCartForUser(user));
 
         return toDto(cart);
@@ -51,6 +53,7 @@ public class CartService {
      */
     @Transactional
     public CartResponseDto addToCart(Integer userId, AddToCartRequest request) {
+        // Validate user and referenced entities first.
         User user = userRepo.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
@@ -74,12 +77,12 @@ public class CartService {
         Optional<CartItem> existingItem = cartItemRepo.findByCartAndFood(cart, food);
 
         if (existingItem.isPresent()) {
-            // Update quantity
+            // Update quantity (idempotent add operation).
             CartItem item = existingItem.get();
             item.setQuantity(item.getQuantity() + request.getQuantity());
             cartItemRepo.save(item);
         } else {
-            // Add new item
+            // Add new item row linked to cart + food + restaurant.
             CartItem newItem = new CartItem();
             newItem.setCart(cart);
             newItem.setFood(food);
@@ -98,6 +101,7 @@ public class CartService {
      */
     @Transactional
     public CartResponseDto updateCartItem(Integer userId, Integer cartItemId, UpdateCartItemRequest request) {
+        // Resolve cart for user to ensure we don't modify someone else's cart.
         User user = userRepo.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
@@ -124,6 +128,7 @@ public class CartService {
      */
     @Transactional
     public CartResponseDto removeFromCart(Integer userId, Integer cartItemId) {
+        // Resolve user's cart before removing an item.
         User user = userRepo.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
@@ -138,6 +143,7 @@ public class CartService {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Cart item does not belong to your cart");
         }
 
+        // Remove from in-memory list and delete row.
         cart.getItems().remove(cartItem);
         cartItemRepo.delete(cartItem);
 
@@ -150,6 +156,7 @@ public class CartService {
      */
     @Transactional
     public CartResponseDto clearCart(Integer userId) {
+        // Clearing only touches the cart aggregate; CartItem cleanup depends on mapping/cascade.
         User user = userRepo.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
@@ -176,6 +183,7 @@ public class CartService {
      */
     private CartResponseDto toDto(Cart cart) {
         CartResponseDto dto = new CartResponseDto();
+        // DTO mapping keeps API payload stable and avoids exposing entity internals.
         dto.setCartId(cart.getCartId());
         dto.setUserId(cart.getUser().getUser_id());
         dto.setItems(cart.getItems().stream().map(this::toItemDto).collect(Collectors.toList()));

@@ -3,8 +3,10 @@ import { useEffect } from 'react';
 /**
  * Lightweight notification/toast.
  * Uses Bootstrap alert styling and fixed positioning (top-right).
+ * Auto-dismisses after `duration` ms unless set to 0.
  */
 const Notification = ({ message, variant = 'success', onClose, duration = 2500 }) => {
+    // Auto-close timer; clears on unmount or if message/duration changes.
     useEffect(() => {
         if (!message) return;
         if (!duration || duration <= 0) return;

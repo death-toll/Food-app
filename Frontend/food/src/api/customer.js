@@ -6,6 +6,7 @@ const USER_BASE_PATH = "users";
 const unwrap = (response) => response.data;
 
 export const getCustomers = (params) =>
+  // Admin-style list endpoint (if enabled on backend).
   axiosInstance.get(USER_BASE_PATH, { params }).then(unwrap);
 
 export const getCustomerById = (customerId) =>
@@ -21,6 +22,7 @@ export const deleteCustomer = (customerId) =>
   axiosInstance.delete(`${USER_BASE_PATH}/${customerId}`).then(unwrap);
 
 // Preferred aliases
+// The UI sometimes uses "customer" wording, but backend resource is "users".
 export const getUsers = getCustomers;
 export const getUserById = getCustomerById;
 export const createUser = createCustomer;
@@ -36,3 +38,4 @@ const userApi = {
 };
 
 export default userApi;
+

@@ -16,6 +16,17 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+/**
+ * Service layer for restaurant rating/review operations.
+ *
+ * Responsibilities:
+ * <ul>
+ *   <li>Create/update a user's rating for a restaurant (one rating per user per restaurant).</li>
+ *   <li>Fetch all ratings for a restaurant and a user's own rating.</li>
+ *   <li>Compute average rating and review count.</li>
+ *   <li>Optionally store a rounded integer rating back on {@link Restaurant} for legacy endpoints.</li>
+ * </ul>
+ */
 @Service
 public class RestaurantRatingService {
 

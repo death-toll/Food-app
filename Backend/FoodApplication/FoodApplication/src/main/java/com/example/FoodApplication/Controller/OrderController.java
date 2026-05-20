@@ -22,6 +22,7 @@ public class OrderController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public OrderResponseDto create(@Valid @RequestBody OrderRequestDto request) {
+        // Controller stays thin; business rules and existence checks are enforced in OrderService.
         return orderService.createOrder(request);
     }
 
@@ -54,6 +55,14 @@ public class OrderController {
     @PutMapping("/{orderId}")
     public OrderResponseDto update(@PathVariable Integer orderId, @Valid @RequestBody OrderRequestDto request) {
         return orderService.updateOrder(orderId, request);
+    }
+
+    /**
+     * PATCH /orders/{orderId}/cancel — customers can cancel their own order.
+     */
+    @PatchMapping("/{orderId}/cancel")
+    public OrderResponseDto cancel(@PathVariable Integer orderId) {
+        return orderService.cancelOrderAsCustomer(orderId);
     }
 
     @DeleteMapping("/{orderId}")

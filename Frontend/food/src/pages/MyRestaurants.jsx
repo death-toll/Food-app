@@ -40,6 +40,7 @@ const MyRestaurants = ({ onAddNew }) => {
 
     const load = async () => {
         if (!ownerId) return;
+        // Fetch only this owner's restaurants (ownerId comes from auth slice).
         setLoading(true); setError('');
         try {
             const data = await getRestaurantsByOwner(ownerId);
@@ -77,6 +78,7 @@ const MyRestaurants = ({ onAddNew }) => {
     const handleDeleteConfirm = async () => {
         setDeleteLoading(true); setDeleteError('');
         try {
+            // Delete on backend, then refresh the list.
             await deleteRestaurant(deleting);
             setDeleting(null);
             load();
@@ -108,9 +110,11 @@ const MyRestaurants = ({ onAddNew }) => {
             <div className="container-fluid py-4">
                 <div className="row g-4">
 
-                    {/* ── Sidebar ── */}
+                    {/* ── Sidebar with filter controls ── */}
                     <div className="col-12 col-md-3 col-xl-2">
+                        {/* Sticky filter card */}
                         <div className="card shadow-sm sticky-top" style={{ top: 70 }}>
+                            {/* Filter header with reset option */}
                             <div className="card-header bg-dark text-white fw-semibold d-flex justify-content-between align-items-center">
                                 <span>Filters</span>
                                 {hasFilters && (
@@ -120,6 +124,7 @@ const MyRestaurants = ({ onAddNew }) => {
                                 )}
                             </div>
                             <div className="card-body">
+                                {/* Name search input */}
                                 <div className="mb-3">
                                     <label className="form-label small fw-medium mb-1">Search by name</label>
                                     <input
@@ -163,8 +168,9 @@ const MyRestaurants = ({ onAddNew }) => {
                         </div>
                     </div>
 
-                    {/* ── Main content ── */}
+                    {/* ── Main content area ── */}
                     <div className="col-12 col-md-9 col-xl-10">
+                        {/* Page header with title and add button */}
                         <div className="d-flex justify-content-between align-items-center mb-3">
                             <h5 className="mb-0 fw-semibold">My Restaurants</h5>
                             <div className="d-flex align-items-center gap-2">
@@ -181,7 +187,7 @@ const MyRestaurants = ({ onAddNew }) => {
                             </div>
                         </div>
 
-                        {/* Delete confirmation alert */}
+                        {/* Delete confirmation alert — shows when user clicks delete */}
                         {deleting && (
                             <div className="alert alert-warning d-flex justify-content-between align-items-center">
                                 <span>
@@ -210,7 +216,9 @@ const MyRestaurants = ({ onAddNew }) => {
                             </div>
                         )}
 
+                        {/* Conditional render: loading / error / empty / table */}
                         {loading ? (
+                            // Loading spinner
                             <div className="card">
                                 <div className="card-body d-flex align-items-center gap-2">
                                     <div className="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
@@ -218,8 +226,10 @@ const MyRestaurants = ({ onAddNew }) => {
                                 </div>
                             </div>
                         ) : error ? (
+                            // Error alert
                             <div className="alert alert-danger">{error}</div>
                         ) : filtered.length === 0 ? (
+                            // Empty state with prompt to add
                             <div className="card">
                                 <div className="card-body text-muted text-center py-5">
                                     {hasFilters ? (
@@ -240,8 +250,10 @@ const MyRestaurants = ({ onAddNew }) => {
                                 </div>
                             </div>
                         ) : (
+                            // Restaurant data table
                             <div className="card shadow-sm">
                                 <div className="table-responsive">
+                                    {/* Data table with sortable columns */}
                                     <table className="table table-hover align-middle mb-0">
                                         <thead className="table-dark">
                                             <tr>
@@ -255,6 +267,7 @@ const MyRestaurants = ({ onAddNew }) => {
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {/* Each row represents one restaurant */}
                                             {filtered.map((r) => (
                                                 <tr key={r.restaurant_id}>
                                                     <td className="text-muted small">{r.restaurant_id}</td>

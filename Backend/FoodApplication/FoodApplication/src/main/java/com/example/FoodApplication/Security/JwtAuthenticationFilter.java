@@ -30,23 +30,30 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String authHeader = request.getHeader("Authorization");
+        // Expect header like: Authorization: Bearer <jwt>
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            // No token → continue without authentication (endpoints may still be public).
             filterChain.doFilter(request, response);
             return;
         }
 
+        // Strip "Bearer " prefix.
         String token = authHeader.substring(7);
         String username;
         try {
+            // Extract subject (email) from token.
             username = jwtService.extractUsername(token);
         } catch (Exception ex) {
+            // Invalid token format/signature → let downstream handlers return 401 if required.
             filterChain.doFilter(request, response);
             return;
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            // Only load user & validate token if request is not already authenticated.
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             if (jwtService.isTokenValid(token, userDetails)) {
+                // Build an Authentication object and store it in the SecurityContext.
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,

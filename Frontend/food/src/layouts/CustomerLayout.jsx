@@ -19,6 +19,7 @@ const CustomerLayout = () => {
     }, [dispatch]);
 
     const handleOrderPlaced = (summary) => {
+        // Close cart drawer and navigate to confirmation with summary state.
         setShowCart(false);
         navigate('/order-confirmation', { state: { orderSummary: summary } });
     };

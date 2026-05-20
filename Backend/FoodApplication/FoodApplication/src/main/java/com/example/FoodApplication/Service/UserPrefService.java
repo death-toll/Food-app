@@ -29,8 +29,10 @@ public class UserPrefService {
 	 * Creates or replaces preference for a user_id.
 	 */
 	public UserPrefResponseDto upsert(UserPrefRequestDto request) {
+		// Preferences are stored with user_id as the primary key.
 		requireUserExists(request.getUser_id());
 
+		// If preference doesn't exist, create a new entity; otherwise update existing.
 		Preference pref = userPrefRepo.findById(request.getUser_id()).orElseGet(Preference::new);
 		pref.setUser_id(request.getUser_id());
 		pref.setRestaurant_id(request.getRestaurant_id());
@@ -63,6 +65,7 @@ public class UserPrefService {
 
 	public UserPrefResponseDto addRestaurant(Integer userId, Integer restaurantId) {
 		requireUserExists(userId);
+		// Auto-create a preference row with defaults so the client can call "add" APIs directly.
 		Preference pref = userPrefRepo.findById(userId).orElseGet(() -> defaultPreference(userId));
 
 		List<Integer> restaurants = pref.getRestaurant_id();
@@ -98,6 +101,7 @@ public class UserPrefService {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "cuisine is required");
 		}
 		Preference pref = userPrefRepo.findById(userId).orElseGet(() -> defaultPreference(userId));
+		// Idempotent add: keep list unique.
 		List<Cuisines> cuisines = pref.getCuisines();
 		if (cuisines == null) cuisines = new ArrayList<>();
 		if (!cuisines.contains(cuisine)) cuisines.add(cuisine);

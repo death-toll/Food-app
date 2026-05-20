@@ -1,6 +1,4 @@
-target
 .git
 .gitignore
 logs
-Dockerfile
 **/*.log

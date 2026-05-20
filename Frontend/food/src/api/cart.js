@@ -5,10 +5,12 @@ const BASE = 'api/cart';
 
 /** GET /api/cart — returns CartResponseDto */
 export const getCart = () =>
+    // Used by CustomerLayout to show the cart badge count.
     axiosInstance.get(BASE).then(unwrap);
 
 /** POST /api/cart/items — { foodId, restaurantId, quantity } */
 export const addToCart = (foodId, restaurantId, quantity = 1) =>
+    // Backend calculates totals; frontend just sends minimal fields.
     axiosInstance.post(`${BASE}/items`, { foodId, restaurantId, quantity }).then(unwrap);
 
 /** PUT /api/cart/items/{cartItemId} — { quantity } */

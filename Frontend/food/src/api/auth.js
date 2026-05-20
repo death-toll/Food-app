@@ -1,4 +1,5 @@
 import axiosInstance from "../services/axiosInstance";
+import apiCache from "../services/apiCache";
 
 const BASE = "/api/auth";
 
@@ -15,9 +16,11 @@ export const login = (email, password) =>
 /**
  * GET /api/auth/me  (requires Bearer token)
  * → { userId, email, name, role }
+ * Cached for 5 seconds to prevent repeated calls
  */
 export const getMe = () =>
-    axiosInstance.get(`${BASE}/me`).then((r) => r.data);
+    // Short cache to avoid repeated /me calls during route changes / StrictMode re-renders.
+    apiCache.withCache('auth/me', () => axiosInstance.get(`${BASE}/me`).then((r) => r.data));
 
 // ── Registration (two-step with OTP) ─────────────────────────────────────────
 

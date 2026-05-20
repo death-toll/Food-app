@@ -29,10 +29,10 @@ public class OtpService {
         // Generate 6-digit OTP
         String otp = String.format("%06d", secureRandom.nextInt(1000000));
 
-        // Create key: {type}:{email}
+        // Create key: {type}:{email} so a user can have separate OTPs for registration/login/reset.
         String key = buildKey(email, otpType);
 
-        // Store OTP with expiration time
+        // Store OTP with expiration time (in-memory).
         LocalDateTime expiryTime = LocalDateTime.now().plusSeconds(otpExpirationSeconds);
         otpStorage.put(key, new OtpData(otp, expiryTime));
 
@@ -49,6 +49,10 @@ public class OtpService {
         String key = buildKey(email, otpType);
         OtpData storedOtp = otpStorage.get(key);
 
+        // Valid only when:
+        // - a record exists
+        // - it is not expired
+        // - it matches exactly
         if (storedOtp != null && !storedOtp.isExpired() && storedOtp.otp().equals(otp)) {
             return true;
         }

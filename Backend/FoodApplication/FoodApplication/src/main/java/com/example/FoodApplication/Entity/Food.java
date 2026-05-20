@@ -4,6 +4,8 @@ import com.example.FoodApplication.enums.Cuisines;
 import com.example.FoodApplication.enums.Foodtype;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -40,10 +42,12 @@ public class Food {
     private String description;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Foodtype type;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Cuisines cuisine;
 

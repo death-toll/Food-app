@@ -21,11 +21,14 @@ public class AppUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // We treat username as email address.
         User user = userRepo.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
 
+        // Spring Security expects role authorities to be prefixed with "ROLE_".
         String role = user.getRole() != null ? ("ROLE_" + user.getRole().name()) : "ROLE_CUSTOMER";
 
+        // Return a framework UserDetails (email + encoded password + single authority).
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getEmail())
                 .password(user.getPassword())

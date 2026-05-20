@@ -88,12 +88,16 @@ const UserProfile = () => {
     }, []);
 
     return (
+        // Profile page container with light gray background
         <section style={{ backgroundColor: '#eee' }}>
             <div className="container py-4">
                 <div className="row">
+
+                    {/* ── Left column: Avatar and basic info card ── */}
                     <div className="col-lg-4 mb-4">
                         <div className="card">
                             <div className="card-body text-center">
+                                {/* User avatar image */}
                                 <img
                                     src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
                                     alt="avatar"
@@ -124,7 +128,9 @@ const UserProfile = () => {
                         </div>
                     </div>
 
+                    {/* ── Right column: Profile details and preferences ── */}
                     <div className="col-lg-8">
+                        {/* Loading state */}
                         {loading ? (
                             <div className="card mb-4">
                                 <div className="card-body">
@@ -139,16 +145,19 @@ const UserProfile = () => {
                                 </div>
                             </div>
                         ) : error ? (
+                            // Error state
                             <div className="alert alert-danger" role="alert">
                                 {error}
                             </div>
                         ) : (
                             <>
+                                {/* Profile details card */}
                                 <div className="card mb-4">
                                     <div className="card-header bg-white">
                                         <div className="fw-semibold">Profile details</div>
                                     </div>
                                     <div className="card-body">
+                                        {/* User info grid */}
                                         <div className="row g-3">
                                             <div className="col-md-6">
                                                 <div className="small text-muted">User Id</div>
@@ -174,9 +183,11 @@ const UserProfile = () => {
                                     </div>
                                 </div>
 
+                                {/* Preferences card (favorite restaurants & foods) */}
                                 <div className="card mb-4">
                                     <div className="card-header bg-white d-flex justify-content-between align-items-center">
                                         <div className="fw-semibold">Preferences</div>
+                                        {/* Food type badge (VEG/NON_VEG) */}
                                         {preferences?.foodtype ? (
                                             <span className="badge text-bg-success">{preferences.foodtype}</span>
                                         ) : null}
@@ -184,6 +195,7 @@ const UserProfile = () => {
 
                                     <div className="card-body">
                                         <div className="row g-4">
+                                            {/* Favorite restaurants list */}
                                             <div className="col-md-6">
                                                 <div className="fw-medium mb-2">Restaurants</div>
                                                 {restaurantPrefs.length ? (

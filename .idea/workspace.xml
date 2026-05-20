@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c3bc7ad6-d1d2-476d-890b-836ce7941d72" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/copilotDiffState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/logs/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Config/CorsConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Security/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication/Service/EmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/food/src/layouts/OwnerLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/layouts/OwnerLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/food/src/pages/RestaurantMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/pages/RestaurantMenu.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/food/src/services/axiosInstance.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/food/src/services/axiosInstance.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/app.log" afterDir="false" />
-    </list>
+    <list default="true" id="c3bc7ad6-d1d2-476d-890b-836ce7941d72" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -67,11 +54,13 @@
     "JUnit.AllLayersTest.executor": "Run",
     "JUnit.FoodApplication in FoodApplication.executor": "Run",
     "JUnit.FoodApplicationTests.executor": "Run",
+    "JUnit.java in FoodApplication.executor": "Run",
+    "Maven.FoodApplication [package].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/sanchitgarg/OneDrive - Nagarro/Desktop/Food Mono/FoodApplication/FoodApplication/src/main/java/com/example/FoodApplication",
     "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors"
@@ -86,7 +75,7 @@
       <recent name="com.example.FoodApplication.Entity" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.java in FoodApplication">
     <configuration name="AllLayersTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FoodApplication" />
       <extension name="coverage">
@@ -125,6 +114,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="java in FoodApplication" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FoodApplication" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/Backend/FoodApplication/FoodApplication/src/test/java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="Food Mono" />
       <method v="2">
@@ -138,9 +135,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.java in FoodApplication" />
+        <item itemvalue="JUnit.FoodApplication in FoodApplication" />
         <item itemvalue="JUnit.AllLayersTest" />
         <item itemvalue="JUnit.FoodApplicationTests" />
-        <item itemvalue="JUnit.FoodApplication in FoodApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -153,6 +151,9 @@
       <updated>1777266389168</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="Dockerfile" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

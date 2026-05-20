@@ -22,6 +22,7 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponseDto create(@Valid @RequestBody UserRequestDto request) {
+        // Public create; password encoding & mapping are handled in UserService.
         return userService.createUser(request);
     }
 

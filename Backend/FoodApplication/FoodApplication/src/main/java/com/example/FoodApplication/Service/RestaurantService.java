@@ -7,13 +7,16 @@ import com.example.FoodApplication.Entity.Food;
 import com.example.FoodApplication.Entity.Restaurant;
 import com.example.FoodApplication.Entity.User;
 import com.example.FoodApplication.Repository.FoodRepo;
+import com.example.FoodApplication.Repository.CartItemRepo;
 import com.example.FoodApplication.Repository.RestaurantRepo;
+import com.example.FoodApplication.Repository.RestaurantRatingRepo;
 import com.example.FoodApplication.Repository.UserRepo;
 import com.example.FoodApplication.enums.Roles;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
@@ -25,19 +28,24 @@ public class RestaurantService {
     private final RestaurantRepo restaurantRepo;
     private final UserRepo userRepo;
     private final FoodRepo foodRepo;
+    private final CartItemRepo cartItemRepo;
+    private final RestaurantRatingRepo restaurantRatingRepo;
 
     private static final double DEAL_DISCOUNT_PERCENT = 10.0;
 
-    public RestaurantService(RestaurantRepo restaurantRepo, UserRepo userRepo, FoodRepo foodRepo) {
+    public RestaurantService(RestaurantRepo restaurantRepo, UserRepo userRepo, FoodRepo foodRepo, CartItemRepo cartItemRepo, RestaurantRatingRepo restaurantRatingRepo) {
         this.restaurantRepo = restaurantRepo;
         this.userRepo = userRepo;
         this.foodRepo = foodRepo;
+        this.cartItemRepo = cartItemRepo;
+        this.restaurantRatingRepo = restaurantRatingRepo;
     }
 
     public RestaurantResponseDto createRestaurant(RestaurantRequestDto request) {
         User caller = getAuthenticatedUser();
 
-        // Prevent an owner from creating a restaurant on behalf of a different owner
+        // Prevent an owner from creating a restaurant on behalf of a different owner.
+        // (Owner identity is taken from JWT; request.ownerId must match.)
         if (!caller.getUser_id().equals(request.getOwnerId())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You can only create restaurants for your own account");
         }
@@ -92,12 +100,20 @@ public class RestaurantService {
         return toDto(saved);
     }
 
+    @Transactional
     public void deleteRestaurant(Integer restaurantId) {
         Restaurant restaurant = restaurantRepo.findById(restaurantId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant not found: " + restaurantId));
 
+        // Authorization: only the owner can delete their restaurant.
         assertIsOwnerOf(restaurant);
 
+        // Cascade delete dependents that have FK constraints to restaurants.
+        // This avoids FK constraint violations on delete.
+        restaurantRatingRepo.deleteByRestaurantId(restaurantId);
+        cartItemRepo.deleteByRestaurantId(restaurantId);
+
+        // Element collections (restaurant_food_available_ids) are removed automatically by JPA
         restaurantRepo.deleteById(restaurantId);
     }
 

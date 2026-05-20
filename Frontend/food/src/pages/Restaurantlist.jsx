@@ -18,6 +18,7 @@ const Restaurantlist = () => {
 
     useEffect(() => {
         let cancelled = false;
+        // Local "cancelled" flag avoids setting state after unmount.
         const load = async () => {
             setLoading(true); setError('');
             try {
@@ -34,6 +35,7 @@ const Restaurantlist = () => {
     }, []);
 
     const cities = useMemo(() => {
+        // Build dropdown options from current data set.
         const set = new Set(restaurants.map((r) => r.city).filter(Boolean));
         return [...set].sort();
     }, [restaurants]);
@@ -52,6 +54,7 @@ const Restaurantlist = () => {
     const hasFilters = search || place || minRating > 0;
 
     if (selectedRestaurant) {
+        // Drill into a single restaurant menu view.
         return <RestaurantMenu restaurant={selectedRestaurant} onBack={() => setSelectedRestaurant(null)} />;
     }
 

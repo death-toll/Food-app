@@ -25,6 +25,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<ApiError> handleAuthentication(AuthenticationException ex, HttpServletRequest request) {
+        // When Spring Security fails authentication (missing/invalid JWT, bad credentials, etc.),
+        // return a consistent JSON error response rather than the default HTML/error page.
         ApiError body = ApiError.builder()
                 .timestamp(Instant.now())
                 .status(HttpStatus.UNAUTHORIZED.value())
@@ -38,6 +40,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ApiError> handleAccessDenied(AccessDeniedException ex, HttpServletRequest request) {
+        // AccessDeniedException is thrown when the user is authenticated but lacks permission/role.
         ApiError body = ApiError.builder()
                 .timestamp(Instant.now())
                 .status(HttpStatus.FORBIDDEN.value())
@@ -51,8 +54,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<ApiError> handleResponseStatusException(ResponseStatusException ex, HttpServletRequest request) {
+        // Most services/controllers throw ResponseStatusException for expected errors (404/400/403...)
+        // Convert it into ApiError so the frontend always receives a predictable payload.
         HttpStatus status = HttpStatus.resolve(ex.getStatusCode().value());
         if (status == null) {
+            // Fallback for unknown/unsupported status codes.
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
 
@@ -75,10 +81,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             WebRequest request) {
 
         Map<String, String> validation = new LinkedHashMap<>();
+        // Flatten field-level validation errors into a simple { field: message } map.
         ex.getBindingResult().getFieldErrors().forEach(err -> validation.put(err.getField(), err.getDefaultMessage()));
 
         String path = null;
         try {
+            // WebRequest description format is typically "uri=/path"; strip prefix for readability.
             path = request.getDescription(false);
             if (path != null && path.startsWith("uri=")) {
                 path = path.substring(4);
@@ -107,6 +115,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         String path = null;
         try {
+            // Extract request path similarly to validation handler.
             path = request.getDescription(false);
             if (path != null && path.startsWith("uri=")) {
                 path = path.substring(4);
@@ -132,6 +141,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             HttpStatusCode status,
             WebRequest request) {
 
+        // Called when Spring MVC cannot match the incoming request to any controller mapping.
         ApiError body = ApiError.builder()
                 .timestamp(Instant.now())
                 .status(HttpStatus.NOT_FOUND.value())
@@ -145,6 +155,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiError> handleUnhandled(Exception ex, HttpServletRequest request) {
+        // Last-resort handler: avoid leaking internal exception details in API responses.
         ApiError body = ApiError.builder()
                 .timestamp(Instant.now())
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())

@@ -10,19 +10,23 @@ import Orderlist from '../components/Orderlist';
 import UserProfile from '../components/UserProfile';
 import OrderConfirmation from './OrderConfirmation';
 
-// Transient pages — not persisted across refresh
+// Transient pages — not persisted across refresh (e.g., order confirmation is one-time).
 const TRANSIENT_PAGES = ['order-confirmation'];
 
 const CustomerUi = () => {
     const dispatch = useDispatch();
+
+    // Restore last visited page on mount (for refresh resiliency).
     const [activePage, setActivePage] = useState(
         () => localStorage.getItem('customer_page') || 'home'
     );
     const [showCart, setShowCart] = useState(false);
     const [lastOrderSummary, setLastOrderSummary] = useState(null);
 
+    // Navigate between pages; save current page unless it's transient.
     const navigateTo = (page) => {
         setActivePage(page);
+        // Don't persist order-confirmation — user shouldn't land back there on refresh.
         if (!TRANSIENT_PAGES.includes(page)) {
             localStorage.setItem('customer_page', page);
         }
@@ -40,13 +44,15 @@ const CustomerUi = () => {
         dispatch(logout());
     };
 
+    // Callback when Cart places an order; closes drawer and shows confirmation.
     const handleOrderPlaced = (summary) => {
-        // summary is passed from Cart when order is placed
+        // summary is passed from Cart when order is placed (contains items/total/etc.).
         setLastOrderSummary(summary ?? null);
         setShowCart(false);
         navigateTo('order-confirmation');
     };
 
+    // Simple client-side page router based on activePage state.
     const renderPage = () => {
         switch (activePage) {
             case 'orders':  return <Orderlist />;

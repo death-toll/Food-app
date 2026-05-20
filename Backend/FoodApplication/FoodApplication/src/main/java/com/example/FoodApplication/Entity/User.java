@@ -2,6 +2,8 @@ package com.example.FoodApplication.Entity;
 
 import com.example.FoodApplication.enums.Roles;
 import jakarta.persistence.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -48,6 +50,7 @@ public class User {
     @Size(min = 6, max = 255)
     @Column(name = "password", nullable = false)
     private String Password;
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Roles Role;
 

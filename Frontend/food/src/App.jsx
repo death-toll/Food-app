@@ -34,6 +34,8 @@ function App() {
       setValidating(false);
       return;
     }
+    // Verify token server-side and hydrate Redux auth state.
+    // The getMe() call is short-cached to reduce repeated calls on re-renders.
     getMe()
       .then((user) => {
         dispatch(setCredentials({
@@ -45,6 +47,7 @@ function App() {
         }));
       })
       .catch(() => {
+        // Token invalid/expired → clear local session.
         dispatch(logout());
       })
       .finally(() => setValidating(false));

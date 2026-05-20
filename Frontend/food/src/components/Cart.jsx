@@ -31,6 +31,7 @@ const QtyControl = ({ value, onDecrease, onIncrease, disabled }) => (
 );
 
 // ── Cart Panel ────────────────────────────────────────────────────────────────
+// Slide-in side panel showing current cart items; grouped by restaurant.
 const Cart = ({ show, onClose, onOrderPlaced }) => {
     const dispatch = useDispatch();
     const userId = useSelector((s) => s.auth.userId);
@@ -61,6 +62,7 @@ const Cart = ({ show, onClose, onOrderPlaced }) => {
         }
     }, [dispatch]);
 
+    // Fetch full cart when panel is shown; resets order messages.
     useEffect(() => {
         if (show) { fetchCart(); setOrderSuccess(''); setOrderError(''); }
     }, [show, fetchCart]);
@@ -108,9 +110,11 @@ const Cart = ({ show, onClose, onOrderPlaced }) => {
         }
     };
 
+    // Place order for one restaurant's items; backend expects food IDs repeated per qty.
     const handlePlaceOrder = async (restaurantId, items) => {
         setPlacingFor(restaurantId); setOrderError(''); setOrderSuccess('');
         try {
+            // Build payload: repeat each foodId by its quantity.
             const foodIds = items.flatMap((item) => Array(item.quantity).fill(item.foodId));
             const payload = { status: 'PLACED', user_id: userId, restaurant_id: restaurantId, food_id: foodIds };
             const created = await createOrder(payload);
@@ -143,7 +147,7 @@ const Cart = ({ show, onClose, onOrderPlaced }) => {
         }
     };
 
-    // Group items by restaurant
+    // Group items by restaurant so each restaurant is a separate checkout.
     const grouped = (cart?.items ?? []).reduce((acc, item) => {
         const key = item.restaurantId;
         if (!acc[key]) acc[key] = { restaurantName: item.restaurantName, restaurantId: key, items: [] };
@@ -190,15 +194,18 @@ const Cart = ({ show, onClose, onOrderPlaced }) => {
                     </div>
                 </div>
 
-                {/* Body — scrollable */}
+                {/* ── Body — scrollable cart content ── */}
                 <div className="flex-grow-1 overflow-auto px-3 py-2">
                     {loading ? (
+                        // Loading state
                         <div className="d-flex justify-content-center align-items-center py-5">
                             <Spin /><span className="ms-2 text-muted">Loading cart…</span>
                         </div>
                     ) : error ? (
+                        // Error state
                         <div className="alert alert-danger small py-2">{error}</div>
                     ) : isEmpty ? (
+                        // Empty cart illustration
                         <div className="text-center text-muted py-5">
                             <div style={{ fontSize: '3rem' }}>🍽️</div>
                             <div className="mt-2">Your cart is empty</div>
@@ -216,17 +223,19 @@ const Cart = ({ show, onClose, onOrderPlaced }) => {
                             {groups.map((group) => {
                                 const groupTotal = group.items.reduce((s, i) => s + (i.subtotal ?? 0), 0);
                                 return (
+                                    // Restaurant group container
                                     <div key={group.restaurantId} className="mb-3">
-                                        {/* Restaurant header */}
+                                        {/* Restaurant header with name and subtotal */}
                                         <div className="d-flex justify-content-between align-items-center py-2">
                                             <span className="fw-semibold text-dark small">{group.restaurantName}</span>
                                             <span className="text-muted small">₹{groupTotal.toFixed(2)}</span>
                                         </div>
                                         <hr className="my-1" />
 
-                                        {/* Items */}
+                                        {/* Cart items list for this restaurant */}
                                         <ul className="list-unstyled mb-2">
                                             {group.items.map((item) => (
+                                                // Single cart item row
                                                 <li key={item.cartItemId} className="d-flex align-items-center gap-2 py-2 border-bottom">
                                                     <div className="flex-grow-1 min-w-0">
                                                         <div className="fw-semibold small text-truncate">{item.foodName}</div>
@@ -254,7 +263,7 @@ const Cart = ({ show, onClose, onOrderPlaced }) => {
                                             ))}
                                         </ul>
 
-                                        {/* Place Order for this restaurant */}
+                                        {/* Place Order button for this restaurant group */}
                                         <button
                                             type="button"
                                             className="btn btn-dark btn-sm w-100"
@@ -272,7 +281,7 @@ const Cart = ({ show, onClose, onOrderPlaced }) => {
                     )}
                 </div>
 
-                {/* Footer total */}
+                {/* ── Footer showing grand total ── */}
                 {!isEmpty && !loading && (
                     <div className="border-top px-3 py-3">
                         <div className="d-flex justify-content-between align-items-center">

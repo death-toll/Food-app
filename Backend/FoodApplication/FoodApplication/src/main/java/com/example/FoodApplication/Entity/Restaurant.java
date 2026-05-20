@@ -2,6 +2,8 @@ package com.example.FoodApplication.Entity;
 
 import com.example.FoodApplication.enums.Foodtype;
 import jakarta.persistence.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -38,6 +40,7 @@ public class Restaurant {
     private User owner;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Foodtype foodtype;
 

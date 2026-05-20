@@ -78,11 +78,13 @@ public class CartController {
      * Get current authenticated user's ID
      */
     private Integer getCurrentUserId() {
+        // SecurityContext is populated by JwtAuthenticationFilter when a valid Bearer token is present.
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !(authentication.getPrincipal() instanceof UserDetails principal)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Not authenticated");
         }
 
+        // Resolve the current user from the email stored in UserDetails.
         User user = userRepo.findByEmail(principal.getUsername())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found"));
 

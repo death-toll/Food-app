@@ -18,6 +18,7 @@ const Home = () => {
 
     useEffect(() => {
         let cancelled = false;
+        // Fetch all restaurants on mount; cancelled flag prevents state updates after unmount.
         const load = async () => {
             setLoading(true);
             setError('');
@@ -37,12 +38,13 @@ const Home = () => {
         return () => { cancelled = true; };
     }, []);
 
-    // Unique city options derived from data
+    // Unique city options derived from data (for dropdown filter).
     const cities = useMemo(() => {
         const set = new Set(restaurants.map((r) => r.city).filter(Boolean));
         return [...set].sort();
     }, [restaurants]);
 
+    // Apply local filters (search, city/place, min rating) on the client side.
     const filtered = useMemo(() => {
         const q = search.trim().toLowerCase();
         return restaurants.filter((r) => {
@@ -56,6 +58,7 @@ const Home = () => {
     const resetFilters = () => { setSearch(''); setPlace(''); setMinRating(0); };
     const hasFilters = search || place || minRating > 0;
 
+    // If a restaurant is selected, drill into the menu view (single-page app style).
     if (selectedRestaurant) {
         return <RestaurantMenu restaurant={selectedRestaurant} onBack={() => setSelectedRestaurant(null)} />;
     }
@@ -65,9 +68,11 @@ const Home = () => {
             <div className="container-fluid py-4">
                 <div className="row g-4">
 
-                    {/* ── Sidebar ── */}
+                    {/* ── Sidebar with filter controls ── */}
                     <div className="col-12 col-md-3 col-xl-2">
+                        {/* Sticky filter card */}
                         <div className="card shadow-sm sticky-top" style={{ top: 70 }}>
+                            {/* Filter header with reset button */}
                             <div className="card-header bg-dark text-white fw-semibold d-flex justify-content-between align-items-center">
                                 <span>Filters</span>
                                 {hasFilters && (
@@ -104,12 +109,13 @@ const Home = () => {
                                     </select>
                                 </div>
 
-                                {/* Min Rating */}
+                                {/* ── Min Rating filter buttons ── */}
                                 <div className="mb-1">
                                     <label className="form-label small fw-medium mb-1">
                                         Min rating&nbsp;
                                         {minRating > 0 && <span className="text-warning fw-bold">{minRating}★</span>}
                                     </label>
+                                    {/* Rating button group — click toggles selection */}
                                     <div className="d-flex flex-wrap gap-1">
                                         {RATINGS.map((r) => (
                                             <button
@@ -127,8 +133,9 @@ const Home = () => {
                         </div>
                     </div>
 
-                    {/* ── Restaurant grid ── */}
+                    {/* ── Restaurant grid (main content area) ── */}
                     <div className="col-12 col-md-9 col-xl-10">
+                        {/* Header with title and result count badge */}
                         <div className="d-flex justify-content-between align-items-center mb-3">
                             <h5 className="mb-0 fw-semibold">Restaurants</h5>
                             {!loading && !error && (
@@ -136,7 +143,9 @@ const Home = () => {
                             )}
                         </div>
 
+                        {/* Conditional render: loading / error / grid / empty */}
                         {loading ? (
+                            // Loading spinner
                             <div className="card">
                                 <div className="card-body d-flex align-items-center gap-2">
                                     <div className="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
@@ -144,16 +153,20 @@ const Home = () => {
                                 </div>
                             </div>
                         ) : error ? (
+                            // Error alert
                             <div className="alert alert-danger" role="alert">{error}</div>
                         ) : filtered.length ? (
+                            // Restaurant cards grid
                             <div className="row g-3">
                                 {filtered.map((r) => (
                                     <div key={r.restaurant_id} className="col-12 col-sm-6 col-xl-4">
+                                        {/* Each card is clickable to view restaurant menu */}
                                         <RestaurantCard restaurant={r} onSelect={setSelectedRestaurant} />
                                     </div>
                                 ))}
                             </div>
                         ) : (
+                            // Empty state with clear filters option
                             <div className="card">
                                 <div className="card-body text-muted text-center py-4">
                                     No restaurants match your filters.{' '}

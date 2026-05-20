@@ -8,6 +8,7 @@ const themeSlice = createSlice({
     reducers: {
         toggleTheme: (state) => {
             state.mode = state.mode === 'light' ? 'dark' : 'light';
+            // Persist across refresh so the UI doesn't flash the wrong mode.
             localStorage.setItem('appTheme', state.mode);
         },
         setTheme: (state, action) => {

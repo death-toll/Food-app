@@ -1,2 +1,465 @@
-2026-04-28 03:58:47 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5h27m35s570ms573µs800ns).
-2026-04-28 09:16:42 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5h18m4s113ms196µs500ns).
+2026-05-12 19:20:54 - Starting FoodApplication using Java 26 with PID 16380 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend)
+2026-05-12 19:20:54 - Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-05-12 19:20:54 - No active profile set, falling back to 1 default profile: "default"
+2026-05-12 19:20:54 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-05-12 19:20:54 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-05-12 19:20:58 - Starting FoodApplication using Java 26 with PID 14312 (C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend\FoodApplication\FoodApplication\target\classes started by sanchitgarg in C:\Users\sanchitgarg\OneDrive - Nagarro\Desktop\Food Mono\Backend)
+2026-05-12 19:20:58 - Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-05-12 19:20:58 - No active profile set, falling back to 1 default profile: "default"
+2026-05-12 19:20:58 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-05-12 19:20:58 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-05-12 19:20:58 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-12 19:20:59 - Finished Spring Data repository scanning in 338 ms. Found 9 JPA repository interfaces.
+2026-05-12 19:21:06 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-12 19:21:06 - Tomcat initialized with port 8083 (http)
+2026-05-12 19:21:07 - Starting service [Tomcat]
+2026-05-12 19:21:07 - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-05-12 19:21:07 - Finished Spring Data repository scanning in 474 ms. Found 9 JPA repository interfaces.
+2026-05-12 19:21:07 - Root WebApplicationContext: initialization completed in 13231 ms
+2026-05-12 19:21:08 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-12 19:21:08 - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-05-12 19:21:11 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-12 19:21:11 - HikariPool-1 - Starting...
+2026-05-12 19:21:13 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@495b8128
+2026-05-12 19:21:13 - HikariPool-1 - Start completed.
+2026-05-12 19:21:13 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-12 19:21:13 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: FoodApp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-12 19:21:13 - Tomcat initialized with port 8083 (http)
+2026-05-12 19:21:13 - Root WebApplicationContext: initialization completed in 15019 ms
+2026-05-12 19:21:15 - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-12 19:21:15 - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-05-12 19:21:17 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-12 19:21:17 - HikariPool-1 - Starting...
+2026-05-12 19:21:18 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@261527fa
+2026-05-12 19:21:18 - HikariPool-1 - Start completed.
+2026-05-12 19:21:18 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-12 19:21:18 - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/FoodApp]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: FoodApp/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-12 19:21:20 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-12 19:21:20 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-12 19:21:21 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-12 19:21:22 - Filter 'jwtAuthenticationFilter' configured for use
+2026-05-12 19:21:22 - Global AuthenticationManager configured with UserDetailsService bean with name appUserDetailsService
+2026-05-12 19:21:22 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-12 19:21:22 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-12 19:21:23 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-12 19:21:24 - Filter 'jwtAuthenticationFilter' configured for use
+2026-05-12 19:21:24 - Global AuthenticationManager configured with UserDetailsService bean with name appUserDetailsService
+2026-05-12 19:21:39 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-12 19:21:39 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-12 19:21:44 - Exposing 1 endpoint beneath base path '/actuator'
+2026-05-12 19:21:46 - Exposing 1 endpoint beneath base path '/actuator'
+2026-05-12 19:21:46 - Tomcat started on port 8083 (http) with context path '/'
+2026-05-12 19:21:46 - Started FoodApplication in 53.701 seconds (process running for 57.608)
+2026-05-12 19:21:48 - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-05-12 19:21:48 - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-05-12 19:22:06 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-12 19:22:06 - Initializing Servlet 'dispatcherServlet'
+2026-05-12 19:22:06 - Completed initialization in 1 ms
+2026-05-12 19:22:06 - Method Called login
+2026-05-12 19:22:07 - Method  login is executed
+2026-05-12 19:22:07 - Method Called me
+2026-05-12 19:22:07 - Method  me is executed
+2026-05-12 19:22:07 - Method Called getAll
+2026-05-12 19:22:07 - Method Called getAllRestaurants
+2026-05-12 19:22:07 - Method  getAllRestaurants is executed
+2026-05-12 19:22:07 - Method  getAll is executed
+2026-05-12 19:22:07 - Method Called getAll
+2026-05-12 19:22:07 - Method Called getAllRestaurants
+2026-05-12 19:22:07 - Method  getAllRestaurants is executed
+2026-05-12 19:22:07 - Method  getAll is executed
+2026-05-12 19:22:07 - Method Called getAverage
+2026-05-12 19:22:07 - Method Called getAverageRating
+2026-05-12 19:22:07 - Method Called getAverage
+2026-05-12 19:22:07 - Method Called getAverageRating
+2026-05-12 19:22:07 - Method Called getAverage
+2026-05-12 19:22:07 - Method Called getAverage
+2026-05-12 19:22:07 - Method Called getAverageRating
+2026-05-12 19:22:07 - Method Called getAverageRating
+2026-05-12 19:22:07 - Method Called getAverage
+2026-05-12 19:22:07 - Method Called getAverageRating
+2026-05-12 19:22:08 - Method Called getAverage
+2026-05-12 19:22:08 - Method Called getAverageRating
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method Called getAverage
+2026-05-12 19:22:08 - Method Called getAverage
+2026-05-12 19:22:08 - Method Called getAverageRating
+2026-05-12 19:22:08 - Method Called getAverageRating
+2026-05-12 19:22:08 - Method Called getAverage
+2026-05-12 19:22:08 - Method Called getAverageRating
+2026-05-12 19:22:08 - Method Called getAverage
+2026-05-12 19:22:08 - Method Called getAverage
+2026-05-12 19:22:08 - Method Called getAverage
+2026-05-12 19:22:08 - Method Called getAverageRating
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method Called getAverageRating
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method Called getAverageRating
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method Called getAverage
+2026-05-12 19:22:08 - Method Called getAverageRating
+2026-05-12 19:22:08 - Method Called getAverage
+2026-05-12 19:22:08 - Method Called getAverageRating
+2026-05-12 19:22:08 - Method Called getAverage
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method Called getAverageRating
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method Called getAverage
+2026-05-12 19:22:08 - Method Called getAverage
+2026-05-12 19:22:08 - Method Called getAverageRating
+2026-05-12 19:22:08 - Method Called getAverageRating
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method Called getAverage
+2026-05-12 19:22:08 - Method Called getAverageRating
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method Called getAverage
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method Called getAverageRating
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method Called getAverage
+2026-05-12 19:22:08 - Method Called getAverageRating
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method Called getAverage
+2026-05-12 19:22:08 - Method Called getAverage
+2026-05-12 19:22:08 - Method Called getAverageRating
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method Called getAverageRating
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:08 - Method  getAverageRating is executed
+2026-05-12 19:22:08 - Method  getAverage is executed
+2026-05-12 19:22:17 - Method Called getByOwnerId
+2026-05-12 19:22:17 - Method Called getRestaurantsByOwnerId
+2026-05-12 19:22:17 - Method  getRestaurantsByOwnerId is executed
+2026-05-12 19:22:17 - Method  getByOwnerId is executed
+2026-05-12 19:22:17 - Method Called getByOwnerId
+2026-05-12 19:22:17 - Method Called getRestaurantsByOwnerId
+2026-05-12 19:22:17 - Method  getRestaurantsByOwnerId is executed
+2026-05-12 19:22:17 - Method  getByOwnerId is executed
+2026-05-12 19:22:18 - Method Called getById
+2026-05-12 19:22:18 - Method Called getById
+2026-05-12 19:22:18 - Method Called getById
+2026-05-12 19:22:18 - Method Called getFoodById
+2026-05-12 19:22:18 - Method Called getFoodById
+2026-05-12 19:22:18 - Method Called getFoodById
+2026-05-12 19:22:18 - Method Called getDealOfTheDay
+2026-05-12 19:22:18 - Method Called getDealOfTheDay
+2026-05-12 19:22:18 - Method  getFoodById is executed
+2026-05-12 19:22:18 - Method  getById is executed
+2026-05-12 19:22:18 - Method  getFoodById is executed
+2026-05-12 19:22:18 - Method  getById is executed
+2026-05-12 19:22:18 - Method  getFoodById is executed
+2026-05-12 19:22:18 - Method  getById is executed
+2026-05-12 19:22:18 - Method  getDealOfTheDay is executed
+2026-05-12 19:22:18 - Method  getDealOfTheDay is executed
+2026-05-12 19:22:18 - Method Called getById
+2026-05-12 19:22:18 - Method Called getFoodById
+2026-05-12 19:22:18 - Method Called getById
+2026-05-12 19:22:18 - Method Called getFoodById
+2026-05-12 19:22:18 - Resolved [org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND "Food not found: 13"]
+2026-05-12 19:22:18 - Resolved [org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND "Food not found: 11"]
+2026-05-12 19:22:18 - Method Called getById
+2026-05-12 19:22:18 - Method Called getFoodById
+2026-05-12 19:22:18 - Method  getFoodById is executed
+2026-05-12 19:22:18 - Method  getById is executed
+2026-05-12 19:22:18 - Method Called getById
+2026-05-12 19:22:18 - Method Called getFoodById
+2026-05-12 19:22:18 - Resolved [org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND "Food not found: 13"]
+2026-05-12 19:22:18 - Method  getFoodById is executed
+2026-05-12 19:22:18 - Method  getFoodById is executed
+2026-05-12 19:22:18 - Method  getById is executed
+2026-05-12 19:22:18 - Method  getFoodById is executed
+2026-05-12 19:22:18 - Method  getById is executed
+2026-05-12 19:22:18 - Method  getById is executed
+2026-05-12 19:22:18 - Resolved [org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND "Food not found: 11"]
+2026-05-12 19:22:18 - Method Called getDealOfTheDay
+2026-05-12 19:22:18 - Method Called getDealOfTheDay
+2026-05-12 19:22:18 - Method  getDealOfTheDay is executed
+2026-05-12 19:22:18 - Method  getDealOfTheDay is executed
+2026-05-12 19:22:18 - Method Called getById
+2026-05-12 19:22:18 - Method Called getFoodById
+2026-05-12 19:22:18 - Method  getFoodById is executed
+2026-05-12 19:22:18 - Method  getById is executed
+2026-05-12 19:22:22 - Method Called getByOwnerId
+2026-05-12 19:22:22 - Method Called getRestaurantsByOwnerId
+2026-05-12 19:22:22 - Method Called getAll
+2026-05-12 19:22:22 - Method Called getAllFood
+2026-05-12 19:22:22 - Method  getRestaurantsByOwnerId is executed
+2026-05-12 19:22:22 - Method  getByOwnerId is executed
+2026-05-12 19:22:22 - Method  getAllFood is executed
+2026-05-12 19:22:22 - Method  getAll is executed
+2026-05-12 19:22:22 - Method Called getByOwnerId
+2026-05-12 19:22:22 - Method Called getAll
+2026-05-12 19:22:22 - Method Called getAllFood
+2026-05-12 19:22:22 - Method Called getRestaurantsByOwnerId
+2026-05-12 19:22:22 - Method  getAllFood is executed
+2026-05-12 19:22:22 - Method  getAll is executed
+2026-05-12 19:22:22 - Method  getRestaurantsByOwnerId is executed
+2026-05-12 19:22:22 - Method  getByOwnerId is executed
+2026-05-12 19:22:22 - Method Called getByRestaurantId
+2026-05-12 19:22:22 - Method Called getOrdersByRestaurantId
+2026-05-12 19:22:22 - Method  getOrdersByRestaurantId is executed
+2026-05-12 19:22:22 - Method  getByRestaurantId is executed
+2026-05-12 19:22:22 - Method Called getByRestaurantId
+2026-05-12 19:22:22 - Method Called getOrdersByRestaurantId
+2026-05-12 19:22:22 - Method  getOrdersByRestaurantId is executed
+2026-05-12 19:22:22 - Method  getByRestaurantId is executed
+2026-05-12 19:22:22 - Method Called getById
+2026-05-12 19:22:22 - Method Called getFoodById
+2026-05-12 19:22:22 - Method  getFoodById is executed
+2026-05-12 19:22:22 - Method  getById is executed
+2026-05-12 19:22:22 - Resolved [org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND "Food not found: 11"]
+2026-05-12 19:22:27 - Method Called getAll
+2026-05-12 19:22:27 - Method Called getAllRestaurants
+2026-05-12 19:22:27 - Method  getAllRestaurants is executed
+2026-05-12 19:22:27 - Method  getAll is executed
+2026-05-12 19:22:27 - Method Called getAll
+2026-05-12 19:22:27 - Method Called getAllRestaurants
+2026-05-12 19:22:27 - Method  getAllRestaurants is executed
+2026-05-12 19:22:27 - Method  getAll is executed
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:27 - Method Called getAverage
+2026-05-12 19:22:27 - Method Called getAverageRating
+2026-05-12 19:22:27 - Method  getAverageRating is executed
+2026-05-12 19:22:27 - Method  getAverage is executed
+2026-05-12 19:22:31 - Method Called getById
+2026-05-12 19:22:31 - Method Called getUserById
+2026-05-12 19:22:31 - Method  getUserById is executed
+2026-05-12 19:22:31 - Method  getById is executed
+2026-05-12 19:22:31 - Method Called getById
+2026-05-12 19:22:31 - Method Called getUserById
+2026-05-12 19:22:31 - Method  getUserById is executed
+2026-05-12 19:22:31 - Method  getById is executed
+2026-05-12 19:22:36 - Method Called getAll
+2026-05-12 19:22:36 - Method Called getAllRestaurants
+2026-05-12 19:22:36 - Method  getAllRestaurants is executed
+2026-05-12 19:22:36 - Method  getAll is executed
+2026-05-12 19:22:36 - Method Called getAll
+2026-05-12 19:22:36 - Method Called getAllRestaurants
+2026-05-12 19:22:36 - Method  getAllRestaurants is executed
+2026-05-12 19:22:36 - Method  getAll is executed
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method Called getAverage
+2026-05-12 19:22:36 - Method Called getAverageRating
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:22:36 - Method  getAverageRating is executed
+2026-05-12 19:22:36 - Method  getAverage is executed
+2026-05-12 19:23:39 - Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-12 19:23:39 - Graceful shutdown complete
+2026-05-12 19:23:39 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-12 19:23:39 - HikariPool-1 - Shutdown initiated...
+2026-05-12 19:23:39 - HikariPool-1 - Shutdown completed.

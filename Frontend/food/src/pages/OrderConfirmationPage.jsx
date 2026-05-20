@@ -4,10 +4,12 @@ import OrderConfirmation from './OrderConfirmation';
 /**
  * Wrapper that reads orderSummary from router location state
  * and provides navigation callbacks.
+ * This allows the confirmation to be a standalone routed page.
  */
 const OrderConfirmationPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    // Summary passed via navigate('/order-confirmation', { state: { orderSummary } }).
     const orderSummary = location.state?.orderSummary ?? null;
 
     return (

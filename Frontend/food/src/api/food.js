@@ -4,6 +4,7 @@ const BASE = "foods";
 const unwrap = (res) => res.data;
 
 export const getFoods = () =>
+    // List endpoint used by restaurant menu and owner food manager.
     axiosInstance.get(BASE).then(unwrap);
 
 export const getFoodById = (id) =>
@@ -20,6 +21,7 @@ export const deleteFood = (id) =>
 
 /** POST /foods/{foodId}/like — increment like count */
 export const likeFood = (id) =>
+    // Like is a write; no caching here.
     axiosInstance.post(`${BASE}/${id}/like`).then(unwrap);
 
 const foodApi = { getFoods, getFoodById, createFood, updateFood, deleteFood, likeFood };

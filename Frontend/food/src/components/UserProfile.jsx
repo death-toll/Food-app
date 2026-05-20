@@ -6,11 +6,14 @@ import { getRestaurants } from '../api/restaurant';
 import { getFoods } from '../api/food';
 import Notification from './Notification';
 
-/** Default avatar fallback */
+/** Default avatar fallback using pravatar service. */
 const getDefaultAvatar = (userId) =>
     `https://i.pravatar.cc/280?u=${encodeURIComponent(String(userId ?? 'guest'))}`;
 
-/** Hook to manage profile photo stored in localStorage, mapped by userId */
+/**
+ * Hook to manage profile photo stored in localStorage, mapped by userId.
+ * Photos are base64-encoded and limited to 2MB for localStorage safety.
+ */
 const useProfilePhoto = (userId) => {
     const storageKey = `profile_photo_${userId}`;
     const fallback = getDefaultAvatar(userId);
@@ -32,17 +35,18 @@ const useProfilePhoto = (userId) => {
         setSrc(stored || fallback);
     }, [userId, storageKey, fallback]);
 
+    // Upload handler: read file as base64 and store in localStorage.
     const uploadPhoto = (file) => {
         if (!file || !userId) return;
         setUploadError('');
 
-        // Validate file type
+        // Validate file type (security + compatibility).
         if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
             setUploadError('Only JPEG, PNG, or WEBP images are allowed.');
             return;
         }
 
-        // Validate file size (max 2MB for localStorage safety)
+        // Validate file size (max 2MB for localStorage safety).
         if (file.size > 2 * 1024 * 1024) {
             setUploadError('Image must be smaller than 2MB.');
             return;
@@ -81,7 +85,16 @@ const safeArray = (value) => (Array.isArray(value) ? value : []);
 
 const CUISINES = ['INDIAN', 'CHINESE', 'ITALIAN', 'MEXICAN', 'THAI', 'JAPANESE', 'KOREAN', 'MEDITERRANEAN', 'AMERICAN'];
 
-const FOODTYPE_OPTIONS = ['VEG', 'NON_VEG', 'NO_RESTRICTION', 'VEGAN'];
+// Food preference options shown to customers.
+// Note: VEGAN intentionally removed from preferences UI.
+const FOODTYPE_OPTIONS = ['VEG', 'NON_VEG', 'NO_RESTRICTION'];
+
+const normalizeFoodtype = (value) => {
+    if (FOODTYPE_OPTIONS.includes(value)) return value;
+    // Backward compatibility: if a previously-saved preference was VEGAN, map it to NO_RESTRICTION.
+    if (value === 'VEGAN') return 'NO_RESTRICTION';
+    return 'VEG';
+};
 
 const UserProfile = () => {
     const userId = useSelector((state) => state.auth.userId);
@@ -115,7 +128,8 @@ const UserProfile = () => {
         e.target.value = ''; // Reset so same file can be re-selected
     };
 
-    // Load selectable options for preferences (customer only)
+    // Load selectable options for preferences (customer only).
+    // Restaurants and foods fetched to populate multi-select dropdowns.
     useEffect(() => {
         if (!isCustomer) {
             setAllRestaurants([]);
@@ -166,7 +180,7 @@ const UserProfile = () => {
                     const restaurantIds = safeArray(pref?.restaurant_id).map((id) => String(id));
                     const foodIds = safeArray(pref?.food_id).map((id) => String(id));
                     const cuisines = safeArray(pref?.cuisines).map((c) => String(c));
-                    setPrefFoodtype(pref?.foodtype || 'VEG');
+                    setPrefFoodtype(normalizeFoodtype(pref?.foodtype));
                     setPrefRestaurantIds(restaurantIds);
                     setPrefFoodIds(foodIds);
                     setPrefCuisines(cuisines);
@@ -232,7 +246,7 @@ const UserProfile = () => {
         try {
             const payload = {
                 user_id: userId,
-                foodtype: prefFoodtype,
+                foodtype: normalizeFoodtype(prefFoodtype),
                 restaurant_id: prefRestaurantIds.map((id) => Number(id)).filter((n) => Number.isFinite(n)),
                 food_id: prefFoodIds.map((id) => Number(id)).filter((n) => Number.isFinite(n)),
                 cuisines: prefCuisines,
@@ -404,7 +418,7 @@ const UserProfile = () => {
                                                         <select
                                                             className="form-select"
                                                             value={prefFoodtype}
-                                                            onChange={(e) => setPrefFoodtype(e.target.value)}
+                                                            onChange={(e) => setPrefFoodtype(normalizeFoodtype(e.target.value))}
                                                             disabled={prefSaving}
                                                         >
                                                             {FOODTYPE_OPTIONS.map((t) => (

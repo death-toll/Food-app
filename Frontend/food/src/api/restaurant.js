@@ -1,12 +1,22 @@
 import axiosInstance from "../services/axiosInstance";
+import apiCache from "../services/apiCache";
 
 // Backend: RestaurantController -> /restaurants
 const BASE = "restaurants";
 
 const unwrap = (res) => res.data;
 
+/**
+ * GET /restaurants
+ * Cached for 5 seconds to prevent repeated calls
+ */
 export const getRestaurants = (params) =>
-    axiosInstance.get(BASE, { params }).then(unwrap);
+    apiCache.withCache(
+        'restaurants',
+        () => axiosInstance.get(BASE, { params }).then(unwrap),
+        // Include params in cache key so different filters/searches don't collide.
+        params
+    );
 
 export const getRestaurantById = (id) =>
     axiosInstance.get(`${BASE}/${id}`).then(unwrap);

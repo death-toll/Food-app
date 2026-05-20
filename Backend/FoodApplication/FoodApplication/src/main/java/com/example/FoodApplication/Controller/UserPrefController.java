@@ -37,6 +37,7 @@ public class UserPrefController {
 	/** Create or replace preference for a user. */
 	@PutMapping
 	public UserPrefResponseDto upsert(@Valid @RequestBody UserPrefRequestDto request) {
+		// Customer can only modify their own preferences; prevent tampering by checking JWT user id.
 		requireSameUser(request.getUser_id());
 		return userPrefService.upsert(request);
 	}
@@ -84,6 +85,7 @@ public class UserPrefController {
 	}
 
 	private void requireSameUser(Integer userId) {
+		// Enforce "self only" access (even if client passes a different userId).
 		Integer currentUserId = getCurrentUserId();
 		if (userId == null || !userId.equals(currentUserId)) {
 			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You can only access your own preferences");
@@ -91,6 +93,7 @@ public class UserPrefController {
 	}
 
 	private Integer getCurrentUserId() {
+		// SecurityContext is populated when a valid Bearer token is provided.
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication == null || !(authentication.getPrincipal() instanceof UserDetails principal)) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Not authenticated");

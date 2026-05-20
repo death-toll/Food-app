@@ -58,16 +58,19 @@ public class FoodController {
 	@PostMapping("/{foodId}/like")
 	@PreAuthorize("hasAnyRole('CUSTOMER','OWNER')")
 	public FoodResponseDto like(@PathVariable Integer foodId) {
+		// Like action requires authentication; user id is inferred from JWT (not passed from client).
 		Integer userId = getCurrentUserId();
 		return foodService.likeFood(foodId, userId);
 	}
 
 	private Integer getCurrentUserId() {
+		// SecurityContext is set by JwtAuthenticationFilter when Authorization header is present.
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication == null || !(authentication.getPrincipal() instanceof UserDetails principal)) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Not authenticated");
 		}
 
+		// Resolve the logged-in user using their email (username).
 		User user = userRepo.findByEmail(principal.getUsername())
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found"));
 
