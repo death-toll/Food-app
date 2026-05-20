@@ -1,0 +1,114 @@
+name: Full Stack CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  backend:
+    name: Backend Build & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout Backend Code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Setup Java
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # 3. Build Backend JAR
+      - name: Build Backend
+        run: mvn clean package -DskipTests
+
+      # 4. Login DockerHub
+      - name: DockerHub Login
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # 5. Build Backend Docker Image
+      - name: Build Backend Image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/foodapp-backend:latest .
+
+      # 6. Push Backend Image
+      - name: Push Backend Image
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/foodapp-backend:latest
+
+      # 7. Deploy Backend to EC2
+      - name: Deploy Backend
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/foodapp-backend:latest
+
+            docker stop backend || true
+            docker rm backend || true
+
+            docker run -d --name backend -p 8083:8083 ${{ secrets.DOCKERHUB_USERNAME }}/foodapp-backend:latest
+
+  frontend:
+    name: Frontend Build & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout Frontend Code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 3. Install Dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # 4. Build Frontend
+      - name: Build Frontend
+        run: npm run build
+
+      # 5. Login DockerHub
+      - name: DockerHub Login
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # 6. Build Frontend Docker Image
+      - name: Build Frontend Image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/foodapp-frontend:latest .
+
+      # 7. Push Frontend Image
+      - name: Push Frontend Image
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/foodapp-frontend:latest
+
+      # 8. Deploy Frontend to EC2
+      - name: Deploy Frontend
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/foodapp-frontend:latest
+
+            docker stop frontend || true
+            docker rm frontend || true
+
+            docker run -d --name frontend -p 5173:5173 ${{ secrets.DOCKERHUB_USERNAME }}/foodapp-frontend:latest
