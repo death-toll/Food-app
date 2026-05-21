@@ -83,6 +83,7 @@ public class SecurityConfig {
                 "http://127.0.0.1:5174",
                 "http://localhost:4173",
                 "http://127.0.0.1:4173",
+                "http://13.220.238.106:5173",
                 "https://foodapplatest-cxh9c3axf3cueddk.canadacentral-01.azurewebsites.net",
                 "http://foodapplatest-cxh9c3axf3cueddk.canadacentral-01.azurewebsites.net",
                 "https://backendnew-dha7bzdkd2cmb7ej.canadacentral-01.azurewebsites.net",

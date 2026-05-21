@@ -4,7 +4,7 @@ const axiosInstance = axios.create({
   // http://localhost:5173/
   // Keep the trailing slash so relative paths like "api/auth/login" join correctly.
   // For Azure deployments, swap this to your WebApp URL or drive it via VITE_API_BASE_URL.
-  baseURL: "http://localhost:8083/" 
+  baseURL: "http://13.220.238.106:8083/" 
 });
 
 axiosInstance.interceptors.request.use(
