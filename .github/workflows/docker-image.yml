@@ -13,7 +13,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: Backend
+        working-directory: Backend/FoodApplication/FoodApplication
 
     steps:
       # 1. Checkout Backend Code
@@ -69,7 +69,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: Frontend
+        working-directory: Frontend\food
 
 
     steps:
