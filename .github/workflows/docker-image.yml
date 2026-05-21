@@ -26,6 +26,7 @@ jobs:
       # 3. Build Backend JAR
       - name: Build Backend
         run: mvn clean package -DskipTests
+        working-directory: Backend
 
       # 4. Login DockerHub
       - name: DockerHub Login
@@ -77,6 +78,7 @@ jobs:
       # 3. Install Dependencies
       - name: Install Dependencies
         run: npm install
+        working-directory: Frontend
 
       # 4. Build Frontend
       - name: Build Frontend
