@@ -1,6 +1,6 @@
 # AI Use Guide (Food App Mono)
 
-This document is a quick “how to work in this repo” guide for frontend + backend, with pointers to important files and safe patterns to follow.
+This document is a quick “how to work in this repo” guide for frontend + backend, with pointers to important files and safe patterns to follow more.
 
 ## Frontend (Vite + React)
 
