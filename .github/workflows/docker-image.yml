@@ -120,6 +120,6 @@ jobs:
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/foodapp-frontend:latest
 
             docker stop frontend || true
-            docker rm frontend || true
+            docker remove frontend || true
 
             docker run -d --name frontend -p 5173:5173 ${{ secrets.DOCKERHUB_USERNAME }}/foodapp-frontend:latest
