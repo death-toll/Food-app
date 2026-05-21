@@ -65,7 +65,7 @@ const LoginView = ({ onSuccess, goRegister, goForgot }) => {
 
     return (
         <div className="p-5">
-            <h3 className="fw-bold mb-1" style={{ color: '#e65c00' }}>Food App</h3>
+            <h3 className="fw-bold mb-1" style={{ color: '#e65c00' }}>Foody App</h3>
             <p className="text-muted mb-4 small">Sign in to your account</p>
             <h5 className="fw-semibold mb-1">Welcome back!</h5>
             <p className="text-muted small mb-4">Enter your credentials to continue.</p>
