@@ -11,6 +11,10 @@ jobs:
     name: Backend Build & Deploy
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: FOOD MONO/Backend
+
     steps:
       # 1. Checkout Backend Code
       - name: Checkout Code
@@ -26,7 +30,6 @@ jobs:
       # 3. Build Backend JAR
       - name: Build Backend
         run: mvn clean package -DskipTests
-        working-directory: Backend
 
       # 4. Login DockerHub
       - name: DockerHub Login
@@ -64,6 +67,11 @@ jobs:
     name: Frontend Build & Deploy
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: FOOD MONO/Frontend
+
+
     steps:
       # 1. Checkout Frontend Code
       - name: Checkout Code
@@ -78,7 +86,7 @@ jobs:
       # 3. Install Dependencies
       - name: Install Dependencies
         run: npm install
-        working-directory: Frontend
+        
 
       # 4. Build Frontend
       - name: Build Frontend
